@@ -61,7 +61,11 @@ class DHCPClusterFilterForm(NetBoxDHCPFilterFormMixin, PrimaryModelFilterSetForm
             "q",
             "filter_id",
             "tag",
+        ),
+        FieldSet(
+            "owner_group_id",
             "owner_id",
+            name=_("Ownership"),
         ),
         FieldSet(
             "name",
