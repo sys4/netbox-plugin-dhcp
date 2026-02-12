@@ -30,7 +30,6 @@ from .mixins import (
     NetBoxDHCPBulkEditFormMixin,
 )
 
-
 __all__ = (
     "OptionDefinitionForm",
     "OptionDefinitionFilterForm",

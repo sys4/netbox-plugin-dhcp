@@ -10,7 +10,6 @@ from netbox_dhcp.models import Option, OptionDefinition
 from netbox_dhcp.choices import OptionSpaceChoices
 from .mixins import ClientClassFilterMixin
 
-
 __all__ = ("OptionFilterSet",)
 
 

@@ -57,7 +57,6 @@ from .mixins import (
     DDNSUpdateBulkEditFormMixin,
 )
 
-
 __all__ = (
     "DHCPServerForm",
     "DHCPServerFilterForm",

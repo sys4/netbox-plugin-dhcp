@@ -7,7 +7,6 @@ from utilities.filtersets import register_filterset
 from netbox_dhcp.models import DHCPCluster
 from netbox_dhcp.choices import DHCPClusterStatusChoices
 
-
 __all__ = ("DHCPClusterFilterSet",)
 
 

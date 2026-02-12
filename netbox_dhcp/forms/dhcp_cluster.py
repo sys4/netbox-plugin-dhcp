@@ -19,7 +19,6 @@ from .mixins import (
     NetBoxDHCPBulkEditFormMixin,
 )
 
-
 __all__ = (
     "DHCPClusterForm",
     "DHCPClusterFilterForm",

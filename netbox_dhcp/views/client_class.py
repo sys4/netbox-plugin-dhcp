@@ -43,7 +43,6 @@ from netbox_dhcp.tables import (
     ParentOptionTable,
 )
 
-
 __all__ = ()
 
 

@@ -12,7 +12,6 @@ from netbox_dhcp.choices import OptionSendChoices
 
 from .mixins import ClientClassSerializerMixin
 
-
 __all__ = ("OptionSerializer",)
 
 

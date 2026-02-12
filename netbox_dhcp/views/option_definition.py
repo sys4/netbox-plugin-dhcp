@@ -17,7 +17,6 @@ from netbox_dhcp.tables import (
     ChildOptionTable,
 )
 
-
 __all__ = (
     "OptionDefinitionView",
     "OptionDefinitionListView",

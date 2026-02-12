@@ -7,7 +7,6 @@ from strawberry_django import FilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
 
-
 if TYPE_CHECKING:
     from ipam.graphql.filters import IPAddressFilter, PrefixFilter
     from dcim.graphql.filters import MACAddressFilter

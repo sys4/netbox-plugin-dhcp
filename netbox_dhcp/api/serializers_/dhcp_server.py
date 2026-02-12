@@ -20,7 +20,6 @@ from ..nested_serializers import (
 
 from netbox_dhcp.models import DHCPServer, DHCPServerInterface
 
-
 __all__ = (
     "DHCPServerSerializer",
     "DHCPServerInterfaceSerializer",

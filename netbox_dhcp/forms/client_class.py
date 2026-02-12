@@ -29,7 +29,6 @@ from .mixins import (
     NetBoxDHCPFilterFormMixin,
 )
 
-
 __all__ = (
     "ClientClassForm",
     "ClientClassFilterForm",

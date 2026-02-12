@@ -17,7 +17,6 @@ from netbox_dhcp.forms import (
 )
 from netbox_dhcp.tables import SharedNetworkTable, SubnetTable, ChildOptionTable
 
-
 __all__ = (
     "SharedNetworkView",
     "SharedNetworkListView",

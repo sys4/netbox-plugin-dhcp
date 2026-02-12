@@ -25,7 +25,6 @@ from netbox_dhcp.tables import (
     ChildOptionTable,
 )
 
-
 __all__ = (
     "SubnetView",
     "SubnetListView",

@@ -13,7 +13,6 @@ if TYPE_CHECKING:
 
 from netbox_dhcp.models import DHCPCluster
 
-
 __all__ = ("NetBoxDHCPClusterFilter",)
 
 

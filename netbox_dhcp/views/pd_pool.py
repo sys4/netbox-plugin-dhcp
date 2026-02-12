@@ -13,7 +13,6 @@ from netbox_dhcp.forms import (
 )
 from netbox_dhcp.tables import PDPoolTable, ChildOptionTable
 
-
 __all__ = (
     "PDPoolView",
     "PDPoolListView",
