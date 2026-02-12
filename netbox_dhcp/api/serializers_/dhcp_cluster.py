@@ -7,7 +7,6 @@ from netbox_dhcp.models import DHCPCluster
 
 from ..nested_serializers import NestedDHCPServerSerializer
 
-
 __all__ = ("DHCPClusterSerializer",)
 
 

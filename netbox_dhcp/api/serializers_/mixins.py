@@ -6,7 +6,6 @@ from ..nested_serializers import (
     NestedClientClassSerializer,
 )
 
-
 __all__ = (
     "ClientClassSerializerMixin",
     "EvaluateClientClassSerializerMixin",

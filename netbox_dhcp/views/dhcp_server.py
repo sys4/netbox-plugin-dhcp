@@ -37,7 +37,6 @@ from netbox_dhcp.tables import (
     OptionDefinitionTable,
 )
 
-
 __all__ = (
     "DHCPServerView",
     "DHCPServerListView",

@@ -20,7 +20,6 @@ from netbox_dhcp.forms import (
 )
 from netbox_dhcp.tables import OptionTable
 
-
 __all__ = (
     "OptionView",
     "OptionListView",

@@ -10,7 +10,6 @@ from .mixins import (
     LifetimeFilterMixin,
 )
 
-
 __all__ = ("ClientClassFilterSet",)
 
 

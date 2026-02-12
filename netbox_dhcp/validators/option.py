@@ -8,7 +8,6 @@ from django.core.exceptions import ValidationError
 
 from netbox_dhcp.choices import OptionTypeChoices
 
-
 __all__ = ("validate_data",)
 
 
@@ -58,7 +57,7 @@ def validate_ipv6_prefix(data):
     if not (split_data := re.match(r"(.*)/(.*)", data)):
         raise ValidationError(_("{data} is not a valid IPv6 prefix").format(data=data))
 
-    (address, prefixlen) = split_data.groups()
+    address, prefixlen = split_data.groups()
     if (
         not netaddr.valid_ipv6(address)
         or not prefixlen.isnumeric()
@@ -71,7 +70,7 @@ def validate_psid(data):
     if not (split_data := re.match(r"(.*)/(.*)", data)):
         raise ValidationError(_("{data} is not a valid PSID").format(data=data))
 
-    (psid, psid_len) = split_data.groups()
+    psid, psid_len = split_data.groups()
     if (
         not psid.isnumeric()
         or int(psid) not in range(0, 17)

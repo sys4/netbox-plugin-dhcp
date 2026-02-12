@@ -35,7 +35,6 @@ from .mixins import (
 
 from .mixins.model import DYNAMIC_ATTRIBUTES
 
-
 __all__ = (
     "PDPoolForm",
     "PDPoolFilterForm",

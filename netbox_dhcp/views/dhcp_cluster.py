@@ -11,7 +11,6 @@ from netbox_dhcp.forms import (
 )
 from netbox_dhcp.tables import DHCPClusterTable
 
-
 __all__ = (
     "DHCPClusterView",
     "DHCPClusterListView",
