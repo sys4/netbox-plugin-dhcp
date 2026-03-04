@@ -1,5 +1,5 @@
 import strawberry_django
-from strawberry_django import FilterLookup
+from strawberry_django import FilterLookup, StrFilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
 
@@ -19,10 +19,10 @@ class NetBoxDHCPClientClassFilter(
     LifetimeGraphQLFilterMixin,
     PrimaryModelFilter,
 ):
-    name: FilterLookup[str] | None = strawberry_django.filter_field()
+    name: StrFilterLookup[str] | None = strawberry_django.filter_field()
     weight: FilterLookup[int] | None = strawberry_django.filter_field()
-    test: FilterLookup[str] | None = strawberry_django.filter_field()
-    template_test: FilterLookup[str] | None = strawberry_django.filter_field()
+    test: StrFilterLookup[str] | None = strawberry_django.filter_field()
+    template_test: StrFilterLookup[str] | None = strawberry_django.filter_field()
     only_in_additional_list: FilterLookup[bool] | None = (
         strawberry_django.filter_field()
     )

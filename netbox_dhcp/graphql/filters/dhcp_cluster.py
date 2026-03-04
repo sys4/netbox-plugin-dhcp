@@ -2,7 +2,7 @@ from typing import Annotated, TYPE_CHECKING
 
 import strawberry
 import strawberry_django
-from strawberry_django import FilterLookup
+from strawberry_django import StrFilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
 
@@ -18,7 +18,7 @@ __all__ = ("NetBoxDHCPClusterFilter",)
 
 @strawberry_django.filter_type(DHCPCluster, lookups=True)
 class NetBoxDHCPClusterFilter(PrimaryModelFilter):
-    name: FilterLookup[str] | None = strawberry_django.filter_field()
+    name: StrFilterLookup[str] | None = strawberry_django.filter_field()
     status: (
         Annotated[
             "NetBoxDHCPClusterStatusEnum", strawberry.lazy("netbox_dhcp.graphql.enums")

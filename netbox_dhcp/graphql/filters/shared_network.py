@@ -1,5 +1,5 @@
 import strawberry_django
-from strawberry_django import FilterLookup
+from strawberry_django import FilterLookup, StrFilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
 
@@ -33,5 +33,5 @@ class NetBoxDHCPSharedNetworkFilter(
     ChildSubnetGraphQLFilterMixin,
     PrimaryModelFilter,
 ):
-    name: FilterLookup[str] | None = strawberry_django.filter_field()
+    name: StrFilterLookup[str] | None = strawberry_django.filter_field()
     weight: FilterLookup[int] | None = strawberry_django.filter_field()

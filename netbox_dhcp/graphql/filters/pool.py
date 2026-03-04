@@ -3,7 +3,7 @@ from typing import Annotated, TYPE_CHECKING
 import strawberry
 from strawberry.scalars import ID
 import strawberry_django
-from strawberry_django import FilterLookup
+from strawberry_django import FilterLookup, StrFilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
 
@@ -28,7 +28,7 @@ class NetBoxDHCPPoolFilter(
     DDNSUpdateGraphQLFilterMixin,
     PrimaryModelFilter,
 ):
-    name: FilterLookup[str] | None = strawberry_django.filter_field()
+    name: StrFilterLookup[str] | None = strawberry_django.filter_field()
     weight: FilterLookup[int] | None = strawberry_django.filter_field()
     pool_id: FilterLookup[int] | None = strawberry_django.filter_field()
     ip_range: (

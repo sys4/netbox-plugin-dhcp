@@ -5,7 +5,7 @@ from typing import Annotated, TYPE_CHECKING
 import strawberry
 from strawberry.scalars import ID
 import strawberry_django
-from strawberry_django import FilterLookup
+from strawberry_django import FilterLookup, StrFilterLookup
 
 if TYPE_CHECKING:
     from ipam.graphql.filters import (
@@ -48,9 +48,9 @@ __all__ = (
 
 @dataclass
 class BOOTPGraphQLFilterMixin:
-    next_server: FilterLookup[str] | None = strawberry_django.filter_field()
-    server_hostname: FilterLookup[str] | None = strawberry_django.filter_field()
-    boot_file_name: FilterLookup[str] | None = strawberry_django.filter_field()
+    next_server: StrFilterLookup[str] | None = strawberry_django.filter_field()
+    server_hostname: StrFilterLookup[str] | None = strawberry_django.filter_field()
+    boot_file_name: StrFilterLookup[str] | None = strawberry_django.filter_field()
 
 
 @dataclass
@@ -62,21 +62,25 @@ class DDNSUpdateGraphQLFilterMixin:
     ddns_override_client_update: FilterLookup[bool] | None = (
         strawberry_django.filter_field()
     )
-    ddns_replace_client_name: FilterLookup[str] | None = (
+    ddns_replace_client_name: StrFilterLookup[str] | None = (
         strawberry_django.filter_field()
     )
-    ddns_generated_prefix: FilterLookup[str] | None = strawberry_django.filter_field()
-    ddns_qualifying_suffix: FilterLookup[str] | None = strawberry_django.filter_field()
+    ddns_generated_prefix: StrFilterLookup[str] | None = (
+        strawberry_django.filter_field()
+    )
+    ddns_qualifying_suffix: StrFilterLookup[str] | None = (
+        strawberry_django.filter_field()
+    )
     ddns_update_on_renew: FilterLookup[bool] | None = strawberry_django.filter_field()
-    ddns_conflict_resolution_mode: FilterLookup[str] | None = (
+    ddns_conflict_resolution_mode: StrFilterLookup[str] | None = (
         strawberry_django.filter_field()
     )
     ddns_ttl_percent: FilterLookup[float] | None = strawberry_django.filter_field()
     ddns_ttl: FilterLookup[int] | None = strawberry_django.filter_field()
     ddns_ttl_min: FilterLookup[int] | None = strawberry_django.filter_field()
     ddns_ttl_max: FilterLookup[int] | None = strawberry_django.filter_field()
-    hostname_char_set: FilterLookup[str] | None = strawberry_django.filter_field()
-    hostname_char_replacement: FilterLookup[str] | None = (
+    hostname_char_set: StrFilterLookup[str] | None = strawberry_django.filter_field()
+    hostname_char_replacement: StrFilterLookup[str] | None = (
         strawberry_django.filter_field()
     )
 
@@ -222,7 +226,7 @@ class ChildHostReservationGraphQLFilterMixin:
 
 @dataclass
 class NetworkGraphQLFilterMixin:
-    relay: FilterLookup[str] | None = strawberry_django.filter_field()
+    relay: StrFilterLookup[str] | None = strawberry_django.filter_field()
     interface_id: FilterLookup[int] | None = strawberry_django.filter_field()
     rapid_commit: FilterLookup[bool] | None = strawberry_django.filter_field()
 
