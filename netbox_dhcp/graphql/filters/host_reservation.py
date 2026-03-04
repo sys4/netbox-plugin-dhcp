@@ -3,7 +3,7 @@ from typing import Annotated, TYPE_CHECKING
 import strawberry
 import strawberry_django
 from strawberry.scalars import ID
-from strawberry_django import FilterLookup
+from strawberry_django import StrFilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
 
@@ -28,16 +28,16 @@ class NetBoxDHCPHostReservationFilter(
     BOOTPGraphQLFilterMixin,
     PrimaryModelFilter,
 ):
-    name: FilterLookup[str] | None = strawberry_django.filter_field()
-    duid: FilterLookup[str] | None = strawberry_django.filter_field()
+    name: StrFilterLookup[str] | None = strawberry_django.filter_field()
+    duid: StrFilterLookup[str] | None = strawberry_django.filter_field()
     hw_address: (
         Annotated["MACAddressFilter", strawberry.lazy("dcim.graphql.filters")] | None
     )
     hw_address_id: ID | None = strawberry_django.filter_field()
-    flex_id: FilterLookup[str] | None = strawberry_django.filter_field()
-    circuit_id: FilterLookup[str] | None = strawberry_django.filter_field()
-    client_id: FilterLookup[str] | None = strawberry_django.filter_field()
-    hostname: FilterLookup[str] | None = strawberry_django.filter_field()
+    flex_id: StrFilterLookup[str] | None = strawberry_django.filter_field()
+    circuit_id: StrFilterLookup[str] | None = strawberry_django.filter_field()
+    client_id: StrFilterLookup[str] | None = strawberry_django.filter_field()
+    hostname: StrFilterLookup[str] | None = strawberry_django.filter_field()
     ipv4_address: (
         Annotated["IPAddressFilter", strawberry.lazy("ipam.graphql.filters")] | None
     )

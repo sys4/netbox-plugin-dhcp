@@ -3,7 +3,7 @@ from typing import Annotated, TYPE_CHECKING
 import strawberry
 from strawberry.scalars import ID
 import strawberry_django
-from strawberry_django import FilterLookup
+from strawberry_django import FilterLookup, StrFilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
 
@@ -30,7 +30,7 @@ class NetBoxDHCPOptionFilter(
         | None
     ) = strawberry_django.filter_field()
     definition_id: ID | None = strawberry_django.filter_field()
-    name: FilterLookup[str] | None = strawberry_django.filter_field()
+    name: StrFilterLookup[str] | None = strawberry_django.filter_field()
     code: FilterLookup[int] | None = strawberry_django.filter_field()
     space: (
         Annotated[
@@ -41,10 +41,10 @@ class NetBoxDHCPOptionFilter(
     family: (
         Annotated["IPAddressFamilyEnum", strawberry.lazy("ipam.graphql.enums")] | None
     ) = strawberry_django.filter_field()
-    data: FilterLookup[str] | None = strawberry_django.filter_field()
+    data: StrFilterLookup[str] | None = strawberry_django.filter_field()
     weight: FilterLookup[int] | None = strawberry_django.filter_field()
     csv_format: FilterLookup[bool] | None = strawberry_django.filter_field()
-    send_option: FilterLookup[str] | None = strawberry_django.filter_field()
+    send_option: StrFilterLookup[str] | None = strawberry_django.filter_field()
     assigned_object_type: (
         Annotated["ContentTypeFilter", strawberry.lazy("core.graphql.filters")] | None
     ) = strawberry_django.filter_field()

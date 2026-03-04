@@ -2,7 +2,7 @@ from typing import Annotated, TYPE_CHECKING
 
 import strawberry
 import strawberry_django
-from strawberry_django import FilterLookup
+from strawberry_django import FilterLookup, StrFilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
 
@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
 @strawberry_django.filter_type(OptionDefinition, lookups=True)
 class NetBoxDHCPOptionDefinitionFilter(PrimaryModelFilter):
-    name: FilterLookup[str] | None = strawberry_django.filter_field()
+    name: StrFilterLookup[str] | None = strawberry_django.filter_field()
     code: FilterLookup[int] | None = strawberry_django.filter_field()
     space: (
         Annotated[
@@ -26,7 +26,7 @@ class NetBoxDHCPOptionDefinitionFilter(PrimaryModelFilter):
         ]
         | None
     ) = strawberry_django.filter_field()
-    encapsulate: FilterLookup[str] | None = strawberry_django.filter_field()
+    encapsulate: StrFilterLookup[str] | None = strawberry_django.filter_field()
     family: (
         Annotated["IPAddressFamilyEnum", strawberry.lazy("ipam.graphql.enums")] | None
     ) = strawberry_django.filter_field()
@@ -36,4 +36,4 @@ class NetBoxDHCPOptionDefinitionFilter(PrimaryModelFilter):
         ]
         | None
     ) = strawberry_django.filter_field()
-    record_type: FilterLookup[str] | None = strawberry_django.filter_field()
+    record_type: StrFilterLookup[str] | None = strawberry_django.filter_field()
