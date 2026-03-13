@@ -36,17 +36,17 @@ class HostReservationFilterSetTestCase(
             Subnet(
                 name="test-subnet-1",
                 dhcp_server=cls.dhcp_servers[0],
-                prefix=cls.ipv6_prefixes[0],
+                prefix=cls.ipv6_prefixes[0],  # 2001:db8:0::/32
             ),
             Subnet(
                 name="test-subnet-2",
                 dhcp_server=cls.dhcp_servers[1],
-                prefix=cls.ipv6_prefixes[1],
+                prefix=cls.ipv6_prefixes[1],  # 2001:db8:0:1:/64
             ),
             Subnet(
                 name="test-subnet-3",
                 dhcp_server=cls.dhcp_servers[2],
-                prefix=cls.ipv6_prefixes[2],
+                prefix=cls.ipv6_prefixes[2],  # 2001:db8:0:2:/64
             ),
         )
         for subnet in cls.subnets:
@@ -194,10 +194,12 @@ class HostReservationFilterSetTestCase(
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_ipv6_prefix(self):
-        params = {"ipv6_prefix__iregex": r"db8:3::"}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"ipv6_prefix_id": [self.ipv6_prefixes[0].pk]}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
+        params = {"ipv6_prefix__iregex": r"db8:0:[12]"}
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
+        params = {
+            "ipv6_prefix_id": [self.ipv6_prefixes[0].pk, self.ipv6_prefixes[1].pk]
+        }
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
 
     def test_excluded_ipv6_prefix(self):
         params = {"excluded_ipv6_prefix": self.ipv6_prefixes[0].prefix}

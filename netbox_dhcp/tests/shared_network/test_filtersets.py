@@ -175,13 +175,13 @@ class SharedNetworkFilterSetTestCase(
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
 
     def test_prefix(self):
-        params = {"prefix_id": [self.ipv6_prefixes[0].pk, self.ipv6_prefixes[1].pk]}
+        params = {"prefix_id": [self.ipv6_prefixes[1].pk, self.ipv6_prefixes[2].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix__iregex": r"2001:db8:[23]"}
+        params = {"prefix__iregex": r"2001:db8:0:[12]"}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
         params = {"prefix_id": [self.ipv4_prefixes[0].pk, self.ipv4_prefixes[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix__iregex": r"192.0.2.(0|64)/26"}
+        params = {"prefix__iregex": r"198\.18\.[01]\..*/24"}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_child_subnet(self):
