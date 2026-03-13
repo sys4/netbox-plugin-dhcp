@@ -89,18 +89,7 @@ class PDPoolForm(
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields["subnet"].widget.attrs.update(DYNAMIC_ATTRIBUTES)
         self.fields["prefix"].widget.attrs.update(DYNAMIC_ATTRIBUTES)
-
-        if subnet_id := get_field_value(self, "subnet"):
-            parent_prefix = (
-                Prefix.objects.filter(netbox_dhcp_subnets=subnet_id)
-                .values_list("prefix", flat=True)
-                .first()
-            )
-            self.fields["prefix"].widget.add_query_param(
-                "within_include", str(parent_prefix)
-            )
 
         if prefix_id := get_field_value(self, "prefix"):
             prefix = (
