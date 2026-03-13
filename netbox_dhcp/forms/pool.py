@@ -102,7 +102,7 @@ class PoolForm(
         if subnet_id := get_field_value(self, "subnet"):
             prefix = (
                 Prefix.objects.filter(netbox_dhcp_subnets=subnet_id)
-                .values_list("prefix")
+                .values_list("prefix", flat=True)
                 .first()
             )
             self.fields["ip_range"].widget.add_query_param("parent", str(prefix))
