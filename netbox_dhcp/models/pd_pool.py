@@ -4,6 +4,7 @@ from django.core.validators import (
     MinValueValidator,
     MaxValueValidator,
 )
+from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.fields import GenericRelation
 
 from netbox.models import PrimaryModel
@@ -116,6 +117,56 @@ class PDPool(
     @property
     def available_client_classes(self):
         return self.subnet.available_client_classes
+
+    def clean(self):
+        super().clean()
+
+        if self.subnet.family != 6:
+            raise ValidationError(
+                {
+                    "subnet": _("Subnet family must be IPv6"),
+                }
+            )
+
+        if self.prefix.family != 6:
+            raise ValidationError(
+                {
+                    "prefix": _("Prefix family must be IPv6"),
+                }
+            )
+
+        if self.excluded_prefix and self.excluded_prefix.family != 6:
+            raise ValidationError(
+                {
+                    "excluded_prefix": _("Excluded prefix family must be IPv6"),
+                }
+            )
+
+        if self.delegated_length < self.prefix.prefix.prefixlen:
+            raise ValidationError(
+                {
+                    "delegated_length": _(
+                        "Delegated length must not be shorter than the length of the prefix"
+                    ),
+                }
+            )
+
+        if (
+            self.excluded_prefix
+            and self.excluded_prefix.prefix not in self.prefix.prefix
+        ):
+            raise ValidationError(
+                {
+                    "excluded_prefix": _(
+                        "Excluded prefix must be a sub-prefix of the prefix"
+                    ),
+                }
+            )
+
+    def save(self, *args, **kwargs):
+        self.clean()
+
+        super().save(*args, **kwargs)
 
 
 @register_search
