@@ -1,6 +1,6 @@
 [project]
 name = "netbox-plugin-dhcp"
-version = "0.1.4"
+version = "0.1.5"
 description = "NetBox DHCP is a NetBox plugin for DHCP data."
 authors = [
     {name="Peter Eckel", email="pe@sys4.de"},
