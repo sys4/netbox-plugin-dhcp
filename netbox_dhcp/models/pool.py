@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.contenttypes.fields import GenericRelation
+from django.core.exceptions import ValidationError
 
 from netbox.models import PrimaryModel
 from netbox.search import SearchIndex, register_search
@@ -97,6 +98,30 @@ class Pool(
     @property
     def available_client_classes(self):
         return self.subnet.available_client_classes
+
+    def clean(self):
+        super().clean()
+
+        ip_range = self.ip_range.range
+        prefix = self.subnet.prefix.prefix
+
+        if ip_range not in prefix:
+            raise ValidationError(
+                {
+                    "ip_range": _(
+                        "IP Range {range} is not within subnet {subnet} ({prefix})"
+                    ).format(
+                        range=str(ip_range),
+                        subnet=self.subnet.name,
+                        prefix=self.subnet.prefix,
+                    )
+                }
+            )
+
+    def save(self, *args, **kwargs):
+        self.clean()
+
+        super().save(*args, **kwargs)
 
 
 @register_search

@@ -13,9 +13,9 @@ class TestObjects:
     @staticmethod
     def get_ipv4_addresses():
         ipv4_addresses = (
-            IPAddress(address="192.0.2.1/24"),
-            IPAddress(address="192.0.2.2/24"),
-            IPAddress(address="192.0.2.3/24"),
+            IPAddress(address="198.18.0.1/24"),
+            IPAddress(address="198.18.0.2/24"),
+            IPAddress(address="198.18.0.3/24"),
         )
         IPAddress.objects.bulk_create(ipv4_addresses)
 
@@ -35,9 +35,10 @@ class TestObjects:
     @staticmethod
     def get_ipv4_prefixes(offset=0):
         ipv4_prefixes = (
-            Prefix(prefix=f"192.0.{2 + offset}.0/24"),
-            Prefix(prefix=f"192.0.{2 + offset}.0/26"),
-            Prefix(prefix=f"192.0.{2 + offset}.64/26"),
+            Prefix(prefix=IPNetwork("198.18.0.0/16")),
+            Prefix(prefix=IPNetwork(f"198.18.{offset}.0/24")),
+            Prefix(prefix=IPNetwork(f"198.18.{1 + offset}.0/24")),
+            Prefix(prefix=IPNetwork(f"198.18.{2 + offset}.0/24")),
         )
         Prefix.objects.bulk_create(ipv4_prefixes)
 
@@ -46,9 +47,14 @@ class TestObjects:
     @staticmethod
     def get_ipv6_prefixes(offset=0):
         ipv6_prefixes = (
-            Prefix(prefix=f"2001:db8:{1 + offset}::/64"),
-            Prefix(prefix=f"2001:db8:{2 + offset}::/64"),
-            Prefix(prefix=f"2001:db8:{3 + offset}::/64"),
+            Prefix(prefix=IPNetwork(f"2001:db8:{offset}::/32")),
+            Prefix(prefix=IPNetwork(f"2001:db8:{offset}:1::/64")),
+            Prefix(prefix=IPNetwork(f"2001:db8:{offset}:2::/64")),
+            Prefix(prefix=IPNetwork(f"2001:db8:{offset}:3::/64")),
+            Prefix(prefix=IPNetwork(f"2001:db8:{offset}:1:0:1::/96")),
+            Prefix(prefix=IPNetwork(f"2001:db8:{offset}:1:0:2::/96")),
+            Prefix(prefix=IPNetwork(f"2001:db8:{offset}:2:0:1::/96")),
+            Prefix(prefix=IPNetwork(f"2001:db8:{offset}:2:0:2::/96")),
         )
         Prefix.objects.bulk_create(ipv6_prefixes)
 
@@ -58,18 +64,18 @@ class TestObjects:
     def get_ipv4_ranges():
         ipv4_ranges = (
             IPRange(
-                start_address=IPNetwork("192.0.2.1/24"),
-                end_address=IPNetwork("192.0.2.16/24"),
+                start_address=IPNetwork("198.18.2.1/24"),
+                end_address=IPNetwork("198.18.2.16/24"),
                 size=16,
             ),
             IPRange(
-                start_address=IPNetwork("192.0.2.17/24"),
-                end_address=IPNetwork("192.0.2.32/24"),
+                start_address=IPNetwork("198.18.2.17/24"),
+                end_address=IPNetwork("198.18.2.32/24"),
                 size=16,
             ),
             IPRange(
-                start_address=IPNetwork("192.0.2.33/24"),
-                end_address=IPNetwork("192.0.2.64/24"),
+                start_address=IPNetwork("198.18.2.33/24"),
+                end_address=IPNetwork("198.18.2.64/24"),
                 size=32,
             ),
         )
@@ -81,18 +87,18 @@ class TestObjects:
     def get_ipv6_ranges():
         ipv6_ranges = (
             IPRange(
-                start_address=IPNetwork("2001:db8::1/64"),
-                end_address=IPNetwork("2001:db8::ffff/64"),
+                start_address=IPNetwork("2001:db8:0:1::1/64"),
+                end_address=IPNetwork("2001:db8:0:1::ffff/64"),
                 size=65535,
             ),
             IPRange(
-                start_address=IPNetwork("2001:db8::1:1/64"),
-                end_address=IPNetwork("2001:db8::1:ffff/64"),
+                start_address=IPNetwork("2001:db8:0:1::1:1/64"),
+                end_address=IPNetwork("2001:db8:0:1::1:ffff/64"),
                 size=65535,
             ),
             IPRange(
-                start_address=IPNetwork("2001:db8::2:1/64"),
-                end_address=IPNetwork("2001:db8::3:ffff/64"),
+                start_address=IPNetwork("2001:db8:0:1::2:1/64"),
+                end_address=IPNetwork("2001:db8:0:1::3:ffff/64"),
                 size=131071,
             ),
         )

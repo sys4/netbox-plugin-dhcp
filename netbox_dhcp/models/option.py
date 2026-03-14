@@ -85,6 +85,23 @@ class Option(
     def clean(self):
         super().clean()
 
+        if (
+            hasattr(self.assigned_object, "family")
+            and self.assigned_object.family is not None
+        ):
+            if self.definition.family != self.assigned_object.family:
+                raise ValidationError(
+                    {
+                        "all": _(
+                            "Cannot assign an IPv{option_family} option to an IPv{object_family} {object_type}"
+                        ).format(
+                            option_family=self.definition.family,
+                            object_family=self.assigned_object.family,
+                            object_type=self.assigned_object_type.name,
+                        )
+                    }
+                )
+
         try:
             definition = self.definition
         except ObjectDoesNotExist:
@@ -125,6 +142,11 @@ class Option(
 
         else:
             validate_data(self.data, definition.type)
+
+    def save(self, *args, **kwargs):
+        self.clean()
+
+        super().save(*args, **kwargs)
 
 
 @register_search

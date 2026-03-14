@@ -78,7 +78,7 @@ class SubnetFilterSetTestCase(
                 name="test-ipv6-shared-network-2",
                 description="Test Shared Network 4",
                 dhcp_server=cls.dhcp_servers[0],
-                prefix=cls.ipv6_prefixes[2],
+                prefix=cls.ipv6_prefixes[3],
             ),
         )
         SharedNetwork.objects.bulk_create(cls.shared_networks)
@@ -190,11 +190,11 @@ class SubnetFilterSetTestCase(
     def test_prefix(self):
         params = {"prefix_id": [self.ipv6_prefixes[0].pk, self.ipv6_prefixes[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix__iregex": r"2001:db8:[23]"}
+        params = {"prefix__iregex": r"2001:db8:0"}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
         params = {"prefix_id": [self.ipv4_prefixes[0].pk, self.ipv4_prefixes[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix__iregex": r"192.0.2.(0|64)/26"}
+        params = {"prefix__iregex": r"198\.18\.0"}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_child_host_reservations(self):

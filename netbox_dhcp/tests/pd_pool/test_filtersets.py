@@ -61,17 +61,17 @@ class PDPoolFilterSetTestCase(
                 prefix=cls.ipv6_prefixes[1],
                 delegated_length=64,
                 pool_id=23,
-                excluded_prefix=cls.ipv6_prefixes[0],
+                excluded_prefix=cls.ipv6_prefixes[4],
             ),
             PDPool(
                 name="test-pd-pool-3",
                 description="Test Prefix Delegation Pool 3",
                 weight=110,
-                subnet=cls.ipv6_subnets[1],
+                subnet=cls.ipv6_subnets[2],
                 prefix=cls.ipv6_prefixes[2],
                 delegated_length=56,
                 pool_id=1337,
-                excluded_prefix=cls.ipv6_prefixes[1],
+                excluded_prefix=cls.ipv6_prefixes[6],
             ),
         )
         PDPool.objects.bulk_create(cls.pd_pools)
@@ -110,7 +110,7 @@ class PDPoolFilterSetTestCase(
     def test_prefix(self):
         params = {"prefix_id": [self.ipv6_prefixes[0].pk, self.ipv6_prefixes[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix__iregex": r"2001:db8:[23]"}
+        params = {"prefix__iregex": r"2001:db8:0:[12]"}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_delegated_length(self):
@@ -121,10 +121,10 @@ class PDPoolFilterSetTestCase(
 
     def test_excluded_prefix(self):
         params = {
-            "excluded_prefix_id": [self.ipv6_prefixes[0].pk, self.ipv6_prefixes[1].pk]
+            "excluded_prefix_id": [self.ipv6_prefixes[4].pk, self.ipv6_prefixes[6].pk]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"excluded_prefix__iregex": r"2001:db8:[23]"}
+        params = {"excluded_prefix__iregex": r"2001:db8:0:[12]:0:1"}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_subnet(self):
