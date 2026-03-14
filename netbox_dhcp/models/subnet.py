@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from django.contrib.contenttypes.fields import GenericRelation
+from django.core.exceptions import ValidationError
 
 from netbox.models import PrimaryModel
 from netbox.search import SearchIndex, register_search
@@ -186,7 +187,30 @@ class Subnet(
     def available_client_classes(self):
         return self.parent_dhcp_server.client_classes.all()
 
+    def clean(self):
+        super().clean()
+
+        if not self.shared_network:
+            return
+
+        if (prefix := self.prefix).prefix not in (
+            shared_network := self.shared_network
+        ).prefix.prefix:
+            raise ValidationError(
+                {
+                    "prefix": _(
+                        "Prefix {prefix} is not within shared network {shared_network} ({shared_network_prefix})"
+                    ).format(
+                        prefix=prefix,
+                        shared_network=shared_network.name,
+                        shared_network_prefix=shared_network.prefix,
+                    )
+                }
+            )
+
     def save(self, *args, **kwargs):
+        self.clean()
+
         if self.subnet_id is None:
             max_subnet_id = (
                 0
