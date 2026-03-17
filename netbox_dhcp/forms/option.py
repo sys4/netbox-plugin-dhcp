@@ -1,5 +1,7 @@
 from django import forms
+from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import FieldError, ValidationError
 
 from netbox.forms import (
     PrimaryModelForm,
@@ -38,6 +40,59 @@ __all__ = (
     "OptionImportForm",
     "OptionBulkEditForm",
 )
+
+
+class CSVOptionDefinitionChoiceField(CSVModelChoiceField):
+    # +
+    # Custom variant of the NetBox CSVModelChoiceField
+    #
+    # The value is generated from a queryset that may or may not
+    # return exactly one result. In case of multiple records matching the
+    # queryset,  the first result is returned as the result after ordering
+    # it by standard, -client_class and -dhcp_server.
+    #
+    # At the moment, ordering is hard-coded, but this field class may
+    # be extended to receive the ordering criteria as a parameter at a
+    # later time.
+    # -
+    def to_python(self, value):
+        if value in self.empty_values:
+            return None
+
+        self.validate_no_null_characters(value)
+
+        try:
+            key = self.to_field_name or "pk"
+            if isinstance(value, self.queryset.model):
+                value = getattr(value, key)
+
+            result = self.queryset.filter(**{key: value}).order_by(
+                "standard",
+                "-client_class",
+                "-dhcp_server",
+            )[:1]
+
+            if result.exists():
+                return result.first()
+            else:
+                raise ValidationError(
+                    self.error_messages["invalid_choice"],
+                    code="invalid_choice",
+                    params={"value": value},
+                )
+
+        except (ValueError, TypeError):
+            raise ValidationError(
+                self.error_messages["invalid_choice"],
+                code="invalid_choice",
+                params={"value": value},
+            )
+        except FieldError:
+            raise forms.ValidationError(
+                _('"{field_name}" is an invalid accessor field name.').format(
+                    field_name=self.to_field_name
+                )
+            )
 
 
 class OptionForm(
@@ -219,7 +274,7 @@ class OptionImportForm(
         choices=OptionSpaceChoices,
         required=True,
     )
-    name = CSVModelChoiceField(
+    name = CSVOptionDefinitionChoiceField(
         label=_("Name"),
         queryset=OptionDefinition.objects.all(),
         required=False,
@@ -228,7 +283,7 @@ class OptionImportForm(
             "invalid_choice": _("No option definition with name %(value)s found"),
         },
     )
-    code = CSVModelChoiceField(
+    code = CSVOptionDefinitionChoiceField(
         label=_("Code"),
         queryset=OptionDefinition.objects.all(),
         required=False,
@@ -334,15 +389,61 @@ class OptionImportForm(
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        if self.is_bound and "space" in self.data:
-            self.fields["code"].queryset = OptionDefinition.objects.filter(
-                space=self.data.get("space")
-            )
-            self.fields["name"].queryset = OptionDefinition.objects.filter(
-                space=self.data.get("space")
+        self.fields["weight"].required = False
+
+        if self.is_bound:
+            dhcp_server = None
+            client_class = None
+
+            if "client_class" in self.data:
+                try:
+                    client_class = self.fields["client_class"].to_python(
+                        self.data["client_class"]
+                    )
+                    dhcp_server = client_class.dhcp_server
+                except forms.ValidationError:
+                    pass
+
+            elif "dhcp_server" in self.data:
+                try:
+                    dhcp_server = self.fields["dhcp_server"].to_python(
+                        self.data["dhcp_server"]
+                    )
+                except forms.ValidationError:
+                    pass
+
+            else:
+                for object_name in (
+                    "subnet",
+                    "shared_network",
+                    "pool",
+                    "pd_pool",
+                    "host_reservation",
+                ):
+                    if object_name in self.data:
+                        obj = self.fields[object_name].to_python(self.data[object_name])
+                        dhcp_server = obj.dhcp_server
+                        continue
+
+            queryset = OptionDefinition.objects.filter(
+                Q(
+                    Q(standard=True)
+                    | Q(
+                        standard=False,
+                        dhcp_server__isnull=False,
+                        dhcp_server=dhcp_server,
+                    )
+                    | Q(
+                        standard=False,
+                        client_class__isnull=False,
+                        client_class=client_class,
+                    )
+                ),
+                Q(space=self.data.get("space")),
             )
 
-        del self.fields["definition"]
+            self.fields["code"].queryset = queryset
+            self.fields["name"].queryset = queryset
 
     def clean(self):
         super().clean()
@@ -350,7 +451,10 @@ class OptionImportForm(
         name = self.cleaned_data.get("name")
         code = self.cleaned_data.get("code")
 
-        self.cleaned_data["definition"] = code if code else name
+        if code is not None:
+            self.cleaned_data["definition"] = code
+        elif name is not None:
+            self.cleaned_data["definition"] = name
 
         objects = [
             self.cleaned_data.get(object_name)
@@ -365,16 +469,20 @@ class OptionImportForm(
             )
             if self.cleaned_data.get(object_name) is not None
         ]
-        if len(objects) != 1:
-            raise forms.ValidationError(_("Exactly one assigned object is required"))
 
-        self.cleaned_data["assigned_object"] = objects[0]
+        if len(objects) == 1:
+            self.cleaned_data["assigned_object"] = objects[0]
+        elif len(objects) > 1 or self.instance._state.adding:
+            raise forms.ValidationError(_("Exactly one assigned object is required"))
 
         return self.cleaned_data
 
     def save(self, *args, **kwargs):
-        self.instance.definition = self.cleaned_data.get("definition")
-        self.instance.assigned_object = self.cleaned_data.get("assigned_object")
+        if "definition" in self.cleaned_data:
+            self.instance.definition = self.cleaned_data.get("definition")
+
+        if "assigned_object" in self.cleaned_data:
+            self.instance.assigned_object = self.cleaned_data.get("assigned_object")
 
         return super().save(*args, **kwargs)
 
