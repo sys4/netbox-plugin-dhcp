@@ -5,6 +5,7 @@ from utilities.testing import APIViewTestCases
 from ipam.choices import IPAddressFamilyChoices
 
 from netbox_dhcp.tests.custom import (
+    TestObjects,
     APITestCase,
     NetBoxDHCPGraphQLMixin,
 )
@@ -43,6 +44,8 @@ class OptionDefinitionAPITestCase(
 
     @classmethod
     def setUpTestData(cls):
+        dhcp_servers = TestObjects.get_dhcp_servers()
+
         option_definitions = (
             OptionDefinition(
                 name="test-option-definition-1",
@@ -50,6 +53,7 @@ class OptionDefinitionAPITestCase(
                 code=251,
                 family=IPAddressFamilyChoices.FAMILY_4,
                 type=OptionTypeChoices.TYPE_STRING,
+                dhcp_server=dhcp_servers[0],
             ),
             OptionDefinition(
                 name="test-option-definition-2",
@@ -57,6 +61,7 @@ class OptionDefinitionAPITestCase(
                 code=252,
                 family=IPAddressFamilyChoices.FAMILY_4,
                 type=OptionTypeChoices.TYPE_IPV4_ADDRESS,
+                dhcp_server=dhcp_servers[0],
             ),
             OptionDefinition(
                 name="test-option-definition-3",
@@ -64,6 +69,7 @@ class OptionDefinitionAPITestCase(
                 code=253,
                 family=IPAddressFamilyChoices.FAMILY_4,
                 type=OptionTypeChoices.TYPE_IPV4_ADDRESS,
+                dhcp_server=dhcp_servers[0],
             ),
         )
         OptionDefinition.objects.bulk_create(option_definitions)
@@ -76,6 +82,7 @@ class OptionDefinitionAPITestCase(
                 "space": OptionSpaceChoices.DHCPV6,
                 "code": 251,
                 "type": OptionTypeChoices.TYPE_EMPTY,
+                "dhcp_server": dhcp_servers[0].pk,
             },
             {
                 "name": "test-option-definition-5",
@@ -88,6 +95,7 @@ class OptionDefinitionAPITestCase(
                     OptionTypeChoices.TYPE_UINT32,
                     OptionTypeChoices.TYPE_IPV6_ADDRESS,
                 ],
+                "dhcp_server": dhcp_servers[0].pk,
             },
             {
                 "name": "test-option-definition-6",
@@ -96,6 +104,7 @@ class OptionDefinitionAPITestCase(
                 "space": OptionSpaceChoices.DHCPV6,
                 "code": 253,
                 "type": OptionTypeChoices.TYPE_IPV6_ADDRESS,
+                "dhcp_server": dhcp_servers[0].pk,
             },
         ]
 

@@ -13,7 +13,7 @@ from utilities.forms.fields import (
     CSVChoiceField,
     CSVMultipleChoiceField,
 )
-from utilities.forms.rendering import FieldSet
+from utilities.forms.rendering import FieldSet, TabbedGroups
 from utilities.forms import (
     get_field_value,
     add_blank_choice,
@@ -26,6 +26,10 @@ from netbox_dhcp.models import OptionDefinition
 from netbox_dhcp.choices import OptionTypeChoices, OptionSpaceChoices
 
 from .mixins import (
+    DHCPServerFormMixin,
+    ClientClassFormMixin,
+    DHCPServerImportFormMixin,
+    ClientClassImportFormMixin,
     NetBoxDHCPFilterFormMixin,
     NetBoxDHCPBulkEditFormMixin,
 )
@@ -38,14 +42,18 @@ __all__ = (
 )
 
 
-class OptionDefinitionForm(PrimaryModelForm):
+class OptionDefinitionForm(
+    DHCPServerFormMixin,
+    ClientClassFormMixin,
+    PrimaryModelForm,
+):
     class Meta:
         model = OptionDefinition
 
         fields = (
             "description",
-            "dhcp_server",
-            "client_class",
+            *DHCPServerFormMixin.FIELDS,
+            *ClientClassFormMixin.FIELDS,
             "family",
             "space",
             "name",
@@ -58,11 +66,22 @@ class OptionDefinitionForm(PrimaryModelForm):
 
         widgets = {
             "type": HTMXSelect(),
-            "dhcp_server": forms.HiddenInput(),
-            "client_class": forms.HiddenInput(),
         }
 
     fieldsets = (
+        FieldSet(
+            TabbedGroups(
+                FieldSet(
+                    "dhcp_server",
+                    name=_("Global"),
+                ),
+                FieldSet(
+                    "client_class",
+                    name=_("Classification"),
+                ),
+            ),
+            name=_("Parent Object"),
+        ),
         FieldSet(
             "family",
             "space",
@@ -192,11 +211,17 @@ class OptionDefinitionFilterForm(
     tag = TagFilterField(OptionDefinition)
 
 
-class OptionDefinitionImportForm(PrimaryModelImportForm):
+class OptionDefinitionImportForm(
+    DHCPServerImportFormMixin,
+    ClientClassImportFormMixin,
+    PrimaryModelImportForm,
+):
     class Meta:
         model = OptionDefinition
 
         fields = (
+            "dhcp_server",
+            "client_class",
             "family",
             "space",
             "name",
