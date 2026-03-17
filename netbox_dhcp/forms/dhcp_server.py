@@ -35,10 +35,10 @@ from netbox_dhcp.choices import (
 from .mixins import (
     NetBoxDHCPFilterFormMixin,
     NetBoxDHCPBulkEditFormMixin,
-    ClientClassFormMixin,
-    ClientClassFilterFormMixin,
-    ClientClassImportFormMixin,
-    ClientClassBulkEditFormMixin,
+    ClientClassesFormMixin,
+    ClientClassesFilterFormMixin,
+    ClientClassesImportFormMixin,
+    ClientClassesBulkEditFormMixin,
     BOOTPFormMixin,
     BOOTPFilterFormMixin,
     BOOTPImportFormMixin,
@@ -70,7 +70,7 @@ class DHCPServerForm(
     LifetimeFormMixin,
     LeaseFormMixin,
     DDNSUpdateFormMixin,
-    ClientClassFormMixin,
+    ClientClassesFormMixin,
     PrimaryModelForm,
 ):
     class Meta:
@@ -94,7 +94,7 @@ class DHCPServerForm(
             *LifetimeFormMixin.FIELDS,
             *LeaseFormMixin.FIELDS,
             *DDNSUpdateFormMixin.FIELDS,
-            *ClientClassFormMixin.FIELDS,
+            *ClientClassesFormMixin.FIELDS,
             "tags",
         )
 
@@ -130,7 +130,7 @@ class DHCPServerForm(
         LifetimeFormMixin.FIELDSET,
         LeaseFormMixin.FIELDSET,
         DDNSUpdateFormMixin.FIELDSET,
-        ClientClassFormMixin.FIELDSET,
+        ClientClassesFormMixin.FIELDSET,
         FieldSet(
             "tags",
             name=_("Tags"),
@@ -216,7 +216,7 @@ class DHCPServerFilterForm(
     LeaseFilterFormMixin,
     DDNSUpdateFilterFormMixin,
     NetBoxDHCPFilterFormMixin,
-    ClientClassFilterFormMixin,
+    ClientClassesFilterFormMixin,
     PrimaryModelFilterSetForm,
 ):
     model = DHCPServer
@@ -251,7 +251,7 @@ class DHCPServerFilterForm(
         LifetimeFilterFormMixin.FIELDSET,
         LeaseFilterFormMixin.FIELDSET,
         DDNSUpdateFilterFormMixin.FIELDSET,
-        ClientClassFilterFormMixin.FIELDSET,
+        ClientClassesFilterFormMixin.FIELDSET,
     )
 
     status = forms.MultipleChoiceField(
@@ -284,7 +284,7 @@ class DHCPServerImportForm(
     LifetimeImportFormMixin,
     LeaseImportFormMixin,
     DDNSUpdateImportFormMixin,
-    ClientClassImportFormMixin,
+    ClientClassesImportFormMixin,
     PrimaryModelImportForm,
 ):
     class Meta:
@@ -308,7 +308,7 @@ class DHCPServerImportForm(
             *LifetimeImportFormMixin.FIELDS,
             *LeaseImportFormMixin.FIELDS,
             *DDNSUpdateImportFormMixin.FIELDS,
-            *ClientClassImportFormMixin.FIELDS,
+            *ClientClassesImportFormMixin.FIELDS,
             "comments",
             "tags",
         )
@@ -393,7 +393,7 @@ class DHCPServerBulkEditForm(
     LeaseBulkEditFormMixin,
     DDNSUpdateBulkEditFormMixin,
     NetBoxDHCPBulkEditFormMixin,
-    ClientClassBulkEditFormMixin,
+    ClientClassesBulkEditFormMixin,
     PrimaryModelBulkEditForm,
 ):
     model = DHCPServer
@@ -417,7 +417,7 @@ class DHCPServerBulkEditForm(
         LifetimeBulkEditFormMixin.FIELDSET,
         LeaseBulkEditFormMixin.FIELDSET,
         DDNSUpdateBulkEditFormMixin.FIELDSET,
-        ClientClassBulkEditFormMixin.FIELDSET,
+        ClientClassesBulkEditFormMixin.FIELDSET,
     )
 
     nullable_fields = (
@@ -432,7 +432,7 @@ class DHCPServerBulkEditForm(
         *LifetimeBulkEditFormMixin.NULLABLE_FIELDS,
         *LeaseBulkEditFormMixin.NULLABLE_FIELDS,
         *DDNSUpdateBulkEditFormMixin.NULLABLE_FIELDS,
-        *ClientClassBulkEditFormMixin.NULLABLE_FIELDS,
+        *ClientClassesBulkEditFormMixin.NULLABLE_FIELDS,
     )
 
     status = forms.ChoiceField(

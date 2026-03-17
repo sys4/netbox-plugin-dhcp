@@ -26,8 +26,8 @@ from netbox_dhcp.choices import (
 __all__ = (
     "NetBoxDHCPBulkEditFormMixin",
     "BOOTPBulkEditFormMixin",
-    "ClientClassBulkEditFormMixin",
-    "EvaluateClientClassBulkEditFormMixin",
+    "ClientClassesBulkEditFormMixin",
+    "EvaluateClientClassesBulkEditFormMixin",
     "OfferLifetimeBulkEditFormMixin",
     "LifetimeBulkEditFormMixin",
     "PrefixBulkEditFormMixin",
@@ -74,7 +74,7 @@ class BOOTPBulkEditFormMixin(forms.Form):
     )
 
 
-class ClientClassBulkEditFormMixin(forms.Form):
+class ClientClassesBulkEditFormMixin(forms.Form):
     FIELDS = [
         "client_classes",
     ]
@@ -94,7 +94,7 @@ class ClientClassBulkEditFormMixin(forms.Form):
     )
 
 
-class EvaluateClientClassBulkEditFormMixin(forms.Form):
+class EvaluateClientClassesBulkEditFormMixin(forms.Form):
     FIELDS = [
         "evaluate_additional_classes",
     ]

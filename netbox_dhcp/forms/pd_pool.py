@@ -21,14 +21,14 @@ from utilities.forms import get_field_value
 from netbox_dhcp.models import PDPool, Subnet
 
 from .mixins import (
-    ClientClassBulkEditFormMixin,
-    ClientClassFilterFormMixin,
-    ClientClassFormMixin,
-    ClientClassImportFormMixin,
-    EvaluateClientClassBulkEditFormMixin,
-    EvaluateClientClassFilterFormMixin,
-    EvaluateClientClassFormMixin,
-    EvaluateClientClassImportFormMixin,
+    ClientClassesBulkEditFormMixin,
+    ClientClassesFilterFormMixin,
+    ClientClassesFormMixin,
+    ClientClassesImportFormMixin,
+    EvaluateClientClassesBulkEditFormMixin,
+    EvaluateClientClassesFilterFormMixin,
+    EvaluateClientClassesFormMixin,
+    EvaluateClientClassesImportFormMixin,
     NetBoxDHCPBulkEditFormMixin,
     NetBoxDHCPFilterFormMixin,
 )
@@ -44,8 +44,8 @@ __all__ = (
 
 
 class PDPoolForm(
-    ClientClassFormMixin,
-    EvaluateClientClassFormMixin,
+    ClientClassesFormMixin,
+    EvaluateClientClassesFormMixin,
     PrimaryModelForm,
 ):
     class Meta:
@@ -59,8 +59,8 @@ class PDPoolForm(
             "prefix",
             "delegated_length",
             "excluded_prefix",
-            *ClientClassFormMixin.FIELDS,
-            *EvaluateClientClassFormMixin.FIELDS,
+            *ClientClassesFormMixin.FIELDS,
+            *EvaluateClientClassesFormMixin.FIELDS,
             "tags",
         )
 
@@ -76,8 +76,8 @@ class PDPoolForm(
             name=_("Prefix Delegation Pool"),
         ),
         FieldSet(
-            *ClientClassFormMixin.FIELDS,
-            *EvaluateClientClassFormMixin.FIELDS,
+            *ClientClassesFormMixin.FIELDS,
+            *EvaluateClientClassesFormMixin.FIELDS,
             name=_("Client Classes"),
         ),
         FieldSet(
@@ -141,8 +141,8 @@ class PDPoolForm(
 
 class PDPoolFilterForm(
     NetBoxDHCPFilterFormMixin,
-    ClientClassFilterFormMixin,
-    EvaluateClientClassFilterFormMixin,
+    ClientClassesFilterFormMixin,
+    EvaluateClientClassesFilterFormMixin,
     PrimaryModelFilterSetForm,
 ):
     model = PDPool
@@ -169,8 +169,8 @@ class PDPoolFilterForm(
             name=_("Prefix Delegation Pool"),
         ),
         FieldSet(
-            *ClientClassFilterFormMixin.FIELDS,
-            *EvaluateClientClassFilterFormMixin.FIELDS,
+            *ClientClassesFilterFormMixin.FIELDS,
+            *EvaluateClientClassesFilterFormMixin.FIELDS,
             name=_("Client Classes"),
         ),
     )
@@ -224,8 +224,8 @@ class PDPoolFilterForm(
 
 
 class PDPoolImportForm(
-    ClientClassImportFormMixin,
-    EvaluateClientClassImportFormMixin,
+    ClientClassesImportFormMixin,
+    EvaluateClientClassesImportFormMixin,
     PrimaryModelImportForm,
 ):
     class Meta:
@@ -239,8 +239,8 @@ class PDPoolImportForm(
             "prefix",
             "delegated_length",
             "excluded_prefix",
-            *ClientClassImportFormMixin.FIELDS,
-            *EvaluateClientClassImportFormMixin.FIELDS,
+            *ClientClassesImportFormMixin.FIELDS,
+            *EvaluateClientClassesImportFormMixin.FIELDS,
             "comments",
             "tags",
         )
@@ -278,8 +278,8 @@ class PDPoolImportForm(
 
 class PDPoolBulkEditForm(
     NetBoxDHCPBulkEditFormMixin,
-    ClientClassBulkEditFormMixin,
-    EvaluateClientClassBulkEditFormMixin,
+    ClientClassesBulkEditFormMixin,
+    EvaluateClientClassesBulkEditFormMixin,
     PrimaryModelBulkEditForm,
 ):
     model = PDPool
@@ -293,8 +293,8 @@ class PDPoolBulkEditForm(
             name=_("Prefix Delegation Pool"),
         ),
         FieldSet(
-            *ClientClassBulkEditFormMixin.FIELDS,
-            *EvaluateClientClassBulkEditFormMixin.FIELDS,
+            *ClientClassesBulkEditFormMixin.FIELDS,
+            *EvaluateClientClassesBulkEditFormMixin.FIELDS,
             name=_("Client Classes"),
         ),
         FieldSet(
@@ -306,8 +306,8 @@ class PDPoolBulkEditForm(
     nullable_fields = (
         "description",
         "excluded_prefix",
-        *ClientClassBulkEditFormMixin.NULLABLE_FIELDS,
-        *EvaluateClientClassBulkEditFormMixin.NULLABLE_FIELDS,
+        *ClientClassesBulkEditFormMixin.NULLABLE_FIELDS,
+        *EvaluateClientClassesBulkEditFormMixin.NULLABLE_FIELDS,
     )
 
     weight = forms.IntegerField(

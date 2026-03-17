@@ -25,14 +25,14 @@ from .mixins import (
     SubnetFilterFormMixin,
     SubnetImportFormMixin,
     SubnetBulkEditFormMixin,
-    ClientClassBulkEditFormMixin,
-    ClientClassFilterFormMixin,
-    ClientClassFormMixin,
-    ClientClassImportFormMixin,
-    EvaluateClientClassBulkEditFormMixin,
-    EvaluateClientClassFilterFormMixin,
-    EvaluateClientClassFormMixin,
-    EvaluateClientClassImportFormMixin,
+    ClientClassesBulkEditFormMixin,
+    ClientClassesFilterFormMixin,
+    ClientClassesFormMixin,
+    ClientClassesImportFormMixin,
+    EvaluateClientClassesBulkEditFormMixin,
+    EvaluateClientClassesFilterFormMixin,
+    EvaluateClientClassesFormMixin,
+    EvaluateClientClassesImportFormMixin,
     NetBoxDHCPBulkEditFormMixin,
     NetBoxDHCPFilterFormMixin,
     DDNSUpdateFormMixin,
@@ -53,8 +53,8 @@ __all__ = (
 
 class PoolForm(
     SubnetFormMixin,
-    ClientClassFormMixin,
-    EvaluateClientClassFormMixin,
+    ClientClassesFormMixin,
+    EvaluateClientClassesFormMixin,
     DDNSUpdateFormMixin,
     PrimaryModelForm,
 ):
@@ -67,8 +67,8 @@ class PoolForm(
             "weight",
             *SubnetFormMixin.FIELDS,
             "ip_range",
-            *ClientClassFormMixin.FIELDS,
-            *EvaluateClientClassFormMixin.FIELDS,
+            *ClientClassesFormMixin.FIELDS,
+            *EvaluateClientClassesFormMixin.FIELDS,
             *DDNSUpdateFormMixin.FIELDS,
             "tags",
         )
@@ -83,8 +83,8 @@ class PoolForm(
             name=_("Address Pool"),
         ),
         FieldSet(
-            *ClientClassFormMixin.FIELDS,
-            *EvaluateClientClassFormMixin.FIELDS,
+            *ClientClassesFormMixin.FIELDS,
+            *EvaluateClientClassesFormMixin.FIELDS,
             name=_("Client Classes"),
         ),
         DDNSUpdateFormMixin.FIELDSET,
@@ -121,8 +121,8 @@ class PoolForm(
 class PoolFilterForm(
     SubnetFilterFormMixin,
     NetBoxDHCPFilterFormMixin,
-    ClientClassFilterFormMixin,
-    EvaluateClientClassFilterFormMixin,
+    ClientClassesFilterFormMixin,
+    EvaluateClientClassesFilterFormMixin,
     DDNSUpdateFilterFormMixin,
     PrimaryModelFilterSetForm,
 ):
@@ -149,8 +149,8 @@ class PoolFilterForm(
             name=_("Address Pool"),
         ),
         FieldSet(
-            *ClientClassFilterFormMixin.FIELDS,
-            *EvaluateClientClassFilterFormMixin.FIELDS,
+            *ClientClassesFilterFormMixin.FIELDS,
+            *EvaluateClientClassesFilterFormMixin.FIELDS,
             name=_("Client Classes"),
         ),
         DDNSUpdateFilterFormMixin.FIELDSET,
@@ -179,8 +179,8 @@ class PoolFilterForm(
 
 class PoolImportForm(
     SubnetImportFormMixin,
-    ClientClassImportFormMixin,
-    EvaluateClientClassImportFormMixin,
+    ClientClassesImportFormMixin,
+    EvaluateClientClassesImportFormMixin,
     DDNSUpdateImportFormMixin,
     PrimaryModelImportForm,
 ):
@@ -193,8 +193,8 @@ class PoolImportForm(
             "weight",
             *SubnetImportFormMixin.FIELDS,
             "ip_range",
-            *ClientClassImportFormMixin.FIELDS,
-            *EvaluateClientClassImportFormMixin.FIELDS,
+            *ClientClassesImportFormMixin.FIELDS,
+            *EvaluateClientClassesImportFormMixin.FIELDS,
             *DDNSUpdateImportFormMixin.FIELDS,
             "comments",
             "tags",
@@ -214,8 +214,8 @@ class PoolImportForm(
 class PoolBulkEditForm(
     SubnetBulkEditFormMixin,
     NetBoxDHCPBulkEditFormMixin,
-    ClientClassBulkEditFormMixin,
-    EvaluateClientClassBulkEditFormMixin,
+    ClientClassesBulkEditFormMixin,
+    EvaluateClientClassesBulkEditFormMixin,
     DDNSUpdateBulkEditFormMixin,
     PrimaryModelBulkEditForm,
 ):
@@ -229,8 +229,8 @@ class PoolBulkEditForm(
             name=_("Address Pool"),
         ),
         FieldSet(
-            *ClientClassBulkEditFormMixin.FIELDS,
-            *EvaluateClientClassBulkEditFormMixin.FIELDS,
+            *ClientClassesBulkEditFormMixin.FIELDS,
+            *EvaluateClientClassesBulkEditFormMixin.FIELDS,
             name=_("Client Classes"),
         ),
         DDNSUpdateBulkEditFormMixin.FIELDSET,
@@ -238,7 +238,7 @@ class PoolBulkEditForm(
 
     nullable_fields = (
         "description",
-        *ClientClassBulkEditFormMixin.NULLABLE_FIELDS,
+        *ClientClassesBulkEditFormMixin.NULLABLE_FIELDS,
         *DDNSUpdateBulkEditFormMixin.NULLABLE_FIELDS,
     )
 

@@ -32,7 +32,8 @@ from netbox_dhcp.choices import (
 __all__ = (
     "BOOTPFormMixin",
     "ClientClassFormMixin",
-    "EvaluateClientClassFormMixin",
+    "ClientClassesFormMixin",
+    "EvaluateClientClassesFormMixin",
     "PrefixFormMixin",
     "DDNSUpdateFormMixin",
     "LeaseFormMixin",
@@ -66,6 +67,23 @@ class BOOTPFormMixin:
 
 class ClientClassFormMixin(forms.Form):
     FIELDS = [
+        "client_class",
+    ]
+    FIELDSET = FieldSet(
+        "client_class",
+        name=_("Client Class"),
+    )
+
+    client_class = DynamicModelChoiceField(
+        queryset=ClientClass.objects.all(),
+        required=False,
+        quick_add=True,
+        label=_("Client Class"),
+    )
+
+
+class ClientClassesFormMixin(forms.Form):
+    FIELDS = [
         "client_classes",
     ]
     FIELDSET = FieldSet(
@@ -81,7 +99,7 @@ class ClientClassFormMixin(forms.Form):
     )
 
 
-class EvaluateClientClassFormMixin(forms.Form):
+class EvaluateClientClassesFormMixin(forms.Form):
     FIELDS = [
         "evaluate_additional_classes",
     ]
