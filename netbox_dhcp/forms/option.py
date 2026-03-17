@@ -26,10 +26,10 @@ from netbox_dhcp.models import (
 from netbox_dhcp.choices import OptionSpaceChoices, OptionSendChoices
 
 from .mixins import (
-    ClientClassFormMixin,
-    ClientClassImportFormMixin,
-    ClientClassFilterFormMixin,
-    ClientClassBulkEditFormMixin,
+    ClientClassesFormMixin,
+    ClientClassesImportFormMixin,
+    ClientClassesFilterFormMixin,
+    ClientClassesBulkEditFormMixin,
 )
 
 __all__ = (
@@ -41,7 +41,7 @@ __all__ = (
 
 
 class OptionForm(
-    ClientClassFormMixin,
+    ClientClassesFormMixin,
     PrimaryModelForm,
 ):
     class Meta:
@@ -56,7 +56,7 @@ class OptionForm(
             "send_option",
             "assigned_object_id",
             "assigned_object_type",
-            *ClientClassFormMixin.FIELDS,
+            *ClientClassesFormMixin.FIELDS,
             "tags",
         )
 
@@ -75,7 +75,7 @@ class OptionForm(
             "send_option",
             name=_("Option"),
         ),
-        ClientClassFormMixin.FIELDSET,
+        ClientClassesFormMixin.FIELDSET,
         FieldSet(
             "tags",
             name=_("Tags"),
@@ -96,7 +96,7 @@ class OptionForm(
 
 
 class OptionFilterForm(
-    ClientClassFilterFormMixin,
+    ClientClassesFilterFormMixin,
     PrimaryModelFilterSetForm,
 ):
     model = Option
@@ -125,7 +125,7 @@ class OptionFilterForm(
             "send_option",
             name=_("Option"),
         ),
-        ClientClassFilterFormMixin.FIELDSET,
+        ClientClassesFilterFormMixin.FIELDSET,
     )
 
     name = forms.CharField(
@@ -181,7 +181,7 @@ class OptionFilterForm(
 
 
 class OptionImportForm(
-    ClientClassImportFormMixin,
+    ClientClassesImportFormMixin,
     PrimaryModelImportForm,
 ):
     class Meta:
@@ -204,7 +204,7 @@ class OptionImportForm(
             "weight",
             "csv_format",
             "send_option",
-            *ClientClassImportFormMixin.FIELDS,
+            *ClientClassesImportFormMixin.FIELDS,
             "comments",
             "tags",
         )
@@ -380,7 +380,7 @@ class OptionImportForm(
 
 
 class OptionBulkEditForm(
-    ClientClassBulkEditFormMixin,
+    ClientClassesBulkEditFormMixin,
     PrimaryModelBulkEditForm,
 ):
     model = Option
@@ -395,7 +395,7 @@ class OptionBulkEditForm(
             "send_option",
             name=_("Option"),
         ),
-        ClientClassBulkEditFormMixin.FIELDSET,
+        ClientClassesBulkEditFormMixin.FIELDSET,
     )
 
     nullable_fields = (
@@ -403,7 +403,7 @@ class OptionBulkEditForm(
         "description",
         "csv_format",
         "send_option",
-        *ClientClassBulkEditFormMixin.NULLABLE_FIELDS,
+        *ClientClassesBulkEditFormMixin.NULLABLE_FIELDS,
     )
 
     description = forms.CharField(

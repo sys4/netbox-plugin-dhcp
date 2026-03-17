@@ -24,7 +24,8 @@ from netbox_dhcp.choices import (
 __all__ = (
     "BOOTPImportFormMixin",
     "ClientClassImportFormMixin",
-    "EvaluateClientClassImportFormMixin",
+    "ClientClassesImportFormMixin",
+    "EvaluateClientClassesImportFormMixin",
     "PrefixImportFormMixin",
     "DDNSUpdateImportFormMixin",
     "LifetimeImportFormMixin",
@@ -46,6 +47,22 @@ class BOOTPImportFormMixin(forms.Form):
 
 class ClientClassImportFormMixin(forms.Form):
     FIELDS = [
+        "client_class",
+    ]
+
+    client_class = CSVModelChoiceField(
+        queryset=ClientClass.objects.all(),
+        required=False,
+        to_field_name="name",
+        error_messages={
+            "invalid_choice": _("Client class %(value)s not found"),
+        },
+        label=_("Client Class"),
+    )
+
+
+class ClientClassesImportFormMixin(forms.Form):
+    FIELDS = [
         "client_classes",
     ]
 
@@ -60,7 +77,7 @@ class ClientClassImportFormMixin(forms.Form):
     )
 
 
-class EvaluateClientClassImportFormMixin(forms.Form):
+class EvaluateClientClassesImportFormMixin(forms.Form):
     FIELDS = [
         "evaluate_additional_classes",
     ]
@@ -72,7 +89,7 @@ class EvaluateClientClassImportFormMixin(forms.Form):
         error_messages={
             "invalid_choice": _("Client class %(value)s not found"),
         },
-        label=_("Require Client Classes"),
+        label=_("Evaluate Additional Classes"),
     )
 
 

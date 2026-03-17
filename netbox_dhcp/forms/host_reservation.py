@@ -32,10 +32,10 @@ from .mixins import (
     SubnetFilterFormMixin,
     SubnetImportFormMixin,
     SubnetBulkEditFormMixin,
-    ClientClassFormMixin,
-    ClientClassFilterFormMixin,
-    ClientClassImportFormMixin,
-    ClientClassBulkEditFormMixin,
+    ClientClassesFormMixin,
+    ClientClassesFilterFormMixin,
+    ClientClassesImportFormMixin,
+    ClientClassesBulkEditFormMixin,
     BOOTPFormMixin,
     BOOTPFilterFormMixin,
     BOOTPImportFormMixin,
@@ -55,7 +55,7 @@ __all__ = (
 class HostReservationForm(
     DHCPServerFormMixin,
     SubnetFormMixin,
-    ClientClassFormMixin,
+    ClientClassesFormMixin,
     PrimaryModelForm,
 ):
     class Meta:
@@ -76,7 +76,7 @@ class HostReservationForm(
             "ipv6_addresses",
             "ipv6_prefixes",
             "excluded_ipv6_prefixes",
-            *ClientClassFormMixin.FIELDS,
+            *ClientClassesFormMixin.FIELDS,
             *BOOTPFormMixin.FIELDS,
             "tags",
         )
@@ -113,7 +113,7 @@ class HostReservationForm(
             "hostname",
             name=_("Assignment"),
         ),
-        ClientClassFormMixin.FIELDSET,
+        ClientClassesFormMixin.FIELDSET,
         BOOTPFormMixin.FIELDSET,
         FieldSet(
             "tags",
@@ -220,7 +220,7 @@ class HostReservationFilterForm(
     DHCPServerFilterFormMixin,
     SubnetFilterFormMixin,
     NetBoxDHCPFilterFormMixin,
-    ClientClassFilterFormMixin,
+    ClientClassesFilterFormMixin,
     BOOTPFilterFormMixin,
     PrimaryModelFilterSetForm,
 ):
@@ -261,7 +261,7 @@ class HostReservationFilterForm(
             "hostname",
             name=_("Assignment"),
         ),
-        ClientClassFilterFormMixin.FIELDSET,
+        ClientClassesFilterFormMixin.FIELDSET,
         BOOTPFilterFormMixin.FIELDSET,
     )
 
@@ -331,7 +331,7 @@ class HostReservationFilterForm(
 class HostReservationImportForm(
     DHCPServerImportFormMixin,
     SubnetImportFormMixin,
-    ClientClassImportFormMixin,
+    ClientClassesImportFormMixin,
     PrimaryModelImportForm,
 ):
     class Meta:
@@ -352,7 +352,7 @@ class HostReservationImportForm(
             "ipv6_addresses",
             "ipv6_prefixes",
             "excluded_ipv6_prefixes",
-            *ClientClassImportFormMixin.FIELDS,
+            *ClientClassesImportFormMixin.FIELDS,
             *BOOTPImportFormMixin.FIELDS,
             "comments",
             "tags",
@@ -416,7 +416,7 @@ class HostReservationBulkEditForm(
     SubnetBulkEditFormMixin,
     NetBoxDHCPBulkEditFormMixin,
     BOOTPBulkEditFormMixin,
-    ClientClassBulkEditFormMixin,
+    ClientClassesBulkEditFormMixin,
     PrimaryModelBulkEditForm,
 ):
     model = HostReservation
@@ -446,7 +446,7 @@ class HostReservationBulkEditForm(
             "excluded_ipv6_prefixes",
             name=_("Assignment"),
         ),
-        ClientClassBulkEditFormMixin.FIELDSET,
+        ClientClassesBulkEditFormMixin.FIELDSET,
         BOOTPBulkEditFormMixin.FIELDSET,
         FieldSet(
             "tags",
@@ -462,7 +462,7 @@ class HostReservationBulkEditForm(
         "ipv6_prefixes",
         "excluded_ipv6_prefixes",
         *BOOTPBulkEditFormMixin.NULLABLE_FIELDS,
-        *ClientClassBulkEditFormMixin.NULLABLE_FIELDS,
+        *ClientClassesBulkEditFormMixin.NULLABLE_FIELDS,
     )
 
     circuit_id = forms.CharField(
