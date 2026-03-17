@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import (
     MinValueValidator,
@@ -28,6 +29,80 @@ class OptionDefinition(PrimaryModel):
             "code",
             "name",
         )
+
+        constraints = [
+            models.CheckConstraint(
+                condition=Q(
+                    Q(
+                        standard=True,
+                        dhcp_server__isnull=True,
+                        client_class__isnull=True,
+                    )
+                    | Q(
+                        standard=False,
+                        dhcp_server__isnull=False,
+                        client_class__isnull=True,
+                    )
+                    | Q(
+                        standard=False,
+                        dhcp_server__isnull=True,
+                        client_class__isnull=False,
+                    )
+                ),
+                violation_error_message=_(
+                    "Option definitions must either be standard or have a unique parent object"
+                ),
+                name="option_definition_standard_or_unique_parent_object",
+            ),
+            models.UniqueConstraint(
+                fields=["space", "name"],
+                name="standard_option_definition_unique_name",
+                condition=Q(standard=True),
+                violation_error_message=_(
+                    "Standard option definitions must be uniqe in space and name"
+                ),
+            ),
+            models.UniqueConstraint(
+                fields=["space", "code"],
+                name="standard_option_definition_unique_code",
+                condition=Q(standard=True),
+                violation_error_message=_(
+                    "Standard option definitions must be uniqe in space and code"
+                ),
+            ),
+            models.UniqueConstraint(
+                fields=["space", "name", "dhcp_server"],
+                name="global_option_definition_unique_name",
+                condition=Q(dhcp_server__isnull=False),
+                violation_error_message=_(
+                    "Global custom option definitions must be uniqe in space and name"
+                ),
+            ),
+            models.UniqueConstraint(
+                fields=["space", "code", "dhcp_server"],
+                name="global_option_definition_unique_code",
+                condition=Q(dhcp_server__isnull=False),
+                violation_error_message=_(
+                    "Global custom option definitions must be uniqe in space and code"
+                ),
+            ),
+            models.UniqueConstraint(
+                fields=["space", "name", "client_class"],
+                name="client_class_option_definition_unique_name",
+                condition=Q(client_class__isnull=False),
+                violation_error_message=_(
+                    "Classification custom option definitions must be uniqe in space and name"
+                ),
+            ),
+            models.UniqueConstraint(
+                fields=["space", "code", "client_class"],
+                name="client_class_option_definition_unique_code",
+                condition=Q(client_class__isnull=False),
+                violation_error_message=_(
+                    "Classification custom option definitions must be uniqe in space and code"
+                ),
+            ),
+        ]
 
     clone_fields = ("space",)
 
@@ -113,6 +188,11 @@ class OptionDefinition(PrimaryModel):
 
     def get_space_color(self):
         return OptionSpaceChoices.colors.get(self.space)
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+
+        super().save(*args, **kwargs)
 
 
 @register_search
