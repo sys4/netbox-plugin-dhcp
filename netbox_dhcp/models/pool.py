@@ -104,6 +104,9 @@ class Pool(
         return self.subnet.dhcp_server
 
     def clean(self):
+        if self.weight is None:
+            self.weight = 100
+
         super().clean()
 
         ip_range = self.ip_range.range

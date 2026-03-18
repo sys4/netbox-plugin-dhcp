@@ -15,7 +15,7 @@ from utilities.forms.fields import (
 )
 from utilities.forms import add_blank_choice, get_field_value
 from utilities.forms.rendering import FieldSet
-from ipam.models import IPRange, Prefix
+from ipam.models import IPRange, Prefix, VRF
 from ipam.choices import IPAddressFamilyChoices
 
 from netbox_dhcp.models import Pool
@@ -192,6 +192,7 @@ class PoolImportForm(
             "description",
             "weight",
             *SubnetImportFormMixin.FIELDS,
+            "vrf",
             "ip_range",
             *ClientClassesImportFormMixin.FIELDS,
             *EvaluateClientClassesImportFormMixin.FIELDS,
@@ -200,15 +201,31 @@ class PoolImportForm(
             "tags",
         )
 
-    # TODO: Specify IP ranges by (start_address,end_address)
+    vrf = CSVModelChoiceField(
+        queryset=VRF.objects.all(),
+        to_field_name="name",
+        required=False,
+        label=_("IP Range VRF"),
+    )
     ip_range = CSVModelChoiceField(
         queryset=IPRange.objects.all(),
-        required=True,
+        to_field_name="start_address",
+        required=False,
         error_messages={
-            "invalid_choice": _("IP range %(value)s not found"),
+            "invalid_choice": _("IP range with start address %(value)s not found"),
         },
-        label=_("IP Range"),
+        label=_("IP Range Start Address"),
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["weight"].required = False
+
+        if self.is_bound and "vrf" in self.data:
+            self.fields["ip_range"].queryset = self.fields["ip_range"].queryset.filter(
+                vrf=self.data["vrf"]
+            )
 
 
 class PoolBulkEditForm(
