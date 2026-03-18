@@ -83,6 +83,9 @@ class Option(
         return self.definition.get_family_display()
 
     def clean(self):
+        if self.weight is None:
+            self.weight = 100
+
         super().clean()
 
         if (

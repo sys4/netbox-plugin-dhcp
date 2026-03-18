@@ -99,6 +99,10 @@ class Pool(
     def available_client_classes(self):
         return self.subnet.available_client_classes
 
+    @property
+    def dhcp_server(self):
+        return self.subnet.dhcp_server
+
     def clean(self):
         super().clean()
 

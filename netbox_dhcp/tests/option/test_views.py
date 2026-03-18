@@ -15,7 +15,7 @@ class OptionViewTestCase(
     ViewTestCases.DeleteObjectViewTestCase,
     ViewTestCases.ListObjectsViewTestCase,
     ViewTestCases.GetObjectChangelogViewTestCase,
-    #   ViewTestCases.BulkImportObjectsViewTestCase,    # TODO: Bulk update via CSV
+    ViewTestCases.BulkImportObjectsViewTestCase,
     ViewTestCases.BulkEditObjectsViewTestCase,
     ViewTestCases.BulkDeleteObjectsViewTestCase,
 ):
@@ -102,7 +102,7 @@ class OptionViewTestCase(
             "description,space,name,code,data,weight,dhcp_server,send_option,csv_format,client_classes",  # noqa: E501
             f'Test Option 1,dhcp4,routers,,"192.0.2.1,192.0.2.2",100,{cls.dhcp_servers[0].name},,true,"{cls.client_classes[0].name},{cls.client_classes[2].name}"',  # noqa: E501
             f'Test Option 2,dhcp4,,3,"192.0.2.3,192.0.2.4",120,{cls.dhcp_servers[1].name},{OptionSendChoices.NEVER_SEND},false,"{cls.client_classes[1].name},{cls.client_classes[2].name}"',  # noqa: E501
-            f'Test Option 3,dhcp4,domain-name-servers,,,"192.0.2.5,192.0.2.6",{cls.dhcp_servers[2].name},{OptionSendChoices.ALWAYS_SEND},false,"{cls.client_classes[0].name},{cls.client_classes[1].name}"',  # noqa: E501
+            f'Test Option 3,dhcp4,domain-name-servers,,"192.0.2.5,192.0.2.6",,{cls.dhcp_servers[2].name},{OptionSendChoices.ALWAYS_SEND},false,"{cls.client_classes[0].name},{cls.client_classes[1].name}"',  # noqa: E501
         )
 
         cls.csv_update_data = (
