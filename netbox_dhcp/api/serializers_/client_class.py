@@ -5,6 +5,7 @@ from netbox.api.serializers import PrimaryModelSerializer
 from netbox_dhcp.models import ClientClass
 
 from .option import OptionSerializer
+from .dhcp_server import DHCPServerSerializer
 
 __all__ = ("ClientClassSerializer",)
 
@@ -54,6 +55,11 @@ class ClientClassSerializer(PrimaryModelSerializer):
         view_name="plugins-api:netbox_dhcp-api:clientclass-detail"
     )
 
+    dhcp_server = DHCPServerSerializer(
+        nested=True,
+        read_only=False,
+        required=True,
+    )
     options = OptionSerializer(
         nested=True,
         many=True,
