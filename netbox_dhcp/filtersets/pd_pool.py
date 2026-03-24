@@ -13,6 +13,7 @@ from .mixins import (
     PrefixFilterMixin,
     ClientClassFilterMixin,
     EvaluateClientClassFilterMixin,
+    OptionFilterMixin,
 )
 
 __all__ = ("PDPoolFilterSet",)
@@ -24,6 +25,7 @@ class PDPoolFilterSet(
     PrefixFilterMixin,
     ClientClassFilterMixin,
     EvaluateClientClassFilterMixin,
+    OptionFilterMixin,
     PrimaryModelFilterSet,
 ):
     class Meta:

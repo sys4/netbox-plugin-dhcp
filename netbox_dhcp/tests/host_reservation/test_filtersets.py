@@ -4,13 +4,18 @@ from utilities.testing import ChangeLoggedFilterSetTests
 
 from netbox_dhcp.models import HostReservation, Subnet
 from netbox_dhcp.filtersets import HostReservationFilterSet
-from netbox_dhcp.tests.custom import TestObjects, BOOTPFilterSetTests
+from netbox_dhcp.tests.custom import (
+    TestObjects,
+    BOOTPFilterSetTests,
+    OptionFilterSetTests,
+)
 
 
 class HostReservationFilterSetTestCase(
     BOOTPFilterSetTests,
     TestCase,
     ChangeLoggedFilterSetTests,
+    OptionFilterSetTests,
 ):
     queryset = HostReservation.objects.all()
     filterset = HostReservationFilterSet
@@ -109,6 +114,8 @@ class HostReservationFilterSetTestCase(
             ),
         )
         HostReservation.objects.bulk_create(cls.host_reservations)
+
+        cls.add_test_options(cls.host_reservations)
 
         cls.host_reservations[0].ipv6_addresses.set(cls.ipv6_addresses[0:2])
         cls.host_reservations[1].ipv6_addresses.set(cls.ipv6_addresses[1:3])

@@ -16,6 +16,7 @@ from .mixins import (
     SubnetFilterMixin,
     ClientClassFilterMixin,
     BOOTPFilterMixin,
+    OptionFilterMixin,
 )
 
 __all__ = ("HostReservationFilterSet",)
@@ -27,6 +28,7 @@ class HostReservationFilterSet(
     SubnetFilterMixin,
     ClientClassFilterMixin,
     BOOTPFilterMixin,
+    OptionFilterMixin,
     PrimaryModelFilterSet,
 ):
     class Meta:

@@ -26,6 +26,7 @@ from netbox_dhcp.tests.custom import (
     PreferredLifetimeFilterSetTests,
     LeaseFilterSetTests,
     DDNSUpdateFilterSetTests,
+    OptionFilterSetTests,
 )
 
 
@@ -36,6 +37,7 @@ class DHCPServerFilterSetTestCase(
     PreferredLifetimeFilterSetTests,
     LeaseFilterSetTests,
     DDNSUpdateFilterSetTests,
+    OptionFilterSetTests,
     TestCase,
     ChangeLoggedFilterSetTests,
 ):
@@ -134,6 +136,8 @@ class DHCPServerFilterSetTestCase(
             ),
         )
         DHCPServer.objects.bulk_create(cls.dhcp_servers)
+
+        cls.add_test_options(cls.dhcp_servers)
 
         cls.client_classes = (
             ClientClass(

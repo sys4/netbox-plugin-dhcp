@@ -8,6 +8,7 @@ from .mixins import (
     DHCPServerFilterMixin,
     BOOTPFilterMixin,
     LifetimeFilterMixin,
+    OptionFilterMixin,
 )
 
 __all__ = ("ClientClassFilterSet",)
@@ -18,6 +19,7 @@ class ClientClassFilterSet(
     DHCPServerFilterMixin,
     BOOTPFilterMixin,
     LifetimeFilterMixin,
+    OptionFilterMixin,
     PrimaryModelFilterSet,
 ):
     class Meta:

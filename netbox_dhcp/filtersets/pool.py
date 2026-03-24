@@ -14,6 +14,7 @@ from .mixins import (
     ClientClassFilterMixin,
     EvaluateClientClassFilterMixin,
     DDNSUpdateFilterMixin,
+    OptionFilterMixin,
 )
 
 __all__ = ("PoolFilterSet",)
@@ -25,6 +26,7 @@ class PoolFilterSet(
     ClientClassFilterMixin,
     EvaluateClientClassFilterMixin,
     DDNSUpdateFilterMixin,
+    OptionFilterMixin,
     PrimaryModelFilterSet,
 ):
     class Meta:

@@ -13,6 +13,7 @@ from netbox_dhcp.tests.custom import (
     PreferredLifetimeFilterSetTests,
     LeaseFilterSetTests,
     DDNSUpdateFilterSetTests,
+    OptionFilterSetTests,
 )
 
 
@@ -23,6 +24,7 @@ class SubnetFilterSetTestCase(
     PreferredLifetimeFilterSetTests,
     LeaseFilterSetTests,
     DDNSUpdateFilterSetTests,
+    OptionFilterSetTests,
     TestCase,
     ChangeLoggedFilterSetTests,
 ):
@@ -152,6 +154,8 @@ class SubnetFilterSetTestCase(
         )
         for subnet in cls.ipv6_subnets:
             subnet.save()
+
+        cls.add_test_options(cls.ipv4_subnets)
 
         cls.host_reservations = (
             HostReservation(

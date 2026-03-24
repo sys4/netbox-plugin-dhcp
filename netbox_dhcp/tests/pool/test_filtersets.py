@@ -5,13 +5,18 @@ from utilities.testing import ChangeLoggedFilterSetTests
 
 from netbox_dhcp.models import Pool, Subnet
 from netbox_dhcp.filtersets import PoolFilterSet
-from netbox_dhcp.tests.custom import TestObjects, DDNSUpdateFilterSetTests
+from netbox_dhcp.tests.custom import (
+    TestObjects,
+    DDNSUpdateFilterSetTests,
+    OptionFilterSetTests,
+)
 
 
 class PoolFilterSetTestCase(
     DDNSUpdateFilterSetTests,
     TestCase,
     ChangeLoggedFilterSetTests,
+    OptionFilterSetTests,
 ):
     queryset = Pool.objects.all()
     filterset = PoolFilterSet
@@ -105,6 +110,8 @@ class PoolFilterSetTestCase(
             ),
         )
         Pool.objects.bulk_create(pools)
+
+        cls.add_test_options(pools)
 
         for number in range(4):
             pools[number].client_classes.add(cls.client_classes[(number + 1) % 3])

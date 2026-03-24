@@ -10,6 +10,7 @@ from netbox_dhcp.tests.custom import (
     ValidLifetimeFilterSetTests,
     OfferLifetimeFilterSetTests,
     PreferredLifetimeFilterSetTests,
+    OptionFilterSetTests,
 )
 
 
@@ -18,6 +19,7 @@ class ClientClassFilterSetTestCase(
     ValidLifetimeFilterSetTests,
     OfferLifetimeFilterSetTests,
     PreferredLifetimeFilterSetTests,
+    OptionFilterSetTests,
     TestCase,
     ChangeLoggedFilterSetTests,
 ):
@@ -84,6 +86,8 @@ class ClientClassFilterSetTestCase(
             ),
         )
         ClientClass.objects.bulk_create(cls.client_classes)
+
+        cls.add_test_options(cls.client_classes)
 
     def test_name(self):
         params = {"name": ["test-client-class-1", "test-client-class-2"]}

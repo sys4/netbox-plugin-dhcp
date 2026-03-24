@@ -13,6 +13,7 @@ from netbox_dhcp.models import (
     SharedNetwork,
     DHCPServer,
     DHCPServerInterface,
+    OptionDefinition,
 )
 from netbox_dhcp.choices import (
     DDNSReplaceClientNameChoices,
@@ -38,6 +39,7 @@ __all__ = (
     "ChildPoolFilterMixin",
     "ChildPDPoolFilterMixin",
     "ChildHostReservationFilterMixin",
+    "OptionFilterMixin",
 )
 
 
@@ -331,3 +333,30 @@ class ChildHostReservationFilterMixin(NetBoxModelFilterSet):
         field_name="child_host_reservations",
         label=_("Host Reservation ID"),
     )
+
+
+class OptionFilterMixin(NetBoxModelFilterSet):
+    option_name = django_filters.ModelMultipleChoiceFilter(
+        queryset=OptionDefinition.objects.all(),
+        method="filter_option",
+        to_field_name="name",
+        label=_("Option Name"),
+    )
+    option_code = django_filters.ModelMultipleChoiceFilter(
+        queryset=OptionDefinition.objects.all(),
+        method="filter_option",
+        to_field_name="code",
+        label=_("Option Code"),
+    )
+    option_space = django_filters.ModelMultipleChoiceFilter(
+        queryset=OptionDefinition.objects.all(),
+        method="filter_option",
+        to_field_name="space",
+        label=_("Option Space"),
+    )
+
+    def filter_option(self, queryset, name, value):
+        if not value:
+            return queryset
+
+        return queryset.filter(options__definition__in=value).distinct()

@@ -19,6 +19,7 @@ from .mixins import (
     LeaseFilterMixin,
     NetworkFilterMixin,
     ChildSubnetFilterMixin,
+    OptionFilterMixin,
 )
 
 __all__ = ("SharedNetworkFilterSet",)
@@ -36,6 +37,7 @@ class SharedNetworkFilterSet(
     NetworkFilterMixin,
     DDNSUpdateFilterMixin,
     ChildSubnetFilterMixin,
+    OptionFilterMixin,
     PrimaryModelFilterSet,
 ):
     class Meta:
