@@ -1,4 +1,6 @@
+from netbox_dhcp.models import Option, OptionDefinition
 from netbox_dhcp.choices import (
+    OptionSpaceChoices,
     AllocatorTypeChoices,
     PDAllocatorTypeChoices,
     DDNSReplaceClientNameChoices,
@@ -12,6 +14,7 @@ __all__ = (
     "OfferLifetimeFilterSetTests",
     "LeaseFilterSetTests",
     "DDNSUpdateFilterSetTests",
+    "OptionFilterSetTests",
 )
 
 
@@ -460,3 +463,82 @@ class DDNSUpdateFilterSetTests:
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
         params = {"ddns_ttl_max": [172800, 172801]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
+
+
+class OptionFilterSetTests:
+    @classmethod
+    def add_test_options(cls, test_objects):
+        option_definitions = (
+            OptionDefinition.objects.get(
+                space=OptionSpaceChoices.DHCPV4,
+                name="routers",  # code 3
+            ),
+            OptionDefinition.objects.get(
+                space=OptionSpaceChoices.DHCPV4,
+                name="domain-name-servers",  # code 6
+            ),
+            OptionDefinition.objects.get(
+                space=OptionSpaceChoices.DHCPV4,
+                name="interface-mtu",  # code 26
+            ),
+            OptionDefinition.objects.get(
+                space=OptionSpaceChoices.DHCPV6,
+                name="dns-servers",  # code 23
+            ),
+            OptionDefinition.objects.get(
+                space=OptionSpaceChoices.DHCPV6,
+                name="domain-search",  # code 24
+            ),
+        )
+
+        options = (
+            Option(
+                definition=option_definitions[0],
+                data="192.0.2.1,192.0.2.2",
+                assigned_object=test_objects[0],
+            ),
+            Option(
+                definition=option_definitions[0],
+                data="192.0.2.3,192.0.2.4",
+                assigned_object=test_objects[1],
+            ),
+            Option(
+                definition=option_definitions[1],
+                data="192.0.2.5,192.0.2.6",
+                assigned_object=test_objects[0],
+            ),
+            Option(
+                definition=option_definitions[2],
+                data="1380",
+                assigned_object=test_objects[1],
+            ),
+            Option(
+                definition=option_definitions[3],
+                data="2001:db8:1::53,2001:db8:2::53",
+                assigned_object=test_objects[2],
+            ),
+            Option(
+                definition=option_definitions[4],
+                data="example.com",
+                assigned_object=test_objects[2],
+            ),
+        )
+        Option.objects.bulk_create(options)
+
+    def test_option_name(self):
+        params = {"option_name": ["routers"]}
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
+        params = {"option_name": ["dns-servers", "domain-search"]}
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
+
+    def test_option_code(self):
+        params = {"option_code": [3]}
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
+        params = {"option_code": [23, 24]}
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
+
+    def test_option_space(self):
+        params = {"option_space": [OptionSpaceChoices.DHCPV4]}
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
+        params = {"option_space": [OptionSpaceChoices.DHCPV6]}
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)

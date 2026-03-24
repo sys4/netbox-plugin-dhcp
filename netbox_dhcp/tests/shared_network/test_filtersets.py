@@ -13,6 +13,7 @@ from netbox_dhcp.tests.custom import (
     PreferredLifetimeFilterSetTests,
     LeaseFilterSetTests,
     DDNSUpdateFilterSetTests,
+    OptionFilterSetTests,
 )
 
 
@@ -23,6 +24,7 @@ class SharedNetworkFilterSetTestCase(
     PreferredLifetimeFilterSetTests,
     LeaseFilterSetTests,
     DDNSUpdateFilterSetTests,
+    OptionFilterSetTests,
     TestCase,
     ChangeLoggedFilterSetTests,
 ):
@@ -115,6 +117,8 @@ class SharedNetworkFilterSetTestCase(
             ),
         )
         SharedNetwork.objects.bulk_create(shared_networks)
+
+        cls.add_test_options(shared_networks)
 
         cls.ipv4_subnets = (
             Subnet(

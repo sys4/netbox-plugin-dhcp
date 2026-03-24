@@ -4,10 +4,11 @@ from utilities.testing import ChangeLoggedFilterSetTests
 
 from netbox_dhcp.models import PDPool, Subnet
 from netbox_dhcp.filtersets import PDPoolFilterSet
-from netbox_dhcp.tests.custom import TestObjects
+from netbox_dhcp.tests.custom import TestObjects, OptionFilterSetTests
 
 
 class PDPoolFilterSetTestCase(
+    OptionFilterSetTests,
     TestCase,
     ChangeLoggedFilterSetTests,
 ):
@@ -75,6 +76,8 @@ class PDPoolFilterSetTestCase(
             ),
         )
         PDPool.objects.bulk_create(cls.pd_pools)
+
+        cls.add_test_options(cls.pd_pools)
 
         for number in range(3):
             cls.pd_pools[number].client_classes.add(
