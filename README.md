@@ -79,7 +79,6 @@ MIT
 ## Known Issues
 
 * There is an issue that sometimes causes a lock conflict while running the test suite. The symptom is that the tests stop at some point and the `./manage.py test netbox_dhcp` command never returns. The issue does not seem to affect normal operation, just the tests. The specific tests have been disabled for the time being until the issue is resolved.
-* Filtering Subnets, Pools etc. by Option is not possible.
 * Documentation is still missing.
 
 These issues will be addressed in upcoming Beta releases.
