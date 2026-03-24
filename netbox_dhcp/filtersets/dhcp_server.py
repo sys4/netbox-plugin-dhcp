@@ -155,13 +155,15 @@ class DHCPServerFilterSet(
         method="filter_relay_supplied_options",
     )
 
+    client_class = django_filters.ModelMultipleChoiceFilter(
+        queryset=ClientClass.objects.all(),
+        field_name="client_class_definition_set__name",
+        to_field_name="name",
+        distinct=True,
+    )
     client_class_id = django_filters.ModelMultipleChoiceFilter(
         queryset=ClientClass.objects.all(),
         field_name="client_class_definition_set",
-    )
-    client_class = django_filters.CharFilter(
-        field_name="client_class_definition_set__name",
-        distinct=True,
     )
 
     def filter_host_reservation_identifiers(self, queryset, name, value):

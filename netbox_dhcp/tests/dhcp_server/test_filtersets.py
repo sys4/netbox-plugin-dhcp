@@ -316,25 +316,31 @@ class DHCPServerFilterSetTestCase(
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
 
     def test_child_subnets(self):
-        params = {"child_subnet": self.subnets[0].name}
+        params = {"child_subnet": [self.subnets[0].name]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
         params = {"child_subnet_id": [self.subnets[2].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
 
     def test_child_shared_networks(self):
-        params = {"child_shared_network": self.shared_networks[0].name}
+        params = {"child_shared_network": [self.shared_networks[0].name]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
         params = {"child_shared_network_id": [self.shared_networks[2].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
 
     def test_child_host_reservations(self):
-        params = {"child_host_reservation": self.host_reservations[0].name}
+        params = {"child_host_reservation": [self.host_reservations[0].name]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
         params = {"child_host_reservation_id": [self.host_reservations[2].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
 
     def test_client_classes(self):
-        params = {"client_class__iregex": r".*[123]$"}
+        params = {
+            "client_class": [
+                self.client_classes[0].name,
+                self.client_classes[1].name,
+                self.client_classes[2].name,
+            ]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
         params = {"client_class_id": [self.client_classes[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)

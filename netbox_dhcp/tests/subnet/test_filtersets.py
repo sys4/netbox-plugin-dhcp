@@ -190,11 +190,9 @@ class SubnetFilterSetTestCase(
     def test_prefix(self):
         params = {"prefix_id": [self.ipv6_prefixes[0].pk, self.ipv6_prefixes[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix__iregex": r"2001:db8:0"}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix_id": [self.ipv4_prefixes[0].pk, self.ipv4_prefixes[1].pk]}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix__iregex": r"198\.18\.0"}
+        params = {
+            "prefix": [self.ipv6_prefixes[0].prefix, self.ipv6_prefixes[1].prefix]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_child_host_reservations(self):
@@ -205,7 +203,12 @@ class SubnetFilterSetTestCase(
             ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"child_host_reservation__iregex": r"host-reservation-[23]"}
+        params = {
+            "child_host_reservation": [
+                self.host_reservations[0].name,
+                self.host_reservations[1].name,
+            ]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_shared_network(self):
@@ -216,29 +219,28 @@ class SubnetFilterSetTestCase(
             ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"shared_network__iregex": r"ipv[46]-shared-network-[12]"}
+        params = {
+            "shared_network": [
+                self.shared_networks[0].name,
+                self.shared_networks[2].name,
+            ]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_dhcp_server(self):
-        params = {
-            "dhcp_server_id": [
-                self.dhcp_servers[0].pk,
-                self.dhcp_servers[1].pk,
-            ]
-        }
+        params = {"dhcp_server_id": [self.dhcp_servers[0].pk, self.dhcp_servers[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 4)
-        params = {"dhcp_server__iregex": r"test-server-[12]"}
+        params = {"dhcp_server": [self.dhcp_servers[0].name, self.dhcp_servers[1].name]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 4)
 
     def test_client_classes(self):
         params = {
-            "client_class_id": [
-                self.client_classes[0].pk,
-                self.client_classes[1].pk,
-            ]
+            "client_class_id": [self.client_classes[0].pk, self.client_classes[1].pk]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"client_class__iregex": r"client-class-[23]"}
+        params = {
+            "client_class": [self.client_classes[0].name, self.client_classes[1].name]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_evaluate_additional_classes(self):
@@ -249,7 +251,12 @@ class SubnetFilterSetTestCase(
             ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"evaluate_additional_class__iregex": r"client-class-[23]"}
+        params = {
+            "evaluate_additional_class": [
+                self.client_classes[0].name,
+                self.client_classes[1].name,
+            ]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_weight(self):

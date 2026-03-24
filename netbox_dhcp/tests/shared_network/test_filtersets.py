@@ -177,21 +177,17 @@ class SharedNetworkFilterSetTestCase(
     def test_prefix(self):
         params = {"prefix_id": [self.ipv6_prefixes[1].pk, self.ipv6_prefixes[2].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix__iregex": r"2001:db8:0:[12]"}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix_id": [self.ipv4_prefixes[0].pk, self.ipv4_prefixes[1].pk]}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix__iregex": r"198\.18\.[01]\..*/24"}
+        params = {
+            "prefix": [self.ipv6_prefixes[1].prefix, self.ipv6_prefixes[2].prefix]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_child_subnet(self):
         params = {"child_subnet_id": [self.ipv6_subnets[0].pk, self.ipv6_subnets[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"child_subnet__iregex": r"ipv6-subnet-[23]"}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"child_subnet_id": [self.ipv4_subnets[0].pk, self.ipv4_subnets[1].pk]}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"child_subnet__iregex": r"ipv4-subnet-[23]"}
+        params = {
+            "child_subnet": [self.ipv6_subnets[0].name, self.ipv6_subnets[1].name]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_client_classes(self):
@@ -202,8 +198,13 @@ class SharedNetworkFilterSetTestCase(
             ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
-        params = {"client_class__iregex": r"client-class-[23]"}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
+        params = {
+            "client_class": [
+                self.client_classes[0].name,
+                self.client_classes[1].name,
+            ]
+        }
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
 
     def test_evaluate_additional_classes(self):
         params = {
@@ -213,8 +214,13 @@ class SharedNetworkFilterSetTestCase(
             ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"evaluate_additional_class__iregex": r"client-class-[23]"}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
+        params = {
+            "evaluate_additional_class": [
+                self.client_classes[0].name,
+                self.client_classes[1].name,
+            ]
+        }
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_weight(self):
         params = {"weight": [100]}

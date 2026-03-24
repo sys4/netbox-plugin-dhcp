@@ -163,11 +163,11 @@ class OptionDefinitionFilterSetTestCase(
     def test_dhcp_server(self):
         params = {"dhcp_server_id": [self.dhcp_servers[0].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"dhcp_server": self.dhcp_servers[1].name}
+        params = {"dhcp_server": [self.dhcp_servers[1].name]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
 
     def test_client_class(self):
         params = {"client_class_id": [self.client_classes[0].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"client_class": self.client_classes[0].name}
+        params = {"client_class": [self.client_classes[0].name]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)

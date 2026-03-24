@@ -110,7 +110,9 @@ class PDPoolFilterSetTestCase(
     def test_prefix(self):
         params = {"prefix_id": [self.ipv6_prefixes[0].pk, self.ipv6_prefixes[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"prefix__iregex": r"2001:db8:0:[12]"}
+        params = {
+            "prefix": [self.ipv6_prefixes[0].prefix, self.ipv6_prefixes[1].prefix]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_delegated_length(self):
@@ -124,13 +126,18 @@ class PDPoolFilterSetTestCase(
             "excluded_prefix_id": [self.ipv6_prefixes[4].pk, self.ipv6_prefixes[6].pk]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"excluded_prefix__iregex": r"2001:db8:0:[12]:0:1"}
+        params = {
+            "excluded_prefix": [
+                self.ipv6_prefixes[4].prefix,
+                self.ipv6_prefixes[6].prefix,
+            ]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_subnet(self):
         params = {"subnet_id": [self.ipv6_subnets[0].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"subnet__iregex": r"subnet-[23]"}
+        params = {"subnet": [self.ipv6_subnets[1].name, self.ipv6_subnets[2].name]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
 
     def test_client_classes(self):
@@ -141,7 +148,12 @@ class PDPoolFilterSetTestCase(
             ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"client_class__iregex": r"client-class-[23]"}
+        params = {
+            "client_class": [
+                self.client_classes[0].name,
+                self.client_classes[1].name,
+            ]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_evaluate_additional_classes(self):
@@ -152,7 +164,12 @@ class PDPoolFilterSetTestCase(
             ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"evaluate_additional_class__iregex": r"client-class-[23]"}
+        params = {
+            "evaluate_additional_class": [
+                self.client_classes[0].name,
+                self.client_classes[1].name,
+            ]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_weight(self):
