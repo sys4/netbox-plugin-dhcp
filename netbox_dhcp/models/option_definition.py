@@ -184,6 +184,12 @@ class OptionDefinition(PrimaryModel):
     )
 
     def __str__(self):
+        if self.dhcp_server:
+            return f"{self.space} {self.name} ({self.code}) [{self.dhcp_server.name}]"
+
+        if self.client_class:
+            return f"{self.space} {self.name} ({self.code}) [{self.client_class.name}]"
+
         return f"{self.space} {self.name} ({self.code})"
 
     def get_space_color(self):
