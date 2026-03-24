@@ -139,6 +139,48 @@ class PoolFilterSetTestCase(
         params = {"ip_range_id": [self.ipv6_ranges[0].pk, self.ipv4_ranges[0].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
+    def test_start_address(self):
+        params = {
+            "start_address": [
+                self.ipv6_ranges[0].start_address.ip,
+                self.ipv4_ranges[0].start_address.ip,
+            ]
+        }
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
+
+    def test_end_address(self):
+        params = {
+            "end_address": [
+                self.ipv6_ranges[0].end_address,
+                self.ipv4_ranges[0].end_address,
+            ]
+        }
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
+
+    def test_contains_address(self):
+        params = {
+            "contains_address": [
+                self.ipv6_ranges[0].end_address,
+                self.ipv4_ranges[0].end_address,
+            ]
+        }
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
+        params = {
+            "contains_address": [
+                self.ipv6_ranges[0].start_address,
+                self.ipv4_ranges[0].start_address,
+            ]
+        }
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
+        params = {
+            "contains_address": [
+                "198.18.2.5",
+                "198.18.2.19/24",
+                "2001:db8:0:1::beef/64",
+            ]
+        }
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
+
     def test_subnet(self):
         params = {"subnet_id": [self.ipv6_subnets[0].pk, self.ipv6_subnets[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
