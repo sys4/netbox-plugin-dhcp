@@ -21,6 +21,7 @@ from .mixins import (
     ChildSubnetFilterMixin,
     ChildSharedNetworkFilterMixin,
     ChildHostReservationFilterMixin,
+    OptionFilterMixin,
 )
 
 __all__ = (
@@ -62,6 +63,7 @@ class DHCPServerFilterSet(
     ChildSubnetFilterMixin,
     ChildSharedNetworkFilterMixin,
     ChildHostReservationFilterMixin,
+    OptionFilterMixin,
     PrimaryModelFilterSet,
 ):
     class Meta:

@@ -22,6 +22,7 @@ from .mixins import (
     ChildPoolFilterMixin,
     ChildPDPoolFilterMixin,
     ChildHostReservationFilterMixin,
+    OptionFilterMixin,
 )
 
 __all__ = ("SubnetFilterSet",)
@@ -42,6 +43,7 @@ class SubnetFilterSet(
     ChildPoolFilterMixin,
     ChildPDPoolFilterMixin,
     ChildHostReservationFilterMixin,
+    OptionFilterMixin,
     PrimaryModelFilterSet,
 ):
     class Meta:
