@@ -135,7 +135,7 @@ class PoolFilterSetTestCase(
     def test_subnet(self):
         params = {"subnet_id": [self.ipv6_subnets[0].pk, self.ipv6_subnets[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"subnet__iregex": r"ipv6-subnet-[12]"}
+        params = {"subnet": [self.ipv6_subnets[0].name, self.ipv6_subnets[1].name]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_client_classes(self):
@@ -146,7 +146,12 @@ class PoolFilterSetTestCase(
             ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
-        params = {"client_class__iregex": r"client-class-[23]"}
+        params = {
+            "client_class": [
+                self.client_classes[0].name,
+                self.client_classes[1].name,
+            ]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
 
     def test_evaluate_additional_classes(self):
@@ -157,8 +162,13 @@ class PoolFilterSetTestCase(
             ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"evaluate_additional_class__iregex": r"client-class-[23]"}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
+        params = {
+            "evaluate_additional_class": [
+                self.client_classes[0].name,
+                self.client_classes[1].name,
+            ]
+        }
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_weight(self):
         params = {"weight": [100]}

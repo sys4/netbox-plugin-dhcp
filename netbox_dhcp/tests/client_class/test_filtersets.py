@@ -124,5 +124,5 @@ class ClientClassFilterSetTestCase(
     def test_dhcp_servers(self):
         params = {"dhcp_server_id": [self.dhcp_servers[0].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"dhcp_server": self.dhcp_servers[1].name}
+        params = {"dhcp_server": [self.dhcp_servers[1].name]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)

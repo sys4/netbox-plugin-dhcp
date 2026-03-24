@@ -38,13 +38,15 @@ class PDPoolFilterSet(
             "delegated_length",
         )
 
+    excluded_prefix = django_filters.ModelMultipleChoiceFilter(
+        queryset=Prefix.objects.all(),
+        field_name="excluded_prefix__prefix",
+        to_field_name="prefix",
+        label=_("Excluded Prefix"),
+    )
     excluded_prefix_id = django_filters.ModelMultipleChoiceFilter(
         queryset=Prefix.objects.all(),
         field_name="excluded_prefix",
-        label=_("Excluded Prefix"),
-    )
-    excluded_prefix = django_filters.CharFilter(
-        field_name="excluded_prefix__prefix",
         label=_("Excluded Prefix"),
     )
 

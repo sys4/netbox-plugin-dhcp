@@ -125,21 +125,24 @@ class OptionFilterSetTestCase(
     def test_definition(self):
         params = {"definition_id": self.option_definitions[0:2]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
-        params = {"definition__iregex": r"(routers|interface-mtu)"}
+        params = {
+            "definition": [
+                self.option_definitions[0].name,
+                self.option_definitions[1].name,
+            ]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
-        params = {"definition": "ip-forwarding"}
-        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
 
     def test_name(self):
-        params = {"name__iregex": r"routers"}
+        params = {"name": ["routers"]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"name__iregex": r"(routers|domain-name-servers)"}
+        params = {"name": ["routers", "domain-name-servers"]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
 
     def test_code(self):
-        params = {"code": 3}
+        params = {"code": [3]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
-        params = {"code__gt": 3}
+        params = {"code": [3, 6, 19, 23]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 5)
 
     def test_family(self):

@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 
 from netbox.filtersets import PrimaryModelFilterSet
 from utilities.filtersets import register_filterset
+from utilities.filters import MultiValueMACAddressFilter
 from dcim.models import MACAddress
 from ipam.models import IPAddress, Prefix
 from ipam.choices import IPAddressFamilyChoices
@@ -44,14 +45,22 @@ class HostReservationFilterSet(
             *BOOTPFilterMixin.FILTER_FIELDS,
         )
 
+    hw_address = MultiValueMACAddressFilter(
+        field_name="hw_address__mac_address",
+        label=_("Hardware Address"),
+    )
     hw_address_id = django_filters.ModelMultipleChoiceFilter(
         queryset=MACAddress.objects.all(),
         field_name="hw_address",
         label=_("Hardware Address ID"),
     )
-    hw_address = django_filters.CharFilter(
-        field_name="hw_address__mac_address",
-        label=_("Hardware Address"),
+    ipv4_address = django_filters.ModelMultipleChoiceFilter(
+        queryset=IPAddress.objects.filter(
+            address__family=IPAddressFamilyChoices.FAMILY_4
+        ),
+        field_name="ipv4_address__address",
+        to_field_name="address",
+        label=_("IPv4 Address"),
     )
     ipv4_address_id = django_filters.ModelMultipleChoiceFilter(
         queryset=IPAddress.objects.filter(
@@ -60,9 +69,14 @@ class HostReservationFilterSet(
         field_name="ipv4_address",
         label=_("IPv4 Address ID"),
     )
-    ipv4_address = django_filters.CharFilter(
-        field_name="ipv4_address__address",
-        label=_("IPv4 Address"),
+    ipv6_address = django_filters.ModelMultipleChoiceFilter(
+        queryset=IPAddress.objects.filter(
+            address__family=IPAddressFamilyChoices.FAMILY_6
+        ),
+        field_name="ipv6_addresses__address",
+        to_field_name="address",
+        distinct=True,
+        label=_("IPv6 Address"),
     )
     ipv6_address_id = django_filters.ModelMultipleChoiceFilter(
         queryset=IPAddress.objects.filter(
@@ -71,30 +85,29 @@ class HostReservationFilterSet(
         field_name="ipv6_addresses",
         label=_("IPv6 Address ID"),
     )
-    ipv6_address = django_filters.CharFilter(
-        field_name="ipv6_addresses__address",
+    ipv6_prefix = django_filters.ModelMultipleChoiceFilter(
+        queryset=Prefix.objects.filter(prefix__family=IPAddressFamilyChoices.FAMILY_6),
+        field_name="ipv6_prefixes__prefix",
+        to_field_name="prefix",
         distinct=True,
-        label=_("IPv6 Address"),
+        label=_("IPv6 Prefix"),
     )
     ipv6_prefix_id = django_filters.ModelMultipleChoiceFilter(
         queryset=Prefix.objects.filter(prefix__family=IPAddressFamilyChoices.FAMILY_6),
         field_name="ipv6_prefixes",
         label=_("IPv6 Prefix ID"),
     )
-    ipv6_prefix = django_filters.CharFilter(
-        field_name="ipv6_prefixes__prefix",
+    excluded_ipv6_prefix = django_filters.ModelMultipleChoiceFilter(
+        queryset=Prefix.objects.filter(prefix__family=IPAddressFamilyChoices.FAMILY_6),
+        field_name="excluded_ipv6_prefixes__prefix",
+        to_field_name="prefix",
         distinct=True,
-        label=_("IPv6 Prefix"),
+        label=_("Excluded IPv6 Prefix"),
     )
     excluded_ipv6_prefix_id = django_filters.ModelMultipleChoiceFilter(
         queryset=Prefix.objects.filter(prefix__family=IPAddressFamilyChoices.FAMILY_6),
         field_name="excluded_ipv6_prefixes",
         label=_("Excluded IPv6 Prefix ID"),
-    )
-    excluded_ipv6_prefix = django_filters.CharFilter(
-        field_name="excluded_ipv6_prefixes__prefix",
-        distinct=True,
-        label=_("Excluded IPv6 Prefix"),
     )
 
     def search(self, queryset, name, value):

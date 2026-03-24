@@ -54,8 +54,10 @@ class OptionDefinitionFilterSet(
         label=_("Record Types"),
     )
 
-    client_class = django_filters.CharFilter(
+    client_class = django_filters.ModelMultipleChoiceFilter(
+        queryset=ClientClass.objects.all(),
         field_name="client_class__name",
+        to_field_name="name",
         label=_("Client Class"),
     )
     client_class_id = django_filters.ModelMultipleChoiceFilter(

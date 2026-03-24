@@ -171,7 +171,10 @@ class HostReservationFilterSetTestCase(
 
     def test_hw_address(self):
         params = {
-            "hw_address__iregex": rf"({self.mac_addresses[0].mac_address}|{self.mac_addresses[1].mac_address})"
+            "hw_address": [
+                self.mac_addresses[0].mac_address,
+                self.mac_addresses[1].mac_address,
+            ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
         params = {"hw_address_id": [self.mac_addresses[0].pk, self.mac_addresses[1].pk]}
@@ -179,7 +182,10 @@ class HostReservationFilterSetTestCase(
 
     def test_ipv4_address(self):
         params = {
-            "ipv4_address__iregex": rf"({self.ipv4_addresses[0].address}|{self.ipv4_addresses[1].address})"
+            "ipv4_address": [
+                self.ipv4_addresses[0].address,
+                self.ipv4_addresses[1].address,
+            ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
         params = {
@@ -188,13 +194,15 @@ class HostReservationFilterSetTestCase(
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_ipv6_address(self):
-        params = {"ipv6_address": self.ipv6_addresses[0].address}
+        params = {"ipv6_address": [self.ipv6_addresses[0].address]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
         params = {"ipv6_address_id": [self.ipv6_addresses[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_ipv6_prefix(self):
-        params = {"ipv6_prefix__iregex": r"db8:0:[12]"}
+        params = {
+            "ipv6_prefix": [self.ipv6_prefixes[0].prefix, self.ipv6_prefixes[1].prefix]
+        }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
         params = {
             "ipv6_prefix_id": [self.ipv6_prefixes[0].pk, self.ipv6_prefixes[1].pk]
@@ -202,19 +210,19 @@ class HostReservationFilterSetTestCase(
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
 
     def test_excluded_ipv6_prefix(self):
-        params = {"excluded_ipv6_prefix": self.ipv6_prefixes[0].prefix}
+        params = {"excluded_ipv6_prefix": [self.ipv6_prefixes[0].prefix]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
         params = {"excluded_ipv6_prefix_id": [self.ipv6_prefixes[0].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_dhcp_server(self):
-        params = {"dhcp_server__iregex": r"server-[12]"}
+        params = {"dhcp_server": [self.dhcp_servers[0].name, self.dhcp_servers[1].name]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
         params = {"dhcp_server_id": [self.dhcp_servers[0].pk, self.dhcp_servers[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
     def test_subnet(self):
-        params = {"subnet__iregex": r"subnet-[12]"}
+        params = {"subnet": [self.subnets[0].name, self.subnets[1].name]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
         params = {"subnet_id": [self.subnets[0].pk, self.subnets[1].pk]}
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
