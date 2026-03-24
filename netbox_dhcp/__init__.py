@@ -21,6 +21,7 @@ class DHCPConfig(PluginConfig):
         super().ready()
 
         from netbox_dhcp.signals import dhcp_server  # noqa: F401
+        from netbox_dhcp.fields import ip_address  # noqa: F401
 
 
 #

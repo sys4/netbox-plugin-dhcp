@@ -1,9 +1,12 @@
+from netaddr import IPNetwork, AddrFormatError
+
 import django_filters
 from django.db.models import Q
 from django.utils.translation import gettext as _
 
 from netbox.filtersets import PrimaryModelFilterSet
 from utilities.filtersets import register_filterset
+from utilities.filters import MultiValueCharFilter
 from ipam.models import IPRange
 from ipam.choices import IPAddressFamilyChoices
 
@@ -53,9 +56,51 @@ class PoolFilterSet(
         field_name="ip_range",
         label=_("IP Range ID"),
     )
+    start_address = MultiValueCharFilter(
+        method="filter_ip_range",
+        label=_("Pool Start Address"),
+    )
+    end_address = MultiValueCharFilter(
+        method="filter_ip_range",
+        label=_("Pool End Address"),
+    )
+    contains_address = MultiValueCharFilter(
+        method="filter_ip_range",
+        label=_("Pool Contains"),
+    )
 
     def search(self, queryset, name, value):
         if not value.strip():
             return queryset
+
         qs_filter = Q(name__icontains=value)
         return queryset.filter(qs_filter)
+
+    def filter_ip_range(self, queryset, name, value):
+        if not value:
+            return queryset
+
+        match name:
+            case "start_address" | "end_address":
+                query = Q()
+                for address in value:
+                    try:
+                        address = IPNetwork(address).ip
+                    except AddrFormatError:
+                        continue
+                    query |= Q(**{f"{name}__net_host_contained": address})
+            case "contains_address":
+                query = Q()
+                for address in value:
+                    try:
+                        address = IPNetwork(address).ip
+                    except AddrFormatError:
+                        continue
+                    query |= Q(
+                        start_address__net_host_lte=address,
+                        end_address__net_host_gte=address,
+                    )
+            case _:
+                return queryset
+
+        return queryset.filter(ip_range__in=IPRange.objects.filter(query)).distinct()
