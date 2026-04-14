@@ -143,7 +143,6 @@ class DHCPServerSerializer(
         many=True,
         read_only=False,
         required=False,
-        default=None,
         help_text=_("Interfaces"),
     )
     virtual_machine = VirtualMachineSerializer(
@@ -158,7 +157,6 @@ class DHCPServerSerializer(
         many=True,
         read_only=False,
         required=False,
-        default=None,
         help_text=_("Virtual Interfaces"),
     )
     interfaces = DHCPServerInterfaceSerializer(
@@ -166,7 +164,6 @@ class DHCPServerSerializer(
         many=True,
         read_only=True,
         required=False,
-        default=None,
         help_text=_("Interfaces"),
     )
 
