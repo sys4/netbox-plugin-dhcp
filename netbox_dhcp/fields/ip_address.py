@@ -10,10 +10,11 @@ class NetHostLTE(Lookup):
         lhs, lhs_params = self.process_lhs(qn, connection)
         rhs, rhs_params = self.process_rhs(qn, connection)
 
+        rhs_params = list(rhs_params)
         if rhs_params:
             rhs_params[0] = rhs_params[0].split("/")[0]
 
-        params = lhs_params + rhs_params
+        params = list(lhs_params) + rhs_params
         return f"CAST(HOST({lhs}) AS INET) <= CAST({rhs} AS INET)", params
 
 
@@ -24,10 +25,11 @@ class NetHostGTE(Lookup):
         lhs, lhs_params = self.process_lhs(qn, connection)
         rhs, rhs_params = self.process_rhs(qn, connection)
 
+        rhs_params = list(rhs_params)
         if rhs_params:
             rhs_params[0] = rhs_params[0].split("/")[0]
 
-        params = lhs_params + rhs_params
+        params = list(lhs_params) + rhs_params
         return f"CAST(HOST({lhs}) AS INET) >= CAST({rhs} AS INET)", params
 
 
