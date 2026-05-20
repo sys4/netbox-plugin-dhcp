@@ -1,11 +1,11 @@
-from netbox_dhcp.models import Option, OptionDefinition
 from netbox_dhcp.choices import (
-    OptionSpaceChoices,
     AllocatorTypeChoices,
-    PDAllocatorTypeChoices,
-    DDNSReplaceClientNameChoices,
     DDNSConflictResolutionModeChoices,
+    DDNSReplaceClientNameChoices,
+    OptionSpaceChoices,
+    PDAllocatorTypeChoices,
 )
+from netbox_dhcp.models import Option, OptionDefinition
 
 __all__ = (
     "BOOTPFilterSetTests",

@@ -2,21 +2,20 @@ import django_filters
 from django.db.models import Q
 from django.utils.translation import gettext as _
 
-from netbox.filtersets import PrimaryModelFilterSet
-from utilities.filtersets import register_filterset
-from utilities.filters import MultiValueMACAddressFilter
 from dcim.models import MACAddress
-from ipam.models import IPAddress, Prefix
 from ipam.choices import IPAddressFamilyChoices
-
+from ipam.models import IPAddress, Prefix
+from netbox.filtersets import PrimaryModelFilterSet
 from netbox_dhcp.models import HostReservation
+from utilities.filters import MultiValueMACAddressFilter
+from utilities.filtersets import register_filterset
 
 from .mixins import (
-    DHCPServerFilterMixin,
-    SubnetFilterMixin,
-    ClientClassFilterMixin,
     BOOTPFilterMixin,
+    ClientClassFilterMixin,
+    DHCPServerFilterMixin,
     OptionFilterMixin,
+    SubnetFilterMixin,
 )
 
 __all__ = ("HostReservationFilterSet",)

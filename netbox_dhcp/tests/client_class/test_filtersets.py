@@ -1,17 +1,16 @@
 from django.test import TestCase
 
-from utilities.testing import ChangeLoggedFilterSetTests
-
-from netbox_dhcp.models import ClientClass
 from netbox_dhcp.filtersets import ClientClassFilterSet
+from netbox_dhcp.models import ClientClass
 from netbox_dhcp.tests.custom import (
-    TestObjects,
     BOOTPFilterSetTests,
-    ValidLifetimeFilterSetTests,
     OfferLifetimeFilterSetTests,
-    PreferredLifetimeFilterSetTests,
     OptionFilterSetTests,
+    PreferredLifetimeFilterSetTests,
+    TestObjects,
+    ValidLifetimeFilterSetTests,
 )
+from utilities.testing import ChangeLoggedFilterSetTests
 
 
 class ClientClassFilterSetTestCase(

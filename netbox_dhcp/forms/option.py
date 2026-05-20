@@ -1,37 +1,36 @@
 from django import forms
+from django.core.exceptions import FieldError, ValidationError
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
-from django.core.exceptions import FieldError, ValidationError
 
-from netbox.forms import (
-    PrimaryModelForm,
-    PrimaryModelFilterSetForm,
-    PrimaryModelImportForm,
-    PrimaryModelBulkEditForm,
-)
-from utilities.forms.fields import TagFilterField, CSVModelChoiceField, CSVChoiceField
-from utilities.forms.rendering import FieldSet
-from utilities.forms import add_blank_choice, BOOLEAN_WITH_BLANK_CHOICES
 from ipam.choices import IPAddressFamilyChoices
-
+from netbox.forms import (
+    PrimaryModelBulkEditForm,
+    PrimaryModelFilterSetForm,
+    PrimaryModelForm,
+    PrimaryModelImportForm,
+)
+from netbox_dhcp.choices import OptionSendChoices, OptionSpaceChoices
 from netbox_dhcp.models import (
+    ClientClass,
+    DHCPServer,
+    HostReservation,
     Option,
     OptionDefinition,
-    DHCPServer,
-    Subnet,
-    SharedNetwork,
-    Pool,
     PDPool,
-    HostReservation,
-    ClientClass,
+    Pool,
+    SharedNetwork,
+    Subnet,
 )
-from netbox_dhcp.choices import OptionSpaceChoices, OptionSendChoices
+from utilities.forms import BOOLEAN_WITH_BLANK_CHOICES, add_blank_choice
+from utilities.forms.fields import CSVChoiceField, CSVModelChoiceField, TagFilterField
+from utilities.forms.rendering import FieldSet
 
 from .mixins import (
+    ClientClassesBulkEditFormMixin,
+    ClientClassesFilterFormMixin,
     ClientClassesFormMixin,
     ClientClassesImportFormMixin,
-    ClientClassesFilterFormMixin,
-    ClientClassesBulkEditFormMixin,
 )
 
 __all__ = (
@@ -74,12 +73,11 @@ class CSVOptionDefinitionChoiceField(CSVModelChoiceField):
 
             if result.exists():
                 return result.first()
-            else:
-                raise ValidationError(
-                    self.error_messages["invalid_choice"],
-                    code="invalid_choice",
-                    params={"value": value},
-                )
+            raise ValidationError(
+                self.error_messages["invalid_choice"],
+                code="invalid_choice",
+                params={"value": value},
+            )
 
         except (ValueError, TypeError):
             raise ValidationError(

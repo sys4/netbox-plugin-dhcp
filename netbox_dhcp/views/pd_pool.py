@@ -1,17 +1,16 @@
 from django.utils.translation import gettext_lazy as _
 
 from netbox.views import generic
-from utilities.views import register_model_view, ViewTab
-
-from netbox_dhcp.models import PDPool, Option
-from netbox_dhcp.filtersets import PDPoolFilterSet, OptionFilterSet
+from netbox_dhcp.filtersets import OptionFilterSet, PDPoolFilterSet
 from netbox_dhcp.forms import (
-    PDPoolForm,
-    PDPoolFilterForm,
-    PDPoolImportForm,
     PDPoolBulkEditForm,
+    PDPoolFilterForm,
+    PDPoolForm,
+    PDPoolImportForm,
 )
-from netbox_dhcp.tables import PDPoolTable, ChildOptionTable
+from netbox_dhcp.models import Option, PDPool
+from netbox_dhcp.tables import ChildOptionTable, PDPoolTable
+from utilities.views import ViewTab, register_model_view
 
 __all__ = (
     "PDPoolView",

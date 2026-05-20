@@ -2,18 +2,17 @@ import django_filters
 from django.db.models import Q
 from django.utils.translation import gettext as _
 
-from netbox.filtersets import PrimaryModelFilterSet
-from utilities.filtersets import register_filterset
 from ipam.models import Prefix
-
+from netbox.filtersets import PrimaryModelFilterSet
 from netbox_dhcp.models import PDPool
+from utilities.filtersets import register_filterset
 
 from .mixins import (
-    SubnetFilterMixin,
-    PrefixFilterMixin,
     ClientClassFilterMixin,
     EvaluateClientClassFilterMixin,
     OptionFilterMixin,
+    PrefixFilterMixin,
+    SubnetFilterMixin,
 )
 
 __all__ = ("PDPoolFilterSet",)

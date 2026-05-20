@@ -7,21 +7,20 @@ except ImportError:
     from strawberry_django import FilterLookup as StrFilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
-
 from netbox_dhcp.models import Subnet
 
 from .mixins import (
-    PrefixGraphQLFilterMixin,
-    ClientClassGraphQLFilterMixin,
-    EvaluateClientClassGraphQLFilterMixin,
     BOOTPGraphQLFilterMixin,
+    ChildHostReservationGraphQLFilterMixin,
+    ChildPDPoolGraphQLFilterMixin,
+    ChildPoolGraphQLFilterMixin,
+    ClientClassGraphQLFilterMixin,
     DDNSUpdateGraphQLFilterMixin,
+    EvaluateClientClassGraphQLFilterMixin,
+    LeaseGraphQLFilterMixin,
     LifetimeGraphQLFilterMixin,
     NetworkGraphQLFilterMixin,
-    LeaseGraphQLFilterMixin,
-    ChildPoolGraphQLFilterMixin,
-    ChildPDPoolGraphQLFilterMixin,
-    ChildHostReservationGraphQLFilterMixin,
+    PrefixGraphQLFilterMixin,
 )
 
 

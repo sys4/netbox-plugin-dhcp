@@ -2,10 +2,9 @@ import django_filters
 from django.db.models import Q
 
 from netbox.filtersets import PrimaryModelFilterSet
-from utilities.filtersets import register_filterset
-
-from netbox_dhcp.models import DHCPCluster
 from netbox_dhcp.choices import DHCPClusterStatusChoices
+from netbox_dhcp.models import DHCPCluster
+from utilities.filtersets import register_filterset
 
 __all__ = ("DHCPClusterFilterSet",)
 

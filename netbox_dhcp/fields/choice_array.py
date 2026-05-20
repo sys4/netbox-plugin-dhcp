@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.postgres.fields import ArrayField
-from django.db.models import Transform, IntegerField
+from django.db.models import IntegerField, Transform
 
 
 class ArrayLength(Transform):

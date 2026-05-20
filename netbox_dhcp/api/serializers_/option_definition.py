@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
 from netbox.api.serializers import PrimaryModelSerializer
-
 from netbox_dhcp.models import OptionDefinition
 
 __all__ = ("OptionDefinitionSerializer",)

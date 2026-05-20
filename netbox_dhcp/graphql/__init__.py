@@ -1,14 +1,14 @@
 from .schema import (
     NetBoxDHCPClientClassQuery,
     NetBoxDHCPClusterQuery,
-    NetBoxDHCPServerQuery,
     NetBoxDHCPHostReservationQuery,
     NetBoxDHCPOptionDefinitionQuery,
     NetBoxDHCPOptionQuery,
     NetBoxDHCPPDPoolQuery,
     NetBoxDHCPPoolQuery,
-    NetBoxDHCPSubnetQuery,
+    NetBoxDHCPServerQuery,
     NetBoxDHCPSharedNetworkQuery,
+    NetBoxDHCPSubnetQuery,
 )
 
 schema = [

@@ -1,20 +1,19 @@
-from django.test import TestCase
 from django.core.exceptions import ValidationError
+from django.test import TestCase
 
 from ipam.choices import IPAddressFamilyChoices
-
+from netbox_dhcp.choices import OptionTypeChoices
 from netbox_dhcp.models import (
+    ClientClass,
+    HostReservation,
+    Option,
+    OptionDefinition,
+    PDPool,
+    Pool,
     SharedNetwork,
     Subnet,
-    Pool,
-    PDPool,
-    OptionDefinition,
-    Option,
-    HostReservation,
-    ClientClass,
 )
 from netbox_dhcp.tests.custom import TestObjects
-from netbox_dhcp.choices import OptionTypeChoices
 
 
 class OptionValidationTestCase(TestCase):

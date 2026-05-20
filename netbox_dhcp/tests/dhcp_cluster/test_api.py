@@ -1,11 +1,10 @@
-from utilities.testing import APIViewTestCases
-
+from netbox_dhcp.choices import DHCPClusterStatusChoices
+from netbox_dhcp.models import DHCPCluster
 from netbox_dhcp.tests.custom import (
     APITestCase,
     NetBoxDHCPGraphQLMixin,
 )
-from netbox_dhcp.models import DHCPCluster
-from netbox_dhcp.choices import DHCPClusterStatusChoices
+from utilities.testing import APIViewTestCases
 
 
 class DHCPClusterAPITestCase(

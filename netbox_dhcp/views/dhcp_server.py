@@ -1,41 +1,40 @@
 from django.utils.translation import gettext_lazy as _
 
 from netbox.views import generic
-from utilities.views import register_model_view, ViewTab
-
-from netbox_dhcp.models import (
-    DHCPServer,
-    Subnet,
-    SharedNetwork,
-    HostReservation,
-    ClientClass,
-    Option,
-    OptionDefinition,
-)
 from netbox_dhcp.filtersets import (
-    DHCPServerFilterSet,
-    SubnetFilterSet,
-    SharedNetworkFilterSet,
-    HostReservationFilterSet,
     ClientClassFilterSet,
-    OptionFilterSet,
+    DHCPServerFilterSet,
+    HostReservationFilterSet,
     OptionDefinitionFilterSet,
+    OptionFilterSet,
+    SharedNetworkFilterSet,
+    SubnetFilterSet,
 )
 from netbox_dhcp.forms import (
-    DHCPServerForm,
-    DHCPServerFilterForm,
-    DHCPServerImportForm,
     DHCPServerBulkEditForm,
+    DHCPServerFilterForm,
+    DHCPServerForm,
+    DHCPServerImportForm,
+)
+from netbox_dhcp.models import (
+    ClientClass,
+    DHCPServer,
+    HostReservation,
+    Option,
+    OptionDefinition,
+    SharedNetwork,
+    Subnet,
 )
 from netbox_dhcp.tables import (
-    DHCPServerTable,
-    SubnetTable,
-    SharedNetworkTable,
-    HostReservationTable,
-    ClientClassTable,
     ChildOptionTable,
+    ClientClassTable,
+    DHCPServerTable,
+    HostReservationTable,
     OptionDefinitionTable,
+    SharedNetworkTable,
+    SubnetTable,
 )
+from utilities.views import ViewTab, register_model_view
 
 __all__ = (
     "DHCPServerView",

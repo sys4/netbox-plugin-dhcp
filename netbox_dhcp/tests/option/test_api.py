@@ -1,13 +1,13 @@
-from utilities.testing import APIViewTestCases
 from django.contrib.contenttypes.models import ContentType
 
+from netbox_dhcp.choices import OptionSendChoices, OptionSpaceChoices
+from netbox_dhcp.models import DHCPServer, Option, OptionDefinition
 from netbox_dhcp.tests.custom import (
-    TestObjects,
     APITestCase,
     NetBoxDHCPGraphQLMixin,
+    TestObjects,
 )
-from netbox_dhcp.models import Option, OptionDefinition, DHCPServer
-from netbox_dhcp.choices import OptionSpaceChoices, OptionSendChoices
+from utilities.testing import APIViewTestCases
 
 
 class OptionAPITestCase(

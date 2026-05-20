@@ -1,27 +1,26 @@
 from django import forms
 from django.utils.translation import gettext as _
 
+from ipam.models import Prefix
+from netbox_dhcp.choices import (
+    AllocatorTypeChoices,
+    DDNSConflictResolutionModeChoices,
+    DDNSReplaceClientNameChoices,
+    PDAllocatorTypeChoices,
+)
+from netbox_dhcp.models import (
+    ClientClass,
+    DHCPServer,
+    SharedNetwork,
+    Subnet,
+)
 from utilities.forms import add_blank_choice
 from utilities.forms.fields import (
     DynamicModelChoiceField,
     DynamicModelMultipleChoiceField,
 )
-from utilities.forms.widgets import BulkEditNullBooleanSelect
 from utilities.forms.rendering import FieldSet
-from ipam.models import Prefix
-
-from netbox_dhcp.models import (
-    ClientClass,
-    Subnet,
-    DHCPServer,
-    SharedNetwork,
-)
-from netbox_dhcp.choices import (
-    DDNSReplaceClientNameChoices,
-    DDNSConflictResolutionModeChoices,
-    AllocatorTypeChoices,
-    PDAllocatorTypeChoices,
-)
+from utilities.forms.widgets import BulkEditNullBooleanSelect
 
 __all__ = (
     "NetBoxDHCPBulkEditFormMixin",

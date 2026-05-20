@@ -2,17 +2,16 @@
 # from django.utils.translation import gettext_lazy as _
 
 from netbox.tables import PrimaryModelTable
-
 from netbox_dhcp.models import SharedNetwork
 
 from .mixins import (
-    NetBoxDHCPTableMixin,
-    DHCPServerTableMixin,
-    PrefixTableMixin,
     ClientClassTableMixin,
-    EvaluateClientClassTableMixin,
     DDNSUpdateTableMixin,
+    DHCPServerTableMixin,
+    EvaluateClientClassTableMixin,
     LeaseTableMixin,
+    NetBoxDHCPTableMixin,
+    PrefixTableMixin,
 )
 
 __all__ = (

@@ -1,24 +1,23 @@
 from netbox.views import generic
-from utilities.views import register_model_view
-
-from netbox_dhcp.models import (
-    Option,
-    DHCPServer,
-    Subnet,
-    SharedNetwork,
-    Pool,
-    PDPool,
-    HostReservation,
-    ClientClass,
-)
 from netbox_dhcp.filtersets import OptionFilterSet
 from netbox_dhcp.forms import (
-    OptionForm,
-    OptionFilterForm,
-    OptionImportForm,
     OptionBulkEditForm,
+    OptionFilterForm,
+    OptionForm,
+    OptionImportForm,
+)
+from netbox_dhcp.models import (
+    ClientClass,
+    DHCPServer,
+    HostReservation,
+    Option,
+    PDPool,
+    Pool,
+    SharedNetwork,
+    Subnet,
 )
 from netbox_dhcp.tables import OptionTable
+from utilities.views import register_model_view
 
 __all__ = (
     "OptionView",

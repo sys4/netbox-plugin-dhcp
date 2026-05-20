@@ -1,15 +1,14 @@
 from rest_framework import serializers
 
 from netbox.api.serializers import WritableNestedSerializer
-
 from netbox_dhcp.models import (
-    DHCPServer,
     ClientClass,
-    Subnet,
-    SharedNetwork,
-    Pool,
-    PDPool,
+    DHCPServer,
     HostReservation,
+    PDPool,
+    Pool,
+    SharedNetwork,
+    Subnet,
 )
 
 __all__ = (

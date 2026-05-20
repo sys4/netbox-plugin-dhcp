@@ -1,11 +1,10 @@
-from utilities.testing import APIViewTestCases
-
+from netbox_dhcp.models import HostReservation
 from netbox_dhcp.tests.custom import (
-    TestObjects,
     APITestCase,
     NetBoxDHCPGraphQLMixin,
+    TestObjects,
 )
-from netbox_dhcp.models import HostReservation
+from utilities.testing import APIViewTestCases
 
 
 class HostReservationAPITestCase(

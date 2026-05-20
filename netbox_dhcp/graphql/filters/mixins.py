@@ -1,10 +1,9 @@
 from dataclasses import dataclass
-
-from typing import Annotated, TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated
 
 import strawberry
-from strawberry.scalars import ID
 import strawberry_django
+from strawberry.scalars import ID
 from strawberry_django import FilterLookup
 
 try:
@@ -16,18 +15,18 @@ if TYPE_CHECKING:
     from ipam.graphql.filters import (
         PrefixFilter,
     )
-    from netbox_dhcp.graphql.filters import (
-        NetBoxDHCPClientClassFilter,
-        NetBoxDHCPSubnetFilter,
-        NetBoxDHCPSharedNetworkFilter,
-        NetBoxDHCPPoolFilter,
-        NetBoxDHCPPDPoolFilter,
-        NetBoxDHCPHostReservationFilter,
-        NetBoxDHCPServerFilter,
-    )
     from netbox_dhcp.graphql.enums import (
         NetBoxDHCPAllocatorTypeEnum,
         NetBoxDHCPPDAllocatorTypeEnum,
+    )
+    from netbox_dhcp.graphql.filters import (
+        NetBoxDHCPClientClassFilter,
+        NetBoxDHCPHostReservationFilter,
+        NetBoxDHCPPDPoolFilter,
+        NetBoxDHCPPoolFilter,
+        NetBoxDHCPServerFilter,
+        NetBoxDHCPSharedNetworkFilter,
+        NetBoxDHCPSubnetFilter,
     )
 
 

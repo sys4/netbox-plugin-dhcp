@@ -1,15 +1,15 @@
 import strawberry
 
 from netbox_dhcp.choices import (
+    AllocatorTypeChoices,
     DDNSReplaceClientNameChoices,
     DHCPClusterStatusChoices,
-    DHCPServerStatusChoices,
     DHCPServerIDTypeChoices,
+    DHCPServerStatusChoices,
     HostReservationIdentifierChoices,
-    AllocatorTypeChoices,
-    PDAllocatorTypeChoices,
     OptionSpaceChoices,
     OptionTypeChoices,
+    PDAllocatorTypeChoices,
 )
 
 __all__ = (

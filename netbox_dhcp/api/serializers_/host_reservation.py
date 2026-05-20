@@ -1,13 +1,12 @@
-from rest_framework import serializers
 from django.utils.translation import gettext as _
+from rest_framework import serializers
 
-from netbox.api.serializers import PrimaryModelSerializer
 from ipam.api.serializers import IPAddressSerializer, PrefixSerializer
-
+from netbox.api.serializers import PrimaryModelSerializer
 from netbox_dhcp.models import HostReservation
 
-from .option import OptionSerializer
 from .mixins import ClientClassSerializerMixin
+from .option import OptionSerializer
 
 __all__ = ("HostReservationSerializer",)
 

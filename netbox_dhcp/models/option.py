@@ -1,14 +1,13 @@
 import re
 
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
 from netbox.models import PrimaryModel
 from netbox.search import SearchIndex, register_search
-
-from netbox_dhcp.choices import OptionTypeChoices, OptionSendChoices
+from netbox_dhcp.choices import OptionSendChoices, OptionTypeChoices
 from netbox_dhcp.validators import validate_data
 
 from .mixins import ClientClassModelMixin

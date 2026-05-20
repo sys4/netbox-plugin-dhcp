@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 
-from netbox.plugins import PluginMenuButton, PluginMenuItem, PluginMenu
+from netbox.plugins import PluginMenu, PluginMenuButton, PluginMenuItem
 from netbox.plugins.utils import get_plugin_config
 
 menu_name = get_plugin_config("netbox_dhcp", "menu_name")

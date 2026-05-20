@@ -1,8 +1,8 @@
-from typing import Annotated, TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated
 
 import strawberry
-from strawberry.scalars import ID
 import strawberry_django
+from strawberry.scalars import ID
 from strawberry_django import FilterLookup
 
 try:
@@ -11,14 +11,13 @@ except ImportError:
     from strawberry_django import FilterLookup as StrFilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
-
 from netbox_dhcp.models import Pool
 
 from .mixins import (
-    SubnetGraphQLFilterMixin,
     ClientClassGraphQLFilterMixin,
-    EvaluateClientClassGraphQLFilterMixin,
     DDNSUpdateGraphQLFilterMixin,
+    EvaluateClientClassGraphQLFilterMixin,
+    SubnetGraphQLFilterMixin,
 )
 
 if TYPE_CHECKING:

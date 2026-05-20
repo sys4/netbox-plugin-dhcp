@@ -1,15 +1,14 @@
+from django.core.validators import (
+    MaxValueValidator,
+    MinValueValidator,
+)
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
-from django.core.validators import (
-    MinValueValidator,
-    MaxValueValidator,
-)
 
+from ipam.choices import IPAddressFamilyChoices
 from netbox.models import PrimaryModel
 from netbox.search import SearchIndex, register_search
-from ipam.choices import IPAddressFamilyChoices
-
 from netbox_dhcp.choices import OptionSpaceChoices, OptionTypeChoices
 from netbox_dhcp.fields import ChoiceArrayField
 

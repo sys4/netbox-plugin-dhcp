@@ -12,7 +12,7 @@ This works in much the same way in which NetBox provides configuration data for 
 <a href="https://github.com/sys4/netbox-plugin-dhcp/pulls"><img src="https://img.shields.io/github/issues-pr/sys4/netbox-plugin-dhcp" alt="Pull Requests Badge"/></a>
 <a href="https://github.com/sys4/netbox-plugin-dhcp/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/sys4/netbox-plugin-dhcp?color=2b9348"></a>
 <a href="https://github.com/sys4/netbox-plugin-dhcp/blob/master/LICENSE"><img src="https://img.shields.io/github/license/sys4/netbox-plugin-dhcp?color=2b9348" alt="License Badge"/></a>
-<a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code Style Black"/></a>
+<a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Code Style Ruff"/></a>
 <a href="https://pepy.tech/project/netbox-plugin-dhcp"><img alt="Downloads" src="https://static.pepy.tech/badge/netbox-plugin-dhcp"></a>
 <a href="https://pepy.tech/project/netbox-plugin-dhcp"><img alt="Downloads/Week" src="https://static.pepy.tech/badge/netbox-plugin-dhcp/month"></a>
 <a href="https://pepy.tech/project/netbox-plugin-dhcp"><img alt="Downloads/Month" src="https://static.pepy.tech/badge/netbox-plugin-dhcp/week"></a>

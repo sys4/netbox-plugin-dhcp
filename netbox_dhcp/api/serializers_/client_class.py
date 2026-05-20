@@ -1,11 +1,10 @@
 from rest_framework import serializers
 
 from netbox.api.serializers import PrimaryModelSerializer
-
 from netbox_dhcp.models import ClientClass
 
-from .option import OptionSerializer
 from .dhcp_server import DHCPServerSerializer
+from .option import OptionSerializer
 
 __all__ = ("ClientClassSerializer",)
 

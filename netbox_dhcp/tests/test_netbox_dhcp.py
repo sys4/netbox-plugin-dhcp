@@ -1,5 +1,5 @@
-from django.urls import reverse
 from django.test import SimpleTestCase
+from django.urls import reverse
 
 from netbox_dhcp import __version__
 from utilities.testing.api import APITestCase
