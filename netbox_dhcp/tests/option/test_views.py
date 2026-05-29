@@ -1,10 +1,9 @@
 from django.contrib.contenttypes.models import ContentType
 
-from utilities.testing import ViewTestCases
-
-from netbox_dhcp.tests.custom import TestObjects, ModelViewTestCase
+from netbox_dhcp.choices import OptionSendChoices, OptionSpaceChoices
 from netbox_dhcp.models import DHCPServer, Option, OptionDefinition
-from netbox_dhcp.choices import OptionSpaceChoices, OptionSendChoices
+from netbox_dhcp.tests.custom import ModelViewTestCase, TestObjects
+from utilities.testing import ViewTestCases
 
 
 class OptionViewTestCase(

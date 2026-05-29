@@ -2,13 +2,13 @@ import django_filters
 from django.db.models import Q
 from django.utils.translation import gettext as _
 
-from netbox.filtersets import PrimaryModelFilterSet
-from utilities.filtersets import register_filterset
-from utilities.filters import MultiValueCharFilter, MultiValueNumberFilter
 from ipam.choices import IPAddressFamilyChoices
-
-from netbox_dhcp.models import Option, OptionDefinition
+from netbox.filtersets import PrimaryModelFilterSet
 from netbox_dhcp.choices import OptionSpaceChoices
+from netbox_dhcp.models import Option, OptionDefinition
+from utilities.filters import MultiValueCharFilter, MultiValueNumberFilter
+from utilities.filtersets import register_filterset
+
 from .mixins import ClientClassFilterMixin
 
 __all__ = ("OptionFilterSet",)

@@ -1,4 +1,4 @@
-from typing import Annotated, TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated
 
 import strawberry
 import strawberry_django
@@ -10,11 +10,11 @@ except ImportError:
     from strawberry_django import FilterLookup as StrFilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
-
 from netbox_dhcp.models import OptionDefinition
 
 if TYPE_CHECKING:
     from dhcp.graphql.enums import IPAddressFamilyEnum
+
     from netbox_dhcp.graphql.enums import (
         NetBoxDHCPOptionSpaceEnum,
         NetBoxDHCPOptionTypeEnum,

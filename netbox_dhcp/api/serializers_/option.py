@@ -1,14 +1,13 @@
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
-from rest_framework import serializers
 from drf_spectacular.utils import extend_schema_field
+from rest_framework import serializers
 
-from netbox.api.serializers import PrimaryModelSerializer
 from netbox.api.fields import ContentTypeField
-from utilities.api import get_serializer_for_model
-
-from netbox_dhcp.models import Option
+from netbox.api.serializers import PrimaryModelSerializer
 from netbox_dhcp.choices import OptionSendChoices
+from netbox_dhcp.models import Option
+from utilities.api import get_serializer_for_model
 
 from .mixins import ClientClassSerializerMixin
 
@@ -120,9 +119,13 @@ class OptionSerializer(
         if instance.send_option is not None:
             return instance.send_option == OptionSendChoices.ALWAYS_SEND
 
+        return None
+
     def get_never_send(self, instance):
         if instance.send_option is not None:
             return instance.send_option == OptionSendChoices.NEVER_SEND
+
+        return None
 
     def create(self, validated_data):
         client_classes = validated_data.pop("client_classes", None)

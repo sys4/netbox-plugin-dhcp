@@ -1,63 +1,62 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from netbox.forms import (
-    PrimaryModelForm,
-    PrimaryModelFilterSetForm,
-    PrimaryModelImportForm,
-    PrimaryModelBulkEditForm,
-)
-from utilities.forms.fields import TagFilterField
-from utilities.forms.rendering import FieldSet, TabbedGroups
-from utilities.forms import add_blank_choice, get_field_value
 from ipam.choices import IPAddressFamilyChoices
 from ipam.models import Prefix
-
+from netbox.forms import (
+    PrimaryModelBulkEditForm,
+    PrimaryModelFilterSetForm,
+    PrimaryModelForm,
+    PrimaryModelImportForm,
+)
 from netbox_dhcp.models import Subnet
+from utilities.forms import add_blank_choice, get_field_value
+from utilities.forms.fields import TagFilterField
+from utilities.forms.rendering import FieldSet, TabbedGroups
+
 from .mixins import (
-    NetBoxDHCPFilterFormMixin,
-    NetBoxDHCPBulkEditFormMixin,
-    DHCPServerFormMixin,
-    DHCPServerFilterFormMixin,
-    DHCPServerImportFormMixin,
-    DHCPServerBulkEditFormMixin,
-    SharedNetworkFormMixin,
-    SharedNetworkFilterFormMixin,
-    SharedNetworkImportFormMixin,
-    SharedNetworkBulkEditFormMixin,
-    ClientClassesFormMixin,
-    ClientClassesFilterFormMixin,
-    ClientClassesImportFormMixin,
+    BOOTPBulkEditFormMixin,
+    BOOTPFilterFormMixin,
+    BOOTPFormMixin,
+    BOOTPImportFormMixin,
     ClientClassesBulkEditFormMixin,
+    ClientClassesFilterFormMixin,
+    ClientClassesFormMixin,
+    ClientClassesImportFormMixin,
+    DDNSUpdateBulkEditFormMixin,
+    DDNSUpdateFilterFormMixin,
+    DDNSUpdateFormMixin,
+    DDNSUpdateImportFormMixin,
+    DHCPServerBulkEditFormMixin,
+    DHCPServerFilterFormMixin,
+    DHCPServerFormMixin,
+    DHCPServerImportFormMixin,
     EvaluateClientClassesBulkEditFormMixin,
     EvaluateClientClassesFilterFormMixin,
     EvaluateClientClassesFormMixin,
     EvaluateClientClassesImportFormMixin,
-    LifetimeFormMixin,
-    LifetimeFilterFormMixin,
-    LifetimeImportFormMixin,
-    LifetimeBulkEditFormMixin,
-    BOOTPFormMixin,
-    BOOTPFilterFormMixin,
-    BOOTPImportFormMixin,
-    BOOTPBulkEditFormMixin,
-    PrefixFormMixin,
-    PrefixFilterFormMixin,
-    PrefixImportFormMixin,
-    DDNSUpdateFormMixin,
-    DDNSUpdateFilterFormMixin,
-    DDNSUpdateImportFormMixin,
-    DDNSUpdateBulkEditFormMixin,
+    LeaseBulkEditFormMixin,
+    LeaseFilterFormMixin,
     LeaseFormMixin,
     LeaseImportFormMixin,
-    LeaseFilterFormMixin,
-    LeaseBulkEditFormMixin,
-    NetworkFormMixin,
-    NetworkFilterFormMixin,
-    NetworkImportFormMixin,
+    LifetimeBulkEditFormMixin,
+    LifetimeFilterFormMixin,
+    LifetimeFormMixin,
+    LifetimeImportFormMixin,
+    NetBoxDHCPBulkEditFormMixin,
+    NetBoxDHCPFilterFormMixin,
     NetworkBulkEditFormMixin,
+    NetworkFilterFormMixin,
+    NetworkFormMixin,
+    NetworkImportFormMixin,
+    PrefixFilterFormMixin,
+    PrefixFormMixin,
+    PrefixImportFormMixin,
+    SharedNetworkBulkEditFormMixin,
+    SharedNetworkFilterFormMixin,
+    SharedNetworkFormMixin,
+    SharedNetworkImportFormMixin,
 )
-
 from .mixins.model import DYNAMIC_ATTRIBUTES
 
 __all__ = (

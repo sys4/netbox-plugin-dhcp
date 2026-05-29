@@ -1,33 +1,32 @@
 from django.test import TestCase
 
-from utilities.testing import ChangeLoggedFilterSetTests
-from dcim.models import Interface
 from dcim.choices import InterfaceTypeChoices
-from virtualization.models import VMInterface
-
-from netbox_dhcp.models import (
-    DHCPServer,
-    Subnet,
-    SharedNetwork,
-    HostReservation,
-    ClientClass,
-)
-from netbox_dhcp.filtersets import DHCPServerFilterSet
+from dcim.models import Interface
 from netbox_dhcp.choices import (
-    DHCPServerStatusChoices,
     DHCPServerIDTypeChoices,
+    DHCPServerStatusChoices,
     HostReservationIdentifierChoices,
 )
-from netbox_dhcp.tests.custom import (
-    TestObjects,
-    BOOTPFilterSetTests,
-    ValidLifetimeFilterSetTests,
-    OfferLifetimeFilterSetTests,
-    PreferredLifetimeFilterSetTests,
-    LeaseFilterSetTests,
-    DDNSUpdateFilterSetTests,
-    OptionFilterSetTests,
+from netbox_dhcp.filtersets import DHCPServerFilterSet
+from netbox_dhcp.models import (
+    ClientClass,
+    DHCPServer,
+    HostReservation,
+    SharedNetwork,
+    Subnet,
 )
+from netbox_dhcp.tests.custom import (
+    BOOTPFilterSetTests,
+    DDNSUpdateFilterSetTests,
+    LeaseFilterSetTests,
+    OfferLifetimeFilterSetTests,
+    OptionFilterSetTests,
+    PreferredLifetimeFilterSetTests,
+    TestObjects,
+    ValidLifetimeFilterSetTests,
+)
+from utilities.testing import ChangeLoggedFilterSetTests
+from virtualization.models import VMInterface
 
 
 class DHCPServerFilterSetTestCase(

@@ -7,12 +7,11 @@ except ImportError:
     from strawberry_django import FilterLookup as StrFilterLookup
 
 from netbox.graphql.filters import PrimaryModelFilter
-
 from netbox_dhcp.models import ClientClass
 
 from .mixins import (
-    DHCPServerGraphQLFilterMixin,
     BOOTPGraphQLFilterMixin,
+    DHCPServerGraphQLFilterMixin,
     LifetimeGraphQLFilterMixin,
 )
 

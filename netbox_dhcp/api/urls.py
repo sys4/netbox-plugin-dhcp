@@ -1,14 +1,13 @@
 from netbox.api.routers import NetBoxRouter
-
 from netbox_dhcp.api.views import (
-    NetBoxDHCPRootView,
     ClientClassViewSet,
     DHCPClusterViewSet,
-    DHCPServerViewSet,
     DHCPServerInterfaceViewSet,
+    DHCPServerViewSet,
     HostReservationViewSet,
-    OptionViewSet,
+    NetBoxDHCPRootView,
     OptionDefinitionViewSet,
+    OptionViewSet,
     PDPoolViewSet,
     PoolViewSet,
     SharedNetworkViewSet,

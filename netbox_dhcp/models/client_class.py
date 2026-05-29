@@ -1,14 +1,14 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.contenttypes.fields import GenericRelation
 
 from netbox.models import PrimaryModel
 from netbox.search import SearchIndex, register_search
 
 from .mixins import (
-    NetBoxDHCPModelMixin,
     BOOTPModelMixin,
     LifetimeModelMixin,
+    NetBoxDHCPModelMixin,
 )
 from .option import Option
 

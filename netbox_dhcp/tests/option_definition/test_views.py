@@ -1,12 +1,11 @@
-from utilities.testing import ViewTestCases
 from ipam.choices import IPAddressFamilyChoices
-
-from netbox_dhcp.tests.custom import ModelViewTestCase, TestObjects
-from netbox_dhcp.models import OptionDefinition
 from netbox_dhcp.choices import (
-    OptionTypeChoices,
     OptionSpaceChoices,
+    OptionTypeChoices,
 )
+from netbox_dhcp.models import OptionDefinition
+from netbox_dhcp.tests.custom import ModelViewTestCase, TestObjects
+from utilities.testing import ViewTestCases
 
 
 class OptionDefinitionViewTestCase(

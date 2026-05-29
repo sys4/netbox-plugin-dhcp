@@ -1,7 +1,6 @@
-from utilities.testing import ViewTestCases
-
-from netbox_dhcp.tests.custom import TestObjects, ModelViewTestCase
 from netbox_dhcp.models import HostReservation, Subnet
+from netbox_dhcp.tests.custom import ModelViewTestCase, TestObjects
+from utilities.testing import ViewTestCases
 
 
 class HostReservationViewTestCase(

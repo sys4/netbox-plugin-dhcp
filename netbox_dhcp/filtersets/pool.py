@@ -1,23 +1,21 @@
-from netaddr import IPNetwork, AddrFormatError
-
 import django_filters
 from django.db.models import Q
 from django.utils.translation import gettext as _
+from netaddr import AddrFormatError, IPNetwork
 
-from netbox.filtersets import PrimaryModelFilterSet
-from utilities.filtersets import register_filterset
-from utilities.filters import MultiValueCharFilter
-from ipam.models import IPRange
 from ipam.choices import IPAddressFamilyChoices
-
+from ipam.models import IPRange
+from netbox.filtersets import PrimaryModelFilterSet
 from netbox_dhcp.models import Pool
+from utilities.filters import MultiValueCharFilter
+from utilities.filtersets import register_filterset
 
 from .mixins import (
-    SubnetFilterMixin,
     ClientClassFilterMixin,
-    EvaluateClientClassFilterMixin,
     DDNSUpdateFilterMixin,
+    EvaluateClientClassFilterMixin,
     OptionFilterMixin,
+    SubnetFilterMixin,
 )
 
 __all__ = ("PoolFilterSet",)

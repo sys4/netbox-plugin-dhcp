@@ -1,5 +1,5 @@
-from django.dispatch import receiver
 from django.db.models.signals import m2m_changed
+from django.dispatch import receiver
 
 from netbox_dhcp.models import DHCPServer, DHCPServerInterface
 

@@ -1,12 +1,10 @@
-from utilities.testing import APIViewTestCases
-
+from netbox_dhcp.models import ClientClass
 from netbox_dhcp.tests.custom import (
     APITestCase,
     NetBoxDHCPGraphQLMixin,
+    TestObjects,
 )
-from netbox_dhcp.models import ClientClass
-
-from netbox_dhcp.tests.custom import TestObjects
+from utilities.testing import APIViewTestCases
 
 
 class ClientClassAPITestCase(

@@ -1,14 +1,13 @@
 from django.test import TestCase
 
-from utilities.testing import ChangeLoggedFilterSetTests
-
-from netbox_dhcp.models import HostReservation, Subnet
 from netbox_dhcp.filtersets import HostReservationFilterSet
+from netbox_dhcp.models import HostReservation, Subnet
 from netbox_dhcp.tests.custom import (
-    TestObjects,
     BOOTPFilterSetTests,
     OptionFilterSetTests,
+    TestObjects,
 )
+from utilities.testing import ChangeLoggedFilterSetTests
 
 
 class HostReservationFilterSetTestCase(

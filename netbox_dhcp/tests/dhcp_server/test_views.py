@@ -1,17 +1,16 @@
-from utilities.testing import ViewTestCases
-
+from netbox_dhcp.choices import (
+    DHCPServerIDTypeChoices,
+    DHCPServerStatusChoices,
+    HostReservationIdentifierChoices,
+)
+from netbox_dhcp.models import (
+    DHCPCluster,
+    DHCPServer,
+)
 from netbox_dhcp.tests.custom import (
     ModelViewTestCase,
 )
-from netbox_dhcp.models import (
-    DHCPServer,
-    DHCPCluster,
-)
-from netbox_dhcp.choices import (
-    DHCPServerStatusChoices,
-    DHCPServerIDTypeChoices,
-    HostReservationIdentifierChoices,
-)
+from utilities.testing import ViewTestCases
 
 
 class DHCPServerViewTestCase(

@@ -1,12 +1,11 @@
 from django.utils.translation import gettext_lazy as _
 
-from netbox.tables import PrimaryModelTable, BooleanColumn
-
+from netbox.tables import BooleanColumn, PrimaryModelTable
 from netbox_dhcp.models import ClientClass
 
 from .mixins import (
-    NetBoxDHCPTableMixin,
     DHCPServerTableMixin,
+    NetBoxDHCPTableMixin,
 )
 
 __all__ = ("ClientClassTable",)

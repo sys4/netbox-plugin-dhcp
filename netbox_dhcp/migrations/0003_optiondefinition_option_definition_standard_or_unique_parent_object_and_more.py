@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("extras", "0134_owner"),
         ("netbox_dhcp", "0002_import_option_definitions"),

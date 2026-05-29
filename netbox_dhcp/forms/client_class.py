@@ -2,29 +2,29 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from netbox.forms import (
-    PrimaryModelForm,
-    PrimaryModelFilterSetForm,
-    PrimaryModelImportForm,
     PrimaryModelBulkEditForm,
+    PrimaryModelFilterSetForm,
+    PrimaryModelForm,
+    PrimaryModelImportForm,
 )
+from netbox_dhcp.models import ClientClass
+from utilities.forms import BOOLEAN_WITH_BLANK_CHOICES
 from utilities.forms.fields import TagFilterField
 from utilities.forms.rendering import FieldSet
-from utilities.forms import BOOLEAN_WITH_BLANK_CHOICES
 
-from netbox_dhcp.models import ClientClass
 from .mixins import (
-    DHCPServerFormMixin,
-    DHCPServerFilterFormMixin,
-    DHCPServerImportFormMixin,
-    DHCPServerBulkEditFormMixin,
-    BOOTPFormMixin,
-    BOOTPFilterFormMixin,
-    BOOTPImportFormMixin,
     BOOTPBulkEditFormMixin,
-    LifetimeFormMixin,
-    LifetimeFilterFormMixin,
-    LifetimeImportFormMixin,
+    BOOTPFilterFormMixin,
+    BOOTPFormMixin,
+    BOOTPImportFormMixin,
+    DHCPServerBulkEditFormMixin,
+    DHCPServerFilterFormMixin,
+    DHCPServerFormMixin,
+    DHCPServerImportFormMixin,
     LifetimeBulkEditFormMixin,
+    LifetimeFilterFormMixin,
+    LifetimeFormMixin,
+    LifetimeImportFormMixin,
     NetBoxDHCPBulkEditFormMixin,
     NetBoxDHCPFilterFormMixin,
 )

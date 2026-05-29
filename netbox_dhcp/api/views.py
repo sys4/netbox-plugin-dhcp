@@ -1,15 +1,14 @@
 from rest_framework.routers import APIRootView
 
 from netbox.api.viewsets import NetBoxModelViewSet
-
 from netbox_dhcp.api.serializers import (
     ClientClassSerializer,
     DHCPClusterSerializer,
-    DHCPServerSerializer,
     DHCPServerInterfaceSerializer,
+    DHCPServerSerializer,
     HostReservationSerializer,
-    OptionSerializer,
     OptionDefinitionSerializer,
+    OptionSerializer,
     PDPoolSerializer,
     PoolSerializer,
     SharedNetworkSerializer,
@@ -21,8 +20,8 @@ from netbox_dhcp.filtersets import (
     DHCPServerFilterSet,
     DHCPServerInterfaceFilterSet,
     HostReservationFilterSet,
-    OptionFilterSet,
     OptionDefinitionFilterSet,
+    OptionFilterSet,
     PDPoolFilterSet,
     PoolFilterSet,
     SharedNetworkFilterSet,

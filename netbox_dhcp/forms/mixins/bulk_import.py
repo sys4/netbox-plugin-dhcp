@@ -1,24 +1,23 @@
 from django import forms
 from django.utils.translation import gettext as _
 
+from ipam.models import Prefix
+from netbox_dhcp.choices import (
+    AllocatorTypeChoices,
+    DDNSConflictResolutionModeChoices,
+    DDNSReplaceClientNameChoices,
+    PDAllocatorTypeChoices,
+)
+from netbox_dhcp.models import (
+    ClientClass,
+    DHCPServer,
+    SharedNetwork,
+    Subnet,
+)
 from utilities.forms.fields import (
     CSVChoiceField,
     CSVModelChoiceField,
     CSVModelMultipleChoiceField,
-)
-from ipam.models import Prefix
-
-from netbox_dhcp.models import (
-    ClientClass,
-    Subnet,
-    DHCPServer,
-    SharedNetwork,
-)
-from netbox_dhcp.choices import (
-    DDNSReplaceClientNameChoices,
-    DDNSConflictResolutionModeChoices,
-    AllocatorTypeChoices,
-    PDAllocatorTypeChoices,
 )
 
 __all__ = (

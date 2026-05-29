@@ -2,9 +2,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from netbox_dhcp.choices import (
-    DDNSReplaceClientNameChoices,
-    DDNSConflictResolutionModeChoices,
     AllocatorTypeChoices,
+    DDNSConflictResolutionModeChoices,
+    DDNSReplaceClientNameChoices,
     PDAllocatorTypeChoices,
 )
 

@@ -1,17 +1,16 @@
 from django.utils.translation import gettext_lazy as _
 
 from netbox.views import generic
-from utilities.views import register_model_view, ViewTab
-
-from netbox_dhcp.models import HostReservation, Option
 from netbox_dhcp.filtersets import HostReservationFilterSet, OptionFilterSet
 from netbox_dhcp.forms import (
-    HostReservationForm,
-    HostReservationFilterForm,
-    HostReservationImportForm,
     HostReservationBulkEditForm,
+    HostReservationFilterForm,
+    HostReservationForm,
+    HostReservationImportForm,
 )
-from netbox_dhcp.tables import HostReservationTable, ChildOptionTable
+from netbox_dhcp.models import HostReservation, Option
+from netbox_dhcp.tables import ChildOptionTable, HostReservationTable
+from utilities.views import ViewTab, register_model_view
 
 __all__ = (
     "HostReservationView",

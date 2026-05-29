@@ -1,23 +1,21 @@
 from rest_framework import serializers
 
-from netbox.api.serializers import PrimaryModelSerializer
 from ipam.api.serializers import PrefixSerializer
-
+from netbox.api.serializers import PrimaryModelSerializer
 from netbox_dhcp.models import Subnet
-from .dhcp_server import DHCPServerSerializer
-from .shared_network import SharedNetworkSerializer
-from .option import OptionSerializer
 
 from ..nested_serializers import (
+    NestedHostReservationSerializer,
     NestedPDPoolSerializer,
     NestedPoolSerializer,
-    NestedHostReservationSerializer,
 )
-
+from .dhcp_server import DHCPServerSerializer
 from .mixins import (
     ClientClassSerializerMixin,
     EvaluateClientClassSerializerMixin,
 )
+from .option import OptionSerializer
+from .shared_network import SharedNetworkSerializer
 
 __all__ = ("SubnetSerializer",)
 

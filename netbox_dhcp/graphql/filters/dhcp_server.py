@@ -1,4 +1,4 @@
-from typing import Annotated, TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated
 
 import strawberry
 import strawberry_django
@@ -14,24 +14,25 @@ from strawberry.scalars import ID
 from netbox.graphql.filters import PrimaryModelFilter
 
 if TYPE_CHECKING:
-    from netbox.graphql.filter_lookups import IntegerArrayLookup
     from dcim.graphql.filters import DeviceFilter, InterfaceFilter
+    from netbox.graphql.filter_lookups import IntegerArrayLookup
     from virtualization.graphql.filters import VirtualMachineFilter, VMInterfaceFilter
-    from .enums import (
-        NetBoxDHCPServerStatusEnum,
-        NetBoxDHCPServerIDTypeEnum,
-    )
+
     from .dhcp_cluster import NetBoxDHCPClusterFilter
+    from .enums import (
+        NetBoxDHCPServerIDTypeEnum,
+        NetBoxDHCPServerStatusEnum,
+    )
 
 from netbox_dhcp.models import DHCPServer
 
 from .mixins import (
-    ClientClassGraphQLFilterMixin,
     BOOTPGraphQLFilterMixin,
-    DDNSUpdateGraphQLFilterMixin,
+    ChildHostReservationGraphQLFilterMixin,
     ChildSharedNetworkGraphQLFilterMixin,
     ChildSubnetGraphQLFilterMixin,
-    ChildHostReservationGraphQLFilterMixin,
+    ClientClassGraphQLFilterMixin,
+    DDNSUpdateGraphQLFilterMixin,
 )
 
 __all__ = ("NetBoxDHCPServerFilter",)

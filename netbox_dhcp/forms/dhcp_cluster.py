@@ -2,21 +2,20 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from netbox.forms import (
-    PrimaryModelForm,
-    PrimaryModelFilterSetForm,
-    PrimaryModelImportForm,
     PrimaryModelBulkEditForm,
+    PrimaryModelFilterSetForm,
+    PrimaryModelForm,
+    PrimaryModelImportForm,
 )
-from utilities.forms.fields import TagFilterField, CSVChoiceField
-from utilities.forms.rendering import FieldSet
-from utilities.forms import add_blank_choice
-
-from netbox_dhcp.models import DHCPCluster
 from netbox_dhcp.choices import DHCPClusterStatusChoices
+from netbox_dhcp.models import DHCPCluster
+from utilities.forms import add_blank_choice
+from utilities.forms.fields import CSVChoiceField, TagFilterField
+from utilities.forms.rendering import FieldSet
 
 from .mixins import (
-    NetBoxDHCPFilterFormMixin,
     NetBoxDHCPBulkEditFormMixin,
+    NetBoxDHCPFilterFormMixin,
 )
 
 __all__ = (

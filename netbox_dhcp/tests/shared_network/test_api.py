@@ -1,11 +1,10 @@
-from utilities.testing import APIViewTestCases
-
+from netbox_dhcp.models import SharedNetwork
 from netbox_dhcp.tests.custom import (
-    TestObjects,
     APITestCase,
     NetBoxDHCPGraphQLMixin,
+    TestObjects,
 )
-from netbox_dhcp.models import SharedNetwork
+from utilities.testing import APIViewTestCases
 
 
 class SharedNetworkAPITestCase(

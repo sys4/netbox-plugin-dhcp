@@ -3,15 +3,15 @@
 import django.contrib.postgres.fields
 import django.core.validators
 import django.db.models.deletion
+import taggit.managers
+from django.db import migrations, models
+
 import netbox.models.deletion
 import netbox_dhcp.fields.choice_array
-import taggit.managers
 import utilities.json
-from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [

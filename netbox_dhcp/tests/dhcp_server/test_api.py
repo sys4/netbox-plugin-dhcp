@@ -1,16 +1,15 @@
-from utilities.testing import APIViewTestCases
-
-from netbox_dhcp.tests.custom import (
-    TestObjects,
-    APITestCase,
-    NetBoxDHCPGraphQLMixin,
-)
-from netbox_dhcp.models import DHCPServer
 from netbox_dhcp.choices import (
-    DHCPServerStatusChoices,
     DHCPServerIDTypeChoices,
+    DHCPServerStatusChoices,
     HostReservationIdentifierChoices,
 )
+from netbox_dhcp.models import DHCPServer
+from netbox_dhcp.tests.custom import (
+    APITestCase,
+    NetBoxDHCPGraphQLMixin,
+    TestObjects,
+)
+from utilities.testing import APIViewTestCases
 
 
 class DHCPServerAPITestCase(

@@ -1,20 +1,19 @@
 from django.test import TestCase
 
 from ipam.choices import IPAddressFamilyChoices
-from utilities.testing import ChangeLoggedFilterSetTests
-
-from netbox_dhcp.models import SharedNetwork, Subnet
 from netbox_dhcp.filtersets import SharedNetworkFilterSet
+from netbox_dhcp.models import SharedNetwork, Subnet
 from netbox_dhcp.tests.custom import (
-    TestObjects,
     BOOTPFilterSetTests,
-    ValidLifetimeFilterSetTests,
-    OfferLifetimeFilterSetTests,
-    PreferredLifetimeFilterSetTests,
-    LeaseFilterSetTests,
     DDNSUpdateFilterSetTests,
+    LeaseFilterSetTests,
+    OfferLifetimeFilterSetTests,
     OptionFilterSetTests,
+    PreferredLifetimeFilterSetTests,
+    TestObjects,
+    ValidLifetimeFilterSetTests,
 )
+from utilities.testing import ChangeLoggedFilterSetTests
 
 
 class SharedNetworkFilterSetTestCase(

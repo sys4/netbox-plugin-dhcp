@@ -1,8 +1,7 @@
-from utilities.testing import ViewTestCases
-
-from netbox_dhcp.tests.custom import ModelViewTestCase
-from netbox_dhcp.models import DHCPCluster
 from netbox_dhcp.choices import DHCPClusterStatusChoices
+from netbox_dhcp.models import DHCPCluster
+from netbox_dhcp.tests.custom import ModelViewTestCase
+from utilities.testing import ViewTestCases
 
 
 class DHCPClusterViewTestCase(

@@ -1,22 +1,22 @@
+from django.contrib.contenttypes.fields import GenericRelation
+from django.core.exceptions import ValidationError
+from django.core.validators import (
+    MaxValueValidator,
+    MinValueValidator,
+)
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core.validators import (
-    MinValueValidator,
-    MaxValueValidator,
-)
-from django.core.exceptions import ValidationError
-from django.contrib.contenttypes.fields import GenericRelation
 
+from ipam.choices import IPAddressFamilyChoices
+from ipam.models import Prefix
 from netbox.models import PrimaryModel
 from netbox.search import SearchIndex, register_search
-from ipam.models import Prefix
-from ipam.choices import IPAddressFamilyChoices
 from utilities.querysets import RestrictedQuerySet
 
 from .mixins import (
-    NetBoxDHCPModelMixin,
     ClientClassModelMixin,
     EvaluateClientClassModelMixin,
+    NetBoxDHCPModelMixin,
 )
 from .option import Option
 

@@ -5,8 +5,8 @@ from utilities.filtersets import register_filterset
 
 from ..models import ClientClass
 from .mixins import (
-    DHCPServerFilterMixin,
     BOOTPFilterMixin,
+    DHCPServerFilterMixin,
     LifetimeFilterMixin,
     OptionFilterMixin,
 )

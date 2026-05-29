@@ -1,19 +1,18 @@
 from django.test import override_settings
 from rest_framework import status
 
-from utilities.testing import APIViewTestCases
 from ipam.choices import IPAddressFamilyChoices
-
-from netbox_dhcp.tests.custom import (
-    TestObjects,
-    APITestCase,
-    NetBoxDHCPGraphQLMixin,
-)
-from netbox_dhcp.models import OptionDefinition
 from netbox_dhcp.choices import (
     OptionSpaceChoices,
     OptionTypeChoices,
 )
+from netbox_dhcp.models import OptionDefinition
+from netbox_dhcp.tests.custom import (
+    APITestCase,
+    NetBoxDHCPGraphQLMixin,
+    TestObjects,
+)
+from utilities.testing import APIViewTestCases
 
 
 class OptionDefinitionAPITestCase(

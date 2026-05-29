@@ -1,31 +1,30 @@
-from django.db import models
-from django.db.models import Case, When, F, Q
-from django.utils.translation import gettext_lazy as _
-from django.core.validators import (
-    MinValueValidator,
-    MaxValueValidator,
-)
-from django.core.exceptions import ValidationError
-from django.contrib.postgres.fields import ArrayField
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.postgres.fields import ArrayField
+from django.core.exceptions import ValidationError
+from django.core.validators import (
+    MaxValueValidator,
+    MinValueValidator,
+)
+from django.db import models
+from django.db.models import Case, F, Q, When
+from django.utils.translation import gettext_lazy as _
 
 from netbox.models import NetBoxModel, PrimaryModel
 from netbox.search import SearchIndex, register_search
-from utilities.querysets import RestrictedQuerySet
-
 from netbox_dhcp.choices import (
+    DHCPServerIDTypeChoices,
     DHCPServerStatusChoices,
     HostReservationIdentifierChoices,
-    DHCPServerIDTypeChoices,
 )
 from netbox_dhcp.fields import ChoiceArrayField
+from utilities.querysets import RestrictedQuerySet
 
 from .mixins import (
-    NetBoxDHCPModelMixin,
     BOOTPModelMixin,
-    LeaseModelMixin,
     DDNSUpdateModelMixin,
+    LeaseModelMixin,
     LifetimeModelMixin,
+    NetBoxDHCPModelMixin,
 )
 from .option import Option
 

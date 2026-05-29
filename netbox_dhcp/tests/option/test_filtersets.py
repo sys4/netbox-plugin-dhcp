@@ -1,12 +1,11 @@
 from django.test import TestCase
 
-from utilities.testing import ChangeLoggedFilterSetTests
 from ipam.choices import IPAddressFamilyChoices
-
-from netbox_dhcp.models import Option, OptionDefinition
-from netbox_dhcp.choices import OptionSpaceChoices, OptionSendChoices
+from netbox_dhcp.choices import OptionSendChoices, OptionSpaceChoices
 from netbox_dhcp.filtersets import OptionFilterSet
+from netbox_dhcp.models import Option, OptionDefinition
 from netbox_dhcp.tests.custom import TestObjects
+from utilities.testing import ChangeLoggedFilterSetTests
 
 
 class OptionFilterSetTestCase(

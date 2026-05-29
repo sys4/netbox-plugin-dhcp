@@ -1,22 +1,22 @@
+from django.contrib.contenttypes.fields import GenericRelation
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
-from django.contrib.contenttypes.fields import GenericRelation
-from django.core.exceptions import ValidationError
 
+from ipam.models import Prefix
 from netbox.models import PrimaryModel
 from netbox.search import SearchIndex, register_search
-from ipam.models import Prefix
 from utilities.querysets import RestrictedQuerySet
 
 from .mixins import (
-    NetBoxDHCPModelMixin,
-    ClientClassModelMixin,
-    EvaluateClientClassModelMixin,
     BOOTPModelMixin,
-    LifetimeModelMixin,
+    ClientClassModelMixin,
     DDNSUpdateModelMixin,
+    EvaluateClientClassModelMixin,
     LeaseModelMixin,
+    LifetimeModelMixin,
+    NetBoxDHCPModelMixin,
     NetworkModelMixin,
 )
 from .option import Option
