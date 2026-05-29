@@ -15,13 +15,10 @@ jobs:
           - name: Checkout code
             uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
 
-          - name: Check conformance to Black standards
-            uses: psf/black@e015af4a681dd2ac847188b13a81dc4a573d4dcb
+          - name: Check conformance to Ruff formatting standards
+            uses: astral-sh/ruff-action@8c228c72ff504d587be6b6cfbcf074768fdd6883
             with:
-                options: "--check"
-                src: "netbox_dhcp"
+                options: "format --check --diff"
 
-          - name: Check conformance to Ruff standards
-            uses: astral-sh/ruff-action@6576144cee480b9d2fc567667a9868f2c3725d1b
-            with:
-                version: "latest"
+          - name: Run the ruff code checker
+            uses: astral-sh/ruff-action@8c228c72ff504d587be6b6cfbcf074768fdd6883
