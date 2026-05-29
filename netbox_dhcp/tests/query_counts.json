@@ -1,0 +1,22 @@
+{
+  "clientclass:api_list_objects": 13,
+  "clientclass:list_objects_with_permission": 20,
+  "dhcpcluster:api_list_objects": 12,
+  "dhcpcluster:list_objects_with_permission": 20,
+  "dhcpserver:api_list_objects": 17,
+  "dhcpserver:list_objects_with_permission": 20,
+  "hostreservation:api_list_objects": 17,
+  "hostreservation:list_objects_with_permission": 23,
+  "option:api_list_objects": 16,
+  "option:list_objects_with_permission": 23,
+  "optiondefinition:api_list_objects": 12,
+  "optiondefinition:list_objects_with_permission": 20,
+  "pdpool:api_list_objects": 17,
+  "pdpool:list_objects_with_permission": 23,
+  "pool:api_list_objects": 17,
+  "pool:list_objects_with_permission": 23,
+  "sharednetwork:api_list_objects": 18,
+  "sharednetwork:list_objects_with_permission": 22,
+  "subnet:api_list_objects": 20,
+  "subnet:list_objects_with_permission": 21
+}

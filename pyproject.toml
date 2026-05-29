@@ -26,14 +26,12 @@ Issues = "https://github.com/sys4/netbox-plugin-dhcp/issues"
 requires = ['setuptools']
 build-backend = 'setuptools.build_meta'
 
-[tool.setuptools.packages.find]
-exclude = ["examples*", "media*", "*.tests*"]
-
-[tool.setuptools.package-data]
-"netbox_dhcp" = [
-    "templates/**/*.html",
-    "migrations/initial_data/*.json",
+[tool.setuptools]
+packages = [
+    "netbox_dhcp",
 ]
+package-data = { "netbox_dhcp" = ["**/*", "templates/**"] }
+exclude-package-data = { "netbox_dhcp" = ["tests/*"] }
 
 [tool.ruff]
 target-version = "py312"

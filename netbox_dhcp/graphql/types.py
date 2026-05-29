@@ -344,14 +344,29 @@ class NetBoxDHCPOptionType(PrimaryObjectType):
     send_option: str | None
 
     @strawberry_django.field
-    def assigned_object(self) -> Annotated[
-        Annotated["NetBoxDHCPDHCPServerType", strawberry.lazy("netbox_dhcp.graphql.types")]
-        | Annotated["NetBoxDHCPSubnetType", strawberry.lazy("netbox_dhcp.graphql.types")]
-        | Annotated["NetBoxDHCPSharedNetworkType", strawberry.lazy("netbox_dhcp.graphql.types")]
+    def assigned_object(
+        self,
+    ) -> Annotated[
+        Annotated[
+            "NetBoxDHCPDHCPServerType", strawberry.lazy("netbox_dhcp.graphql.types")
+        ]
+        | Annotated[
+            "NetBoxDHCPSubnetType", strawberry.lazy("netbox_dhcp.graphql.types")
+        ]
+        | Annotated[
+            "NetBoxDHCPSharedNetworkType", strawberry.lazy("netbox_dhcp.graphql.types")
+        ]
         | Annotated["NetBoxDHCPPoolType", strawberry.lazy("netbox_dhcp.graphql.types")]
-        | Annotated["NetBoxDHCPPDPoolType", strawberry.lazy("netbox_dhcp.graphql.types")]
-        | Annotated["NetBoxDHCPHostReservationType", strawberry.lazy("netbox_dhcp.graphql.types")]
-        | Annotated["NetBoxDHCPClientClassType", strawberry.lazy("netbox_dhcp.graphql.types")],
+        | Annotated[
+            "NetBoxDHCPPDPoolType", strawberry.lazy("netbox_dhcp.graphql.types")
+        ]
+        | Annotated[
+            "NetBoxDHCPHostReservationType",
+            strawberry.lazy("netbox_dhcp.graphql.types"),
+        ]
+        | Annotated[
+            "NetBoxDHCPClientClassType", strawberry.lazy("netbox_dhcp.graphql.types")
+        ],
         strawberry.union("OptionAssignmentType"),
     ]:
         return self.assigned_object

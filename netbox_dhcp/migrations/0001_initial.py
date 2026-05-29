@@ -12,7 +12,6 @@ import utilities.json
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
