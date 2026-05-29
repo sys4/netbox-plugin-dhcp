@@ -33,4 +33,33 @@ packages = [
 package-data = { "netbox_dhcp" = ["**/*", "templates/**"] }
 exclude-package-data = { "netbox_dhcp" = ["tests/*"] }
 
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "W", "C", "RET", "UP", "I"]
+ignore = ["F403", "C901"]
+preview = true
+
+[tool.ruff.lint.isort]
+known-first-party = [
+    "account",
+    "circuits",
+    "core",
+    "dcim",
+    "extras",
+    "ipam",
+    "netbox",
+    "tenancy",
+    "users",
+    "utilities",
+    "virtualization",
+    "vpn",
+    "wireless",
+    "netbox_dhcp",
 ]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
