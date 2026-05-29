@@ -1,60 +1,58 @@
 from django import forms
-from django.utils.translation import gettext_lazy as _
 from django.contrib.postgres.forms import SimpleArrayField
+from django.utils.translation import gettext_lazy as _
 
+from dcim.models import Device, Interface
 from netbox.forms import (
-    PrimaryModelForm,
-    PrimaryModelFilterSetForm,
-    PrimaryModelImportForm,
     PrimaryModelBulkEditForm,
+    PrimaryModelFilterSetForm,
+    PrimaryModelForm,
+    PrimaryModelImportForm,
+)
+from netbox_dhcp.choices import (
+    DHCPServerIDTypeChoices,
+    DHCPServerStatusChoices,
+    HostReservationIdentifierChoices,
+)
+from netbox_dhcp.models import DHCPCluster, DHCPServer
+from utilities.forms import (
+    BOOLEAN_WITH_BLANK_CHOICES,
+    add_blank_choice,
 )
 from utilities.forms.fields import (
-    TagFilterField,
-    DynamicModelChoiceField,
-    DynamicModelMultipleChoiceField,
     CSVChoiceField,
     CSVModelChoiceField,
     CSVModelMultipleChoiceField,
+    DynamicModelChoiceField,
+    DynamicModelMultipleChoiceField,
+    TagFilterField,
 )
 from utilities.forms.rendering import FieldSet, TabbedGroups
-from utilities.forms import (
-    add_blank_choice,
-    BOOLEAN_WITH_BLANK_CHOICES,
-)
-
-from dcim.models import Device, Interface
 from virtualization.models import VirtualMachine, VMInterface
 
-from netbox_dhcp.models import DHCPServer, DHCPCluster
-from netbox_dhcp.choices import (
-    DHCPServerStatusChoices,
-    DHCPServerIDTypeChoices,
-    HostReservationIdentifierChoices,
-)
-
 from .mixins import (
-    NetBoxDHCPFilterFormMixin,
-    NetBoxDHCPBulkEditFormMixin,
-    ClientClassesFormMixin,
-    ClientClassesFilterFormMixin,
-    ClientClassesImportFormMixin,
-    ClientClassesBulkEditFormMixin,
-    BOOTPFormMixin,
-    BOOTPFilterFormMixin,
-    BOOTPImportFormMixin,
     BOOTPBulkEditFormMixin,
-    LifetimeFormMixin,
-    LifetimeFilterFormMixin,
-    LifetimeImportFormMixin,
-    LifetimeBulkEditFormMixin,
+    BOOTPFilterFormMixin,
+    BOOTPFormMixin,
+    BOOTPImportFormMixin,
+    ClientClassesBulkEditFormMixin,
+    ClientClassesFilterFormMixin,
+    ClientClassesFormMixin,
+    ClientClassesImportFormMixin,
+    DDNSUpdateBulkEditFormMixin,
+    DDNSUpdateFilterFormMixin,
+    DDNSUpdateFormMixin,
+    DDNSUpdateImportFormMixin,
+    LeaseBulkEditFormMixin,
+    LeaseFilterFormMixin,
     LeaseFormMixin,
     LeaseImportFormMixin,
-    LeaseFilterFormMixin,
-    LeaseBulkEditFormMixin,
-    DDNSUpdateFormMixin,
-    DDNSUpdateFilterFormMixin,
-    DDNSUpdateImportFormMixin,
-    DDNSUpdateBulkEditFormMixin,
+    LifetimeBulkEditFormMixin,
+    LifetimeFilterFormMixin,
+    LifetimeFormMixin,
+    LifetimeImportFormMixin,
+    NetBoxDHCPBulkEditFormMixin,
+    NetBoxDHCPFilterFormMixin,
 )
 
 __all__ = (

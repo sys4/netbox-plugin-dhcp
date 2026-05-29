@@ -1,15 +1,14 @@
 from django.test import TestCase
 
 from ipam.choices import IPAddressFamilyChoices
-from utilities.testing import ChangeLoggedFilterSetTests
-
-from netbox_dhcp.models import Pool, Subnet
 from netbox_dhcp.filtersets import PoolFilterSet
+from netbox_dhcp.models import Pool, Subnet
 from netbox_dhcp.tests.custom import (
-    TestObjects,
     DDNSUpdateFilterSetTests,
     OptionFilterSetTests,
+    TestObjects,
 )
+from utilities.testing import ChangeLoggedFilterSetTests
 
 
 class PoolFilterSetTestCase(

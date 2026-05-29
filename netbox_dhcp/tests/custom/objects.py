@@ -1,10 +1,9 @@
 from netaddr import IPNetwork
 
+from dcim.models import Device, DeviceRole, DeviceType, MACAddress, Manufacturer, Site
 from ipam.models import IPAddress, IPRange, Prefix
-from dcim.models import Device, Manufacturer, DeviceRole, DeviceType, Site, MACAddress
-from virtualization.models import VirtualMachine, Cluster, ClusterType
-
-from netbox_dhcp.models import DHCPCluster, DHCPServer, ClientClass
+from netbox_dhcp.models import ClientClass, DHCPCluster, DHCPServer
+from virtualization.models import Cluster, ClusterType, VirtualMachine
 
 __all__ = ("TestObjects",)
 

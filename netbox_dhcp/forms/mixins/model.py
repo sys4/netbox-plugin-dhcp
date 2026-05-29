@@ -1,33 +1,31 @@
 from django import forms
 from django.utils.translation import gettext as _
 
+from ipam.choices import IPAddressFamilyChoices
+from ipam.models import Prefix
+from netbox_dhcp.choices import (
+    AllocatorTypeChoices,
+    DDNSConflictResolutionModeChoices,
+    DDNSReplaceClientNameChoices,
+    PDAllocatorTypeChoices,
+)
+from netbox_dhcp.models import (
+    ClientClass,
+    DHCPServer,
+    DHCPServerInterface,
+    SharedNetwork,
+    Subnet,
+)
+from utilities.forms import (
+    BOOLEAN_WITH_BLANK_CHOICES,
+    add_blank_choice,
+    get_field_value,
+)
 from utilities.forms.fields import (
     DynamicModelChoiceField,
     DynamicModelMultipleChoiceField,
 )
-from utilities.forms import (
-    add_blank_choice,
-    get_field_value,
-    BOOLEAN_WITH_BLANK_CHOICES,
-)
 from utilities.forms.rendering import FieldSet
-
-from ipam.models import Prefix
-from ipam.choices import IPAddressFamilyChoices
-
-from netbox_dhcp.models import (
-    ClientClass,
-    Subnet,
-    SharedNetwork,
-    DHCPServer,
-    DHCPServerInterface,
-)
-from netbox_dhcp.choices import (
-    DDNSReplaceClientNameChoices,
-    DDNSConflictResolutionModeChoices,
-    AllocatorTypeChoices,
-    PDAllocatorTypeChoices,
-)
 
 __all__ = (
     "BOOTPFormMixin",

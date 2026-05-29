@@ -1,3 +1,3 @@
+from .filterset import *
 from .netbox import *
 from .objects import *
-from .filterset import *

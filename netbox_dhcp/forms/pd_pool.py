@@ -1,24 +1,23 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
+from ipam.choices import IPAddressFamilyChoices
+from ipam.models import Prefix
 from netbox.forms import (
-    PrimaryModelForm,
-    PrimaryModelFilterSetForm,
-    PrimaryModelImportForm,
     PrimaryModelBulkEditForm,
+    PrimaryModelFilterSetForm,
+    PrimaryModelForm,
+    PrimaryModelImportForm,
 )
+from netbox_dhcp.models import PDPool, Subnet
+from utilities.forms import get_field_value
 from utilities.forms.fields import (
-    TagFilterField,
+    CSVModelChoiceField,
     DynamicModelChoiceField,
     DynamicModelMultipleChoiceField,
-    CSVModelChoiceField,
+    TagFilterField,
 )
-from ipam.models import Prefix
-from ipam.choices import IPAddressFamilyChoices
 from utilities.forms.rendering import FieldSet
-from utilities.forms import get_field_value
-
-from netbox_dhcp.models import PDPool, Subnet
 
 from .mixins import (
     ClientClassesBulkEditFormMixin,
@@ -32,7 +31,6 @@ from .mixins import (
     NetBoxDHCPBulkEditFormMixin,
     NetBoxDHCPFilterFormMixin,
 )
-
 from .mixins.model import DYNAMIC_ATTRIBUTES
 
 __all__ = (

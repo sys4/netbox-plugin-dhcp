@@ -1,47 +1,45 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
+from dcim.models import MACAddress
+from ipam.choices import IPAddressFamilyChoices
+from ipam.models import IPAddress, Prefix
 from netbox.forms import (
-    PrimaryModelForm,
-    PrimaryModelFilterSetForm,
-    PrimaryModelImportForm,
     PrimaryModelBulkEditForm,
+    PrimaryModelFilterSetForm,
+    PrimaryModelForm,
+    PrimaryModelImportForm,
 )
+from netbox_dhcp.models import HostReservation
+from utilities.forms import get_field_value
 from utilities.forms.fields import (
-    TagFilterField,
-    DynamicModelChoiceField,
-    DynamicModelMultipleChoiceField,
     CSVModelChoiceField,
     CSVModelMultipleChoiceField,
+    DynamicModelChoiceField,
+    DynamicModelMultipleChoiceField,
+    TagFilterField,
 )
 from utilities.forms.rendering import FieldSet, TabbedGroups
-from utilities.forms import get_field_value
-
-from ipam.models import IPAddress, Prefix
-from ipam.choices import IPAddressFamilyChoices
-from dcim.models import MACAddress
-
-from netbox_dhcp.models import HostReservation
 
 from .mixins import (
-    DHCPServerFormMixin,
-    DHCPServerFilterFormMixin,
-    DHCPServerImportFormMixin,
-    DHCPServerBulkEditFormMixin,
-    SubnetFormMixin,
-    SubnetFilterFormMixin,
-    SubnetImportFormMixin,
-    SubnetBulkEditFormMixin,
-    ClientClassesFormMixin,
-    ClientClassesFilterFormMixin,
-    ClientClassesImportFormMixin,
-    ClientClassesBulkEditFormMixin,
-    BOOTPFormMixin,
-    BOOTPFilterFormMixin,
-    BOOTPImportFormMixin,
     BOOTPBulkEditFormMixin,
+    BOOTPFilterFormMixin,
+    BOOTPFormMixin,
+    BOOTPImportFormMixin,
+    ClientClassesBulkEditFormMixin,
+    ClientClassesFilterFormMixin,
+    ClientClassesFormMixin,
+    ClientClassesImportFormMixin,
+    DHCPServerBulkEditFormMixin,
+    DHCPServerFilterFormMixin,
+    DHCPServerFormMixin,
+    DHCPServerImportFormMixin,
     NetBoxDHCPBulkEditFormMixin,
     NetBoxDHCPFilterFormMixin,
+    SubnetBulkEditFormMixin,
+    SubnetFilterFormMixin,
+    SubnetFormMixin,
+    SubnetImportFormMixin,
 )
 
 __all__ = (

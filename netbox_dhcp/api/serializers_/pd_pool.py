@@ -1,17 +1,15 @@
 from rest_framework import serializers
 
-from netbox.api.serializers import PrimaryModelSerializer
 from ipam.api.serializers import PrefixSerializer
-
+from netbox.api.serializers import PrimaryModelSerializer
 from netbox_dhcp.models import PDPool
 
 from .mixins import (
     ClientClassSerializerMixin,
     EvaluateClientClassSerializerMixin,
 )
-
-from .subnet import SubnetSerializer
 from .option import OptionSerializer
+from .subnet import SubnetSerializer
 
 __all__ = ("PDPoolSerializer",)
 

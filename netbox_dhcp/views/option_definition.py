@@ -1,21 +1,20 @@
 from django.utils.translation import gettext_lazy as _
 
 from netbox.views import generic
-from utilities.views import register_model_view, ViewTab
-
-from netbox_dhcp.models import OptionDefinition, Option
 from netbox_dhcp.filtersets import OptionDefinitionFilterSet, OptionFilterSet
 from netbox_dhcp.forms import (
-    OptionDefinitionForm,
-    OptionDefinitionFilterForm,
-    OptionDefinitionImportForm,
     OptionDefinitionBulkEditForm,
+    OptionDefinitionFilterForm,
+    OptionDefinitionForm,
+    OptionDefinitionImportForm,
 )
+from netbox_dhcp.models import Option, OptionDefinition
 from netbox_dhcp.tables import (
+    ChildOptionTable,
     OptionDefinitionTable,
     StandardOptionDefinitionTable,
-    ChildOptionTable,
 )
+from utilities.views import ViewTab, register_model_view
 
 __all__ = (
     "OptionDefinitionView",

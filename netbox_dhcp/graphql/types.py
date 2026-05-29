@@ -1,12 +1,13 @@
-from typing import Annotated, List, Union, TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated
 
 import strawberry
 import strawberry_django
+
 from netbox.graphql.types import PrimaryObjectType
 
 if TYPE_CHECKING:
-    from ipam.graphql.types import IPAddressType, PrefixType, IPRangeType
-    from dcim.graphql.types import MACAddressType, DeviceType, InterfaceType
+    from dcim.graphql.types import DeviceType, InterfaceType, MACAddressType
+    from ipam.graphql.types import IPAddressType, IPRangeType, PrefixType
     from virtualization.graphql.types import VirtualMachineType, VMInterfaceType
 
 from netbox_dhcp.models import (
@@ -14,24 +15,25 @@ from netbox_dhcp.models import (
     DHCPCluster,
     DHCPServer,
     HostReservation,
-    OptionDefinition,
     Option,
+    OptionDefinition,
     PDPool,
     Pool,
-    Subnet,
     SharedNetwork,
+    Subnet,
 )
+
 from .filters import (
     NetBoxDHCPClientClassFilter,
     NetBoxDHCPClusterFilter,
-    NetBoxDHCPServerFilter,
     NetBoxDHCPHostReservationFilter,
     NetBoxDHCPOptionDefinitionFilter,
     NetBoxDHCPOptionFilter,
     NetBoxDHCPPDPoolFilter,
     NetBoxDHCPPoolFilter,
-    NetBoxDHCPSubnetFilter,
+    NetBoxDHCPServerFilter,
     NetBoxDHCPSharedNetworkFilter,
+    NetBoxDHCPSubnetFilter,
 )
 
 
@@ -104,14 +106,14 @@ class NetworkGraphQLTypeMixin:
 
 @strawberry.type
 class ChildSubnetGraphQLTypeMixin:
-    child_subnets: List[
+    child_subnets: list[
         Annotated["NetBoxDHCPSubnetType", strawberry.lazy("netbox_dhcp.graphql.types")]
     ]
 
 
 @strawberry.type
 class ChildSharedNetworkGraphQLTypeMixin:
-    child_shared_networks: List[
+    child_shared_networks: list[
         Annotated[
             "NetBoxDHCPSharedNetworkType", strawberry.lazy("netbox_dhcp.graphql.types")
         ]
@@ -120,21 +122,21 @@ class ChildSharedNetworkGraphQLTypeMixin:
 
 @strawberry.type
 class ChildPDPoolGraphQLTypeMixin:
-    child_pd_pools: List[
+    child_pd_pools: list[
         Annotated["NetBoxDHCPPDPoolType", strawberry.lazy("netbox_dhcp.graphql.types")]
     ]
 
 
 @strawberry.type
 class ChildPoolGraphQLTypeMixin:
-    child_pools: List[
+    child_pools: list[
         Annotated["NetBoxDHCPPoolType", strawberry.lazy("netbox_dhcp.graphql.types")]
     ]
 
 
 @strawberry.type
 class ChildHostReservationGraphQLTypeMixin:
-    child_host_reservations: List[
+    child_host_reservations: list[
         Annotated[
             "NetBoxDHCPHostReservationType",
             strawberry.lazy("netbox_dhcp.graphql.types"),
@@ -144,7 +146,7 @@ class ChildHostReservationGraphQLTypeMixin:
 
 @strawberry.type
 class ClientClassGraphQLTypeMixin:
-    client_classes: List[
+    client_classes: list[
         Annotated[
             "NetBoxDHCPClientClassType", strawberry.lazy("netbox_dhcp.graphql.types")
         ]
@@ -153,7 +155,7 @@ class ClientClassGraphQLTypeMixin:
 
 @strawberry.type
 class EvaluateClientClassGraphQLTypeMixin:
-    evaluate_additional_classes: List[
+    evaluate_additional_classes: list[
         Annotated[
             "NetBoxDHCPClientClassType", strawberry.lazy("netbox_dhcp.graphql.types")
         ]
@@ -212,7 +214,7 @@ class NetBoxDHCPClientClassType(
 class NetBoxDHCPDHCPClusterType(PrimaryObjectType):
     name: str
     status: str
-    dhcp_servers: List[
+    dhcp_servers: list[
         Annotated[
             "NetBoxDHCPDHCPServerType", strawberry.lazy("netbox_dhcp.graphql.types")
         ]
@@ -235,7 +237,7 @@ class NetBoxDHCPDHCPServerType(
     server_id: str | None
     #   host_reservation_identifiers:
     echo_client_id: bool | None
-    relay_supplied_options: List[int] | None
+    relay_supplied_options: list[int] | None
     dhcp_cluster: (
         Annotated[
             "NetBoxDHCPDHCPClusterType", strawberry.lazy("netbox_dhcp.graphql.types")
@@ -244,14 +246,14 @@ class NetBoxDHCPDHCPServerType(
     )
     device: Annotated["DeviceType", strawberry.lazy("dcim.graphql.types")] | None
     device_interfaces: (
-        List[Annotated["InterfaceType", strawberry.lazy("dcim.graphql.types")]] | None
+        list[Annotated["InterfaceType", strawberry.lazy("dcim.graphql.types")]] | None
     )
     virtual_machine: (
         Annotated["VirtualMachineType", strawberry.lazy("virtualization.graphql.types")]
         | None
     )
     virtual_machine_interfaces: (
-        List[
+        list[
             Annotated[
                 "VMInterfaceType", strawberry.lazy("virtualization.graphql.types")
             ]
@@ -283,16 +285,16 @@ class NetBoxDHCPHostReservationType(
         Annotated["IPAddressType", strawberry.lazy("ipam.graphql.types")] | None
     )
     ipv6_addresses: (
-        List[Annotated["IPAddressType", strawberry.lazy("ipam.graphql.types")]] | None
+        list[Annotated["IPAddressType", strawberry.lazy("ipam.graphql.types")]] | None
     )
     ipv6_prefixes: (
-        List[Annotated["PrefixType", strawberry.lazy("ipam.graphql.types")]] | None
+        list[Annotated["PrefixType", strawberry.lazy("ipam.graphql.types")]] | None
     )
     excluded_ipv6_prefixes: (
-        List[Annotated["PrefixType", strawberry.lazy("ipam.graphql.types")]] | None
+        list[Annotated["PrefixType", strawberry.lazy("ipam.graphql.types")]] | None
     )
     client_classes: (
-        List[
+        list[
             Annotated[
                 "NetBoxDHCPClientClassType",
                 strawberry.lazy("netbox_dhcp.graphql.types"),
@@ -312,7 +314,7 @@ class NetBoxDHCPOptionDefinitionType(PrimaryObjectType):
     encapsulate: str | None
     family: int
     type: str
-    record_types: List[str] | None
+    record_types: list[str] | None
     dhcp_server: (
         Annotated[
             "NetBoxDHCPDHCPServerType", strawberry.lazy("netbox_dhcp.graphql.types")
@@ -343,36 +345,13 @@ class NetBoxDHCPOptionType(PrimaryObjectType):
 
     @strawberry_django.field
     def assigned_object(self) -> Annotated[
-        Union[
-            Annotated[
-                "NetBoxDHCPDHCPServerType",
-                strawberry.lazy("netbox_dhcp.graphql.types"),
-            ],
-            Annotated[
-                "NetBoxDHCPSubnetType",
-                strawberry.lazy("netbox_dhcp.graphql.types"),
-            ],
-            Annotated[
-                "NetBoxDHCPSharedNetworkType",
-                strawberry.lazy("netbox_dhcp.graphql.types"),
-            ],
-            Annotated[
-                "NetBoxDHCPPoolType",
-                strawberry.lazy("netbox_dhcp.graphql.types"),
-            ],
-            Annotated[
-                "NetBoxDHCPPDPoolType",
-                strawberry.lazy("netbox_dhcp.graphql.types"),
-            ],
-            Annotated[
-                "NetBoxDHCPHostReservationType",
-                strawberry.lazy("netbox_dhcp.graphql.types"),
-            ],
-            Annotated[
-                "NetBoxDHCPClientClassType",
-                strawberry.lazy("netbox_dhcp.graphql.types"),
-            ],
-        ],
+        Annotated["NetBoxDHCPDHCPServerType", strawberry.lazy("netbox_dhcp.graphql.types")]
+        | Annotated["NetBoxDHCPSubnetType", strawberry.lazy("netbox_dhcp.graphql.types")]
+        | Annotated["NetBoxDHCPSharedNetworkType", strawberry.lazy("netbox_dhcp.graphql.types")]
+        | Annotated["NetBoxDHCPPoolType", strawberry.lazy("netbox_dhcp.graphql.types")]
+        | Annotated["NetBoxDHCPPDPoolType", strawberry.lazy("netbox_dhcp.graphql.types")]
+        | Annotated["NetBoxDHCPHostReservationType", strawberry.lazy("netbox_dhcp.graphql.types")]
+        | Annotated["NetBoxDHCPClientClassType", strawberry.lazy("netbox_dhcp.graphql.types")],
         strawberry.union("OptionAssignmentType"),
     ]:
         return self.assigned_object

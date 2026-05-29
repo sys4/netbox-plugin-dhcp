@@ -1,37 +1,36 @@
 from django import forms
-from django.utils.translation import gettext_lazy as _
 from django.contrib.postgres.forms import SimpleArrayField
+from django.utils.translation import gettext_lazy as _
 
+from ipam.choices import IPAddressFamilyChoices
 from netbox.forms import (
-    PrimaryModelForm,
-    PrimaryModelFilterSetForm,
-    PrimaryModelImportForm,
     PrimaryModelBulkEditForm,
+    PrimaryModelFilterSetForm,
+    PrimaryModelForm,
+    PrimaryModelImportForm,
+)
+from netbox_dhcp.choices import OptionSpaceChoices, OptionTypeChoices
+from netbox_dhcp.models import OptionDefinition
+from utilities.forms import (
+    BOOLEAN_WITH_BLANK_CHOICES,
+    add_blank_choice,
+    get_field_value,
 )
 from utilities.forms.fields import (
-    TagFilterField,
     CSVChoiceField,
     CSVMultipleChoiceField,
+    TagFilterField,
 )
 from utilities.forms.rendering import FieldSet, TabbedGroups
-from utilities.forms import (
-    get_field_value,
-    add_blank_choice,
-    BOOLEAN_WITH_BLANK_CHOICES,
-)
 from utilities.forms.widgets import HTMXSelect
-from ipam.choices import IPAddressFamilyChoices
-
-from netbox_dhcp.models import OptionDefinition
-from netbox_dhcp.choices import OptionTypeChoices, OptionSpaceChoices
 
 from .mixins import (
-    DHCPServerFormMixin,
     ClientClassFormMixin,
-    DHCPServerImportFormMixin,
     ClientClassImportFormMixin,
-    NetBoxDHCPFilterFormMixin,
+    DHCPServerFormMixin,
+    DHCPServerImportFormMixin,
     NetBoxDHCPBulkEditFormMixin,
+    NetBoxDHCPFilterFormMixin,
 )
 
 __all__ = (

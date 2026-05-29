@@ -1,17 +1,17 @@
-from django.db import models
-from django.utils.translation import gettext_lazy as _
 from django.contrib.contenttypes.fields import GenericRelation
 from django.core.exceptions import ValidationError
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 
+from ipam.models import IPRange
 from netbox.models import PrimaryModel
 from netbox.search import SearchIndex, register_search
-from ipam.models import IPRange
 
 from .mixins import (
-    NetBoxDHCPModelMixin,
     ClientClassModelMixin,
-    EvaluateClientClassModelMixin,
     DDNSUpdateModelMixin,
+    EvaluateClientClassModelMixin,
+    NetBoxDHCPModelMixin,
 )
 from .option import Option
 

@@ -2,17 +2,16 @@ import django_filters
 from django.db.models import Q
 from django.utils.translation import gettext as _
 
-from netbox.filtersets import PrimaryModelFilterSet
-from utilities.filtersets import register_filterset
-from utilities.filters import MultiValueCharFilter
 from ipam.choices import IPAddressFamilyChoices
-
-from netbox_dhcp.models import OptionDefinition, ClientClass
+from netbox.filtersets import PrimaryModelFilterSet
 from netbox_dhcp.choices import OptionSpaceChoices, OptionTypeChoices
+from netbox_dhcp.models import ClientClass, OptionDefinition
+from utilities.filters import MultiValueCharFilter
+from utilities.filtersets import register_filterset
 
 from .mixins import (
-    DHCPServerFilterMixin,
     ClientClassFilterMixin,
+    DHCPServerFilterMixin,
 )
 
 __all__ = ("OptionDefinitionFilterSet",)

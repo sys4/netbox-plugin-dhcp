@@ -1,7 +1,7 @@
-from django.test import TestCase
 from django.core.exceptions import ValidationError
+from django.test import TestCase
 
-from netbox_dhcp.models import Subnet, SharedNetwork
+from netbox_dhcp.models import SharedNetwork, Subnet
 from netbox_dhcp.tests.custom import TestObjects
 
 

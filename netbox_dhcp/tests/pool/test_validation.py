@@ -1,10 +1,8 @@
+from django.core.exceptions import ValidationError
+from django.test import TestCase
 from netaddr import IPNetwork
 
-from django.test import TestCase
-from django.core.exceptions import ValidationError
-
 from ipam.models import IPRange
-
 from netbox_dhcp.models import Pool, Subnet
 from netbox_dhcp.tests.custom import TestObjects
 

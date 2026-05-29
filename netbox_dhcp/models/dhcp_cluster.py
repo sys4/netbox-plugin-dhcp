@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 
 from netbox.models import PrimaryModel
 from netbox.search import SearchIndex, register_search
-
 from netbox_dhcp.choices import DHCPClusterStatusChoices
 
 from .mixins import (

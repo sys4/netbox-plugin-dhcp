@@ -1,24 +1,22 @@
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
-from netbox.api.serializers import NetBoxModelSerializer, PrimaryModelSerializer
-
 from dcim.api.serializers import DeviceSerializer, InterfaceSerializer
+from netbox.api.serializers import NetBoxModelSerializer, PrimaryModelSerializer
+from netbox_dhcp.models import DHCPServer, DHCPServerInterface
 from virtualization.api.serializers import (
     VirtualMachineSerializer,
     VMInterfaceSerializer,
 )
 
-from .dhcp_cluster import DHCPClusterSerializer
-from .mixins import ClientClassSerializerMixin
 from ..nested_serializers import (
     NestedDHCPServerSerializer,
+    NestedHostReservationSerializer,
     NestedSharedNetworkSerializer,
     NestedSubnetSerializer,
-    NestedHostReservationSerializer,
 )
-
-from netbox_dhcp.models import DHCPServer, DHCPServerInterface
+from .dhcp_cluster import DHCPClusterSerializer
+from .mixins import ClientClassSerializerMixin
 
 __all__ = (
     "DHCPServerSerializer",

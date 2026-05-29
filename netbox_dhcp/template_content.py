@@ -1,14 +1,13 @@
 # from django.utils.translation import gettext_lazy as _
 
-from netbox.plugins import PluginTemplateExtension
 from ipam.choices import IPAddressFamilyChoices
-
+from netbox.plugins import PluginTemplateExtension
 from netbox_dhcp.tables import (
     RelatedHostReservationTable,
+    RelatedPDPoolTable,
+    RelatedPoolTable,
     RelatedSharedNetworkTable,
     RelatedSubnetTable,
-    RelatedPoolTable,
-    RelatedPDPoolTable,
 )
 
 

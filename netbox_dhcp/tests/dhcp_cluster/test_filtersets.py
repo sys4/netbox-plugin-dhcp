@@ -1,10 +1,9 @@
 from django.test import TestCase
 
-from utilities.testing import ChangeLoggedFilterSetTests
-
-from netbox_dhcp.models import DHCPCluster
-from netbox_dhcp.filtersets import DHCPClusterFilterSet
 from netbox_dhcp.choices import DHCPClusterStatusChoices
+from netbox_dhcp.filtersets import DHCPClusterFilterSet
+from netbox_dhcp.models import DHCPCluster
+from utilities.testing import ChangeLoggedFilterSetTests
 
 
 class DHCPClusterFilterSetTestCase(

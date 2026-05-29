@@ -1,15 +1,14 @@
 from netbox.views import generic
-from utilities.views import register_model_view
-
-from netbox_dhcp.models import DHCPCluster
 from netbox_dhcp.filtersets import DHCPClusterFilterSet
 from netbox_dhcp.forms import (
-    DHCPClusterForm,
-    DHCPClusterFilterForm,
-    DHCPClusterImportForm,
     DHCPClusterBulkEditForm,
+    DHCPClusterFilterForm,
+    DHCPClusterForm,
+    DHCPClusterImportForm,
 )
+from netbox_dhcp.models import DHCPCluster
 from netbox_dhcp.tables import DHCPClusterTable
+from utilities.views import register_model_view
 
 __all__ = (
     "DHCPClusterView",

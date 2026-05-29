@@ -1,4 +1,4 @@
-from typing import Annotated, TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated
 
 import strawberry
 import strawberry_django
@@ -12,15 +12,15 @@ except ImportError:
 from netbox.graphql.filters import PrimaryModelFilter
 
 if TYPE_CHECKING:
-    from ipam.graphql.filters import IPAddressFilter, PrefixFilter
     from dcim.graphql.filters import MACAddressFilter
+    from ipam.graphql.filters import IPAddressFilter, PrefixFilter
     from netbox_dhcp.filters import NetBoxDHCPClientClassFilter
 
 from netbox_dhcp.models import HostReservation
 
 from .mixins import (
-    ClientClassGraphQLFilterMixin,
     BOOTPGraphQLFilterMixin,
+    ClientClassGraphQLFilterMixin,
 )
 
 __all__ = ("NetBoxDHCPHostReservationFilter",)

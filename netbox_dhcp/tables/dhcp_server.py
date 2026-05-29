@@ -1,8 +1,7 @@
 import django_tables2 as tables
 from django.utils.translation import gettext_lazy as _
 
-from netbox.tables import PrimaryModelTable, ChoiceFieldColumn, columns
-
+from netbox.tables import ChoiceFieldColumn, PrimaryModelTable, columns
 from netbox_dhcp.models import DHCPServer
 
 from .mixins import (

@@ -1,10 +1,10 @@
-import re
-import netaddr
 import json
+import re
 
-from django.utils.translation import gettext_lazy as _
+import netaddr
 from django.core import validators as django_validators
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 from netbox_dhcp.choices import OptionTypeChoices
 
