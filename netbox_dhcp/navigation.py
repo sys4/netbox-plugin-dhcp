@@ -9,7 +9,7 @@ top_level_menu = get_plugin_config("netbox_dhcp", "top_level_menu")
 dhcp_server_menu_item = PluginMenuItem(
     link="plugins:netbox_dhcp:dhcpserver_list",
     link_text=_("DHCP Servers"),
-    permissions=["netbox_dhcp.dhcpserver_view"],
+    permissions=["netbox_dhcp.view_dhcpserver"],
     buttons=(
         PluginMenuButton(
             "plugins:netbox_dhcp:dhcpserver_add",
@@ -29,7 +29,7 @@ dhcp_server_menu_item = PluginMenuItem(
 dhcp_cluster_menu_item = PluginMenuItem(
     link="plugins:netbox_dhcp:dhcpcluster_list",
     link_text=_("DHCP Clusters"),
-    permissions=["netbox_dhcp.dhcpcluster_view"],
+    permissions=["netbox_dhcp.view_dhcpcluster"],
     buttons=(
         PluginMenuButton(
             "plugins:netbox_dhcp:dhcpcluster_add",
@@ -49,7 +49,7 @@ dhcp_cluster_menu_item = PluginMenuItem(
 ddns_menu_item = PluginMenuItem(
     link="plugins:netbox_dhcp:ddns_list",
     link_text=_("Dynamic DNS"),
-    permissions=["netbox_dhcp.ddns_view"],
+    permissions=["netbox_dhcp.view_ddns"],
     buttons=(
         PluginMenuButton(
             "plugins:netbox_dhcp:ddns_add",
@@ -69,7 +69,7 @@ ddns_menu_item = PluginMenuItem(
 custom_option_definition_menu_item = PluginMenuItem(
     link="plugins:netbox_dhcp:optiondefinition_list",
     link_text=_("Custom Option Definitions"),
-    permissions=["netbox_dhcp.optiondefinition_view"],
+    permissions=["netbox_dhcp.view_optiondefinition"],
     buttons=(
         PluginMenuButton(
             "plugins:netbox_dhcp:optiondefinition_add",
@@ -89,7 +89,7 @@ custom_option_definition_menu_item = PluginMenuItem(
 standard_option_definition_menu_item = PluginMenuItem(
     link="plugins:netbox_dhcp:optiondefinition_list_standard",
     link_text=_("Standard Option Definitions"),
-    permissions=["netbox_dhcp.optiondefinition_view"],
+    permissions=["netbox_dhcp.view_optiondefinition"],
 )
 
 option_menu_item = PluginMenuItem(
@@ -109,7 +109,7 @@ option_menu_item = PluginMenuItem(
 client_class_menu_item = PluginMenuItem(
     link="plugins:netbox_dhcp:clientclass_list",
     link_text=_("Client Classes"),
-    permissions=["netbox_dhcp.clientclass_view"],
+    permissions=["netbox_dhcp.view_clientclass"],
     buttons=(
         PluginMenuButton(
             "plugins:netbox_dhcp:clientclass_add",
@@ -129,7 +129,7 @@ client_class_menu_item = PluginMenuItem(
 host_reservation_menu_item = PluginMenuItem(
     link="plugins:netbox_dhcp:hostreservation_list",
     link_text=_("Host Reservations"),
-    permissions=["netbox_dhcp.hostreservation_view"],
+    permissions=["netbox_dhcp.view_hostreservation"],
     buttons=(
         PluginMenuButton(
             "plugins:netbox_dhcp:hostreservation_add",
@@ -149,7 +149,7 @@ host_reservation_menu_item = PluginMenuItem(
 shared_netwok_menu_item = PluginMenuItem(
     link="plugins:netbox_dhcp:sharednetwork_list",
     link_text=_("Shared Networks"),
-    permissions=["netbox_dhcp.sharednetwork_view"],
+    permissions=["netbox_dhcp.view_sharednetwork"],
     buttons=(
         PluginMenuButton(
             "plugins:netbox_dhcp:sharednetwork_add",
@@ -169,7 +169,7 @@ shared_netwok_menu_item = PluginMenuItem(
 subnet_menu_item = PluginMenuItem(
     link="plugins:netbox_dhcp:subnet_list",
     link_text=_("Subnets"),
-    permissions=["netbox_dhcp.subnet_view"],
+    permissions=["netbox_dhcp.view_subnet"],
     buttons=(
         PluginMenuButton(
             "plugins:netbox_dhcp:subnet_add",
@@ -189,7 +189,7 @@ subnet_menu_item = PluginMenuItem(
 pd_pool_menu_item = PluginMenuItem(
     link="plugins:netbox_dhcp:pdpool_list",
     link_text=_("Prefix Delegation Pools"),
-    permissions=["netbox_dhcp.pdpool_view"],
+    permissions=["netbox_dhcp.view_pdpool"],
     buttons=(
         PluginMenuButton(
             "plugins:netbox_dhcp:pdpool_add",
@@ -209,7 +209,7 @@ pd_pool_menu_item = PluginMenuItem(
 pool_menu_item = PluginMenuItem(
     link="plugins:netbox_dhcp:pool_list",
     link_text=_("Pools"),
-    permissions=["netbox_dhcp.pool_view"],
+    permissions=["netbox_dhcp.view_pool"],
     buttons=(
         PluginMenuButton(
             "plugins:netbox_dhcp:pool_add",
