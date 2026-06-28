@@ -25,13 +25,13 @@ from netbox_dhcp.models import (
 
 from .filters import (
     NetBoxDHCPClientClassFilter,
-    NetBoxDHCPClusterFilter,
+    NetBoxDHCPDHCPClusterFilter,
+    NetBoxDHCPDHCPServerFilter,
     NetBoxDHCPHostReservationFilter,
     NetBoxDHCPOptionDefinitionFilter,
     NetBoxDHCPOptionFilter,
     NetBoxDHCPPDPoolFilter,
     NetBoxDHCPPoolFilter,
-    NetBoxDHCPServerFilter,
     NetBoxDHCPSharedNetworkFilter,
     NetBoxDHCPSubnetFilter,
 )
@@ -210,7 +210,9 @@ class NetBoxDHCPClientClassType(
     only_in_additional_list: bool | None
 
 
-@strawberry_django.type(DHCPCluster, fields="__all__", filters=NetBoxDHCPClusterFilter)
+@strawberry_django.type(
+    DHCPCluster, fields="__all__", filters=NetBoxDHCPDHCPClusterFilter
+)
 class NetBoxDHCPDHCPClusterType(PrimaryObjectType):
     name: str
     status: str
@@ -221,7 +223,9 @@ class NetBoxDHCPDHCPClusterType(PrimaryObjectType):
     ]
 
 
-@strawberry_django.type(DHCPServer, fields="__all__", filters=NetBoxDHCPServerFilter)
+@strawberry_django.type(
+    DHCPServer, fields="__all__", filters=NetBoxDHCPDHCPServerFilter
+)
 class NetBoxDHCPDHCPServerType(
     BOOTPGraphQLTypeMixin,
     DDNSUpdateGraphQLTypeMixin,

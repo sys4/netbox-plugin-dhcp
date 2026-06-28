@@ -21,10 +21,10 @@ if TYPE_CHECKING:
     )
     from netbox_dhcp.graphql.filters import (
         NetBoxDHCPClientClassFilter,
+        NetBoxDHCPDHCPServerFilter,
         NetBoxDHCPHostReservationFilter,
         NetBoxDHCPPDPoolFilter,
         NetBoxDHCPPoolFilter,
-        NetBoxDHCPServerFilter,
         NetBoxDHCPSharedNetworkFilter,
         NetBoxDHCPSubnetFilter,
     )
@@ -251,7 +251,7 @@ class SubnetGraphQLFilterMixin:
 class DHCPServerGraphQLFilterMixin:
     dhcp_server: (
         Annotated[
-            "NetBoxDHCPServerFilter",
+            "NetBoxDHCPDHCPServerFilter",
             strawberry.lazy("netbox_dhcp.graphql.filters"),
         ]
         | None
