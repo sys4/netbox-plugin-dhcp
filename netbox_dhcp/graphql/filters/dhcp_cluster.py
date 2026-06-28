@@ -17,11 +17,11 @@ if TYPE_CHECKING:
 
 from netbox_dhcp.models import DHCPCluster
 
-__all__ = ("NetBoxDHCPClusterFilter",)
+__all__ = ("NetBoxDHCPDHCPClusterFilter",)
 
 
 @strawberry_django.filter_type(DHCPCluster, lookups=True)
-class NetBoxDHCPClusterFilter(PrimaryModelFilter):
+class NetBoxDHCPDHCPClusterFilter(PrimaryModelFilter):
     name: StrFilterLookup[str] | None = strawberry_django.filter_field()
     status: (
         Annotated[

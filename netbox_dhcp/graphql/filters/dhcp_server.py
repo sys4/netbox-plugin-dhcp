@@ -18,7 +18,7 @@ if TYPE_CHECKING:
     from netbox.graphql.filter_lookups import IntegerArrayLookup
     from virtualization.graphql.filters import VirtualMachineFilter, VMInterfaceFilter
 
-    from .dhcp_cluster import NetBoxDHCPClusterFilter
+    from .dhcp_cluster import NetBoxDHCPDHCPClusterFilter
     from .enums import (
         NetBoxDHCPServerIDTypeEnum,
         NetBoxDHCPServerStatusEnum,
@@ -35,11 +35,11 @@ from .mixins import (
     DDNSUpdateGraphQLFilterMixin,
 )
 
-__all__ = ("NetBoxDHCPServerFilter",)
+__all__ = ("NetBoxDHCPDHCPServerFilter",)
 
 
 @strawberry_django.filter_type(DHCPServer, lookups=True)
-class NetBoxDHCPServerFilter(
+class NetBoxDHCPDHCPServerFilter(
     ClientClassGraphQLFilterMixin,
     BOOTPGraphQLFilterMixin,
     DDNSUpdateGraphQLFilterMixin,
@@ -71,7 +71,8 @@ class NetBoxDHCPServerFilter(
     ) = strawberry_django.filter_field()
     dhcp_cluster: (
         Annotated[
-            "NetBoxDHCPClusterFilter", strawberry.lazy("netbox_dhcp.graphql.filters")
+            "NetBoxDHCPDHCPClusterFilter",
+            strawberry.lazy("netbox_dhcp.graphql.filters"),
         ]
         | None
     ) = strawberry_django.filter_field()
