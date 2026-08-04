@@ -1,15 +1,17 @@
 from django.utils.translation import gettext as _
 from rest_framework import serializers
 
-from ipam.api.serializers import IPAddressSerializer, PrefixSerializer
 from dcim.api.serializers import MACAddressSerializer
+from ipam.api.serializers import IPAddressSerializer, PrefixSerializer
 from netbox.api.serializers import PrimaryModelSerializer
 from netbox_dhcp.models import HostReservation
 
-from .mixins import ClientClassesSerializerMixin, DHCPServerSerializerMixin, SubnetSerializerMixin
+from .mixins import (
+    ClientClassesSerializerMixin,
+    DHCPServerSerializerMixin,
+    SubnetSerializerMixin,
+)
 from .option import OptionSerializer
-from .subnet import SubnetSerializer
-from .dhcp_server import DHCPServerSerializer
 
 __all__ = ("HostReservationSerializer",)
 

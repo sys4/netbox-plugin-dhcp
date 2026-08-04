@@ -10,10 +10,7 @@ from .mixins import DHCPServerSerializerMixin
 __all__ = ("OptionDefinitionSerializer",)
 
 
-class OptionDefinitionSerializer(
-    DHCPServerSerializerMixin,
-    PrimaryModelSerializer
-):
+class OptionDefinitionSerializer(DHCPServerSerializerMixin, PrimaryModelSerializer):
     class Meta:
         model = OptionDefinition
 
