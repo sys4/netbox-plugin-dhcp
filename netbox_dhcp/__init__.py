@@ -2,7 +2,7 @@ from django.utils.translation import gettext_lazy as _
 
 from netbox.plugins import PluginConfig
 
-__version__ = "0.1.9"
+__version__ = "0.1.10"
 
 
 class DHCPConfig(PluginConfig):
