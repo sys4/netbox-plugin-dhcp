@@ -171,7 +171,7 @@ class DDNSUpdateFormMixin(forms.Form):
             }
         )
 
-        if not get_field_value(self, "ddns_send_updates") == "True":
+        if not bool(get_field_value(self, "ddns_send_updates")):
             for field_name in DDNSUpdateFormMixin.FIELDS:
                 if field_name != "ddns_send_updates":
                     del self.fields[field_name]
@@ -300,7 +300,7 @@ class LeaseFormMixin(forms.Form):
         self.fields["calculate_tee_times"].widget.attrs.update(DYNAMIC_ATTRIBUTES)
         self.fields["allocator"].widget.attrs.update(DYNAMIC_ATTRIBUTES)
 
-        if get_field_value(self, "calculate_tee_times") == "True":
+        if bool(get_field_value(self, "calculate_tee_times")):
             del self.fields["renew_timer"]
             del self.fields["rebind_timer"]
         else:
