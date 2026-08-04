@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 
+from netbox.object_actions import BulkExport
 from netbox.views import generic
 from netbox_dhcp.filtersets import (
     ClientClassFilterSet,
@@ -148,7 +149,7 @@ class ClientClassParentOptionListView(generic.ObjectChildrenView):
     table = ParentOptionTable
     filterset = OptionFilterSet
     template_name = "netbox_dhcp/clientclass/parent_options.html"
-    actions = {"export": {"view"}}
+    actions = [BulkExport]
 
     tab = ViewTab(
         label=_("Parent Options"),
@@ -168,7 +169,7 @@ class ClientClassParentSharedNetworkListView(generic.ObjectChildrenView):
     table = ParentSharedNetworkTable
     filterset = SharedNetworkFilterSet
     template_name = "netbox_dhcp/clientclass/parent_shared_networks.html"
-    actions = {"export": {"view"}}
+    actions = [BulkExport]
 
     tab = ViewTab(
         label=_("Parent Shared Networks"),
@@ -188,7 +189,7 @@ class ClientClassParentSubnetListView(generic.ObjectChildrenView):
     table = ParentSubnetTable
     filterset = SubnetFilterSet
     template_name = "netbox_dhcp/clientclass/parent_subnets.html"
-    actions = {"export": {"view"}}
+    actions = [BulkExport]
 
     tab = ViewTab(
         label=_("Parent Subnets"),
@@ -208,7 +209,7 @@ class ClientClassParentPDPoolListView(generic.ObjectChildrenView):
     table = ParentPDPoolTable
     filterset = PDPoolFilterSet
     template_name = "netbox_dhcp/clientclass/parent_pd_pools.html"
-    actions = {"export": {"view"}}
+    actions = [BulkExport]
 
     tab = ViewTab(
         label=_("Parent Prefix Delegation Pools"),
@@ -228,7 +229,7 @@ class ClientClassParentPoolListView(generic.ObjectChildrenView):
     table = ParentPoolTable
     filterset = PoolFilterSet
     template_name = "netbox_dhcp/clientclass/parent_pools.html"
-    actions = {"export": {"view"}}
+    actions = [BulkExport]
 
     tab = ViewTab(
         label=_("Parent Pools"),
@@ -248,7 +249,7 @@ class ClientClassParentHostReservationListView(generic.ObjectChildrenView):
     table = ParentHostReservationTable
     filterset = HostReservationFilterSet
     template_name = "netbox_dhcp/clientclass/parent_host_reservations.html"
-    actions = {"export": {"view"}}
+    actions = [BulkExport]
 
     tab = ViewTab(
         label=_("Parent Host Reservations"),

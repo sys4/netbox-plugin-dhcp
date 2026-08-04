@@ -1,3 +1,9 @@
+from netbox.object_actions import (
+    BulkDelete,
+    BulkEdit,
+    BulkExport,
+    BulkImport,
+)
 from netbox.views import generic
 from netbox_dhcp.filtersets import OptionFilterSet
 from netbox_dhcp.forms import (
@@ -34,12 +40,7 @@ __all__ = (
 class OptionListView(generic.ObjectListView):
     queryset = Option.objects.all()
     table = OptionTable
-    actions = {
-        "export": {"view"},
-        "bulk_import": {"change"},
-        "bulk_edit": {"change"},
-        "bulk_delete": {"delete"},
-    }
+    actions = [BulkImport, BulkExport, BulkEdit, BulkDelete]
     filterset = OptionFilterSet
     filterset_form = OptionFilterForm
 
