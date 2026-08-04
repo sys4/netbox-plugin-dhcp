@@ -2,17 +2,22 @@ from django.utils.translation import gettext as _
 from rest_framework import serializers
 
 from ipam.api.serializers import IPAddressSerializer, PrefixSerializer
+from dcim.api.serializers import MACAddressSerializer
 from netbox.api.serializers import PrimaryModelSerializer
 from netbox_dhcp.models import HostReservation
 
-from .mixins import ClientClassSerializerMixin
+from .mixins import ClientClassSerializerMixin, DHCPServerSerializerMixin, SubnetSerializerMixin
 from .option import OptionSerializer
+from .subnet import SubnetSerializer
+from .dhcp_server import DHCPServerSerializer
 
 __all__ = ("HostReservationSerializer",)
 
 
 class HostReservationSerializer(
     ClientClassSerializerMixin,
+    DHCPServerSerializerMixin,
+    SubnetSerializerMixin,
     PrimaryModelSerializer,
 ):
     class Meta:
@@ -62,6 +67,12 @@ class HostReservationSerializer(
         view_name="plugins-api:netbox_dhcp-api:hostreservation-detail"
     )
 
+    hw_address = MACAddressSerializer(
+        nested=True,
+        read_only=False,
+        required=False,
+        help_text=_("Hardware address used for the host reservation"),
+    )
     ipv4_address = IPAddressSerializer(
         nested=True,
         read_only=False,
