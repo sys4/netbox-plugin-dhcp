@@ -6,7 +6,7 @@ from dcim.api.serializers import MACAddressSerializer
 from netbox.api.serializers import PrimaryModelSerializer
 from netbox_dhcp.models import HostReservation
 
-from .mixins import ClientClassSerializerMixin, DHCPServerSerializerMixin, SubnetSerializerMixin
+from .mixins import ClientClassesSerializerMixin, DHCPServerSerializerMixin, SubnetSerializerMixin
 from .option import OptionSerializer
 from .subnet import SubnetSerializer
 from .dhcp_server import DHCPServerSerializer
@@ -15,7 +15,7 @@ __all__ = ("HostReservationSerializer",)
 
 
 class HostReservationSerializer(
-    ClientClassSerializerMixin,
+    ClientClassesSerializerMixin,
     DHCPServerSerializerMixin,
     SubnetSerializerMixin,
     PrimaryModelSerializer,

@@ -5,8 +5,8 @@ from netbox.api.serializers import PrimaryModelSerializer
 from netbox_dhcp.models import Pool
 
 from .mixins import (
-    ClientClassSerializerMixin,
-    EvaluateClientClassSerializerMixin,
+    ClientClassesSerializerMixin,
+    EvaluateClientClassesSerializerMixin,
 )
 from .option import OptionSerializer
 from .subnet import SubnetSerializer
@@ -15,8 +15,8 @@ __all__ = ("PoolSerializer",)
 
 
 class PoolSerializer(
-    ClientClassSerializerMixin,
-    EvaluateClientClassSerializerMixin,
+    ClientClassesSerializerMixin,
+    EvaluateClientClassesSerializerMixin,
     PrimaryModelSerializer,
 ):
     class Meta:

@@ -16,7 +16,7 @@ from ..nested_serializers import (
     NestedSubnetSerializer,
 )
 from .dhcp_cluster import DHCPClusterSerializer
-from .mixins import ClientClassSerializerMixin
+from .mixins import ClientClassesSerializerMixin
 
 __all__ = (
     "DHCPServerSerializer",
@@ -79,7 +79,7 @@ class DHCPServerInterfaceSerializer(NetBoxModelSerializer):
 
 
 class DHCPServerSerializer(
-    ClientClassSerializerMixin,
+    ClientClassesSerializerMixin,
     PrimaryModelSerializer,
 ):
     class Meta:

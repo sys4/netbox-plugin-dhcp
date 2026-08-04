@@ -4,17 +4,19 @@ from netbox.api.serializers import PrimaryModelSerializer
 
 from ..nested_serializers import (
     NestedClientClassSerializer,
+    NestedDHCPServerSerializer,
+    NestedSubnetSerializer,
 )
 
 __all__ = (
-    "ClientClassSerializerMixin",
-    "EvaluateClientClassSerializerMixin",
+    "ClientClassesSerializerMixin",
+    "EvaluateClientClassesSerializerMixin",
     "DHCPServerSerializerMixin",
     "SubnetSerializerMixin",
 )
 
 
-class ClientClassSerializerMixin(PrimaryModelSerializer):
+class ClientClassesSerializerMixin(PrimaryModelSerializer):
     client_classes = NestedClientClassSerializer(
         many=True,
         read_only=False,
@@ -23,7 +25,7 @@ class ClientClassSerializerMixin(PrimaryModelSerializer):
     )
 
 
-class EvaluateClientClassSerializerMixin(PrimaryModelSerializer):
+class EvaluateClientClassesSerializerMixin(PrimaryModelSerializer):
     evaluate_additional_classes = NestedClientClassSerializer(
         many=True,
         read_only=False,
