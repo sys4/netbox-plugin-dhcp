@@ -11,8 +11,8 @@ from ..nested_serializers import (
 )
 from .dhcp_server import DHCPServerSerializer
 from .mixins import (
-    ClientClassSerializerMixin,
-    EvaluateClientClassSerializerMixin,
+    ClientClassesSerializerMixin,
+    EvaluateClientClassesSerializerMixin,
 )
 from .option import OptionSerializer
 from .shared_network import SharedNetworkSerializer
@@ -21,8 +21,8 @@ __all__ = ("SubnetSerializer",)
 
 
 class SubnetSerializer(
-    ClientClassSerializerMixin,
-    EvaluateClientClassSerializerMixin,
+    ClientClassesSerializerMixin,
+    EvaluateClientClassesSerializerMixin,
     PrimaryModelSerializer,
 ):
     class Meta:

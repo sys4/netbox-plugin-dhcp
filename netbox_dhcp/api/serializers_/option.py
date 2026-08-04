@@ -9,7 +9,7 @@ from netbox_dhcp.choices import OptionSendChoices
 from netbox_dhcp.models import Option
 from utilities.api import get_serializer_for_model
 
-from .mixins import ClientClassSerializerMixin
+from .mixins import ClientClassesSerializerMixin
 
 __all__ = ("OptionSerializer",)
 
@@ -29,7 +29,7 @@ OPTION_ASSIGNMENT_MODELS = Q(
 
 
 class OptionSerializer(
-    ClientClassSerializerMixin,
+    ClientClassesSerializerMixin,
     PrimaryModelSerializer,
 ):
     class Meta:

@@ -7,8 +7,8 @@ from netbox_dhcp.models import SharedNetwork
 from ..nested_serializers import NestedSubnetSerializer
 from .dhcp_server import DHCPServerSerializer
 from .mixins import (
-    ClientClassSerializerMixin,
-    EvaluateClientClassSerializerMixin,
+    ClientClassesSerializerMixin,
+    EvaluateClientClassesSerializerMixin,
 )
 from .option import OptionSerializer
 
@@ -16,8 +16,8 @@ __all__ = ("SharedNetworkSerializer",)
 
 
 class SharedNetworkSerializer(
-    ClientClassSerializerMixin,
-    EvaluateClientClassSerializerMixin,
+    ClientClassesSerializerMixin,
+    EvaluateClientClassesSerializerMixin,
     PrimaryModelSerializer,
 ):
     class Meta:
