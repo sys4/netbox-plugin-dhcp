@@ -96,6 +96,7 @@ class PoolForm(
         super().__init__(*args, **kwargs)
 
         self.fields["subnet"].widget.attrs.update(DYNAMIC_ATTRIBUTES)
+        self.fields["subnet"].required = True
 
         if subnet_id := get_field_value(self, "subnet"):
             prefix = (
