@@ -87,6 +87,11 @@ class ClientClassForm(
         widget=forms.Select(choices=BOOLEAN_WITH_BLANK_CHOICES),
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["dhcp_server"].required = True
+
 
 class ClientClassFilterForm(
     NetBoxDHCPFilterFormMixin,
