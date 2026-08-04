@@ -5,12 +5,12 @@ from netbox_dhcp.choices import OptionSpaceChoices, OptionTypeChoices
 from netbox_dhcp.filtersets import OptionDefinitionFilterSet
 from netbox_dhcp.models import OptionDefinition
 from netbox_dhcp.tests.custom import TestObjects
-from utilities.testing import ChangeLoggedFilterSetTests
+from utilities.testing import ChangeLoggedFilterSetTestMixin
 
 
 class OptionDefinitionFilterSetTestCase(
     TestCase,
-    ChangeLoggedFilterSetTests,
+    ChangeLoggedFilterSetTestMixin,
 ):
     queryset = OptionDefinition.objects.all()
     filterset = OptionDefinitionFilterSet

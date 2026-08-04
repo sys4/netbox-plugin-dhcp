@@ -3,12 +3,12 @@ from django.test import TestCase
 from netbox_dhcp.choices import DHCPClusterStatusChoices
 from netbox_dhcp.filtersets import DHCPClusterFilterSet
 from netbox_dhcp.models import DHCPCluster
-from utilities.testing import ChangeLoggedFilterSetTests
+from utilities.testing import ChangeLoggedFilterSetTestMixin
 
 
 class DHCPClusterFilterSetTestCase(
     TestCase,
-    ChangeLoggedFilterSetTests,
+    ChangeLoggedFilterSetTestMixin,
 ):
     queryset = DHCPCluster.objects.all()
     filterset = DHCPClusterFilterSet
