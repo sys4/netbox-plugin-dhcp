@@ -8,17 +8,17 @@ from netbox_dhcp.choices import (
 from netbox_dhcp.models import Option, OptionDefinition
 
 __all__ = (
-    "BOOTPFilterSetTests",
-    "ValidLifetimeFilterSetTests",
-    "PreferredLifetimeFilterSetTests",
-    "OfferLifetimeFilterSetTests",
-    "LeaseFilterSetTests",
-    "DDNSUpdateFilterSetTests",
-    "OptionFilterSetTests",
+    "BOOTPFilterSetTestMixin",
+    "ValidLifetimeFilterSetTestMixin",
+    "PreferredLifetimeFilterSetTestMixin",
+    "OfferLifetimeFilterSetTestMixin",
+    "LeaseFilterSetTestMixin",
+    "DDNSUpdateFilterSetTestMixin",
+    "OptionFilterSetTestMixin",
 )
 
 
-class BOOTPFilterSetTests:
+class BOOTPFilterSetTestMixin:
     DATA = [
         {
             "next_server": "10.0.0.1",
@@ -54,7 +54,7 @@ class BOOTPFilterSetTests:
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
 
-class ValidLifetimeFilterSetTests:
+class ValidLifetimeFilterSetTestMixin:
     DATA = [
         {
             "valid_lifetime": 86400,
@@ -92,7 +92,7 @@ class ValidLifetimeFilterSetTests:
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
 
-class PreferredLifetimeFilterSetTests:
+class PreferredLifetimeFilterSetTestMixin:
     DATA = [
         {
             "preferred_lifetime": 86400,
@@ -130,7 +130,7 @@ class PreferredLifetimeFilterSetTests:
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
 
-class OfferLifetimeFilterSetTests:
+class OfferLifetimeFilterSetTestMixin:
     DATA = [
         {
             "offer_lifetime": 86400,
@@ -150,7 +150,7 @@ class OfferLifetimeFilterSetTests:
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
 
-class LeaseFilterSetTests:
+class LeaseFilterSetTestMixin:
     DATA = [
         {
             "renew_timer": 43200,
@@ -310,7 +310,7 @@ class LeaseFilterSetTests:
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
 
 
-class DDNSUpdateFilterSetTests:
+class DDNSUpdateFilterSetTestMixin:
     DATA = [
         {
             "hostname_char_set": r"[a-z0-9_-]",
@@ -465,7 +465,7 @@ class DDNSUpdateFilterSetTests:
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
 
 
-class OptionFilterSetTests:
+class OptionFilterSetTestMixin:
     @classmethod
     def add_test_options(cls, test_objects):
         option_definitions = (
