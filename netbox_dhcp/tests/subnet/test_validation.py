@@ -67,3 +67,13 @@ class SharedNetworkValidationTestCase(TestCase):
 
         self.assertFalse(Subnet.objects.filter(name="test-ipv4-subnet").exists())
         self.assertFalse(Subnet.objects.filter(name="test-ipv6-subnet").exists())
+
+    def test_large_subnet_id(self):
+        subnet = Subnet.objects.create(
+            name="test-ipv4-subnet",
+            shared_network=self.shared_networks[0],
+            prefix=self.ipv4_prefixes[1],
+            subnet_id=2166046592,
+        )
+
+        self.assertEqual(subnet.subnet_id, 2166046592)

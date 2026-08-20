@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.fields import GenericRelation
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
@@ -131,10 +132,11 @@ class Subnet(
 
     objects = SubnetManager()
 
-    subnet_id = models.PositiveIntegerField(
+    subnet_id = models.PositiveBigIntegerField(
         verbose_name=_("Subnet ID"),
         blank=True,
         null=False,
+        validators=[MaxValueValidator(4294967295)],
     )
 
     dhcp_server = models.ForeignKey(
