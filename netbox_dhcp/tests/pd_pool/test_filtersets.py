@@ -2,14 +2,14 @@ from django.test import TestCase
 
 from netbox_dhcp.filtersets import PDPoolFilterSet
 from netbox_dhcp.models import PDPool, Subnet
-from netbox_dhcp.tests.custom import OptionFilterSetTests, TestObjects
-from utilities.testing import ChangeLoggedFilterSetTests
+from netbox_dhcp.tests.custom import OptionFilterSetTestMixin, TestObjects
+from utilities.testing import ChangeLoggedFilterSetTestMixin
 
 
 class PDPoolFilterSetTestCase(
-    OptionFilterSetTests,
     TestCase,
-    ChangeLoggedFilterSetTests,
+    ChangeLoggedFilterSetTestMixin,
+    OptionFilterSetTestMixin,
 ):
     queryset = PDPool.objects.all()
     filterset = PDPoolFilterSet

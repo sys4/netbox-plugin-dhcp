@@ -1,5 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 
+from netbox.object_actions import BulkExport
 from netbox.views import generic
 from netbox_dhcp.filtersets import OptionDefinitionFilterSet, OptionFilterSet
 from netbox_dhcp.forms import (
@@ -35,7 +36,7 @@ class StandardOptionDefinitionListView(generic.ObjectListView):
     table = StandardOptionDefinitionTable
     filterset = OptionDefinitionFilterSet
     filterset_form = OptionDefinitionFilterForm
-    actions = {"export": {"view"}}
+    actions = [BulkExport]
     template_name = "netbox_dhcp/optiondefinition/standard.html"
 
 

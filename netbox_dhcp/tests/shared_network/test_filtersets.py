@@ -4,28 +4,28 @@ from ipam.choices import IPAddressFamilyChoices
 from netbox_dhcp.filtersets import SharedNetworkFilterSet
 from netbox_dhcp.models import SharedNetwork, Subnet
 from netbox_dhcp.tests.custom import (
-    BOOTPFilterSetTests,
-    DDNSUpdateFilterSetTests,
-    LeaseFilterSetTests,
-    OfferLifetimeFilterSetTests,
-    OptionFilterSetTests,
-    PreferredLifetimeFilterSetTests,
+    BOOTPFilterSetTestMixin,
+    DDNSUpdateFilterSetTestMixin,
+    LeaseFilterSetTestMixin,
+    OfferLifetimeFilterSetTestMixin,
+    OptionFilterSetTestMixin,
+    PreferredLifetimeFilterSetTestMixin,
     TestObjects,
-    ValidLifetimeFilterSetTests,
+    ValidLifetimeFilterSetTestMixin,
 )
-from utilities.testing import ChangeLoggedFilterSetTests
+from utilities.testing import ChangeLoggedFilterSetTestMixin
 
 
 class SharedNetworkFilterSetTestCase(
-    BOOTPFilterSetTests,
-    ValidLifetimeFilterSetTests,
-    OfferLifetimeFilterSetTests,
-    PreferredLifetimeFilterSetTests,
-    LeaseFilterSetTests,
-    DDNSUpdateFilterSetTests,
-    OptionFilterSetTests,
     TestCase,
-    ChangeLoggedFilterSetTests,
+    BOOTPFilterSetTestMixin,
+    ValidLifetimeFilterSetTestMixin,
+    OfferLifetimeFilterSetTestMixin,
+    PreferredLifetimeFilterSetTestMixin,
+    LeaseFilterSetTestMixin,
+    DDNSUpdateFilterSetTestMixin,
+    OptionFilterSetTestMixin,
+    ChangeLoggedFilterSetTestMixin,
 ):
     queryset = SharedNetwork.objects.all()
     filterset = SharedNetworkFilterSet
@@ -60,11 +60,11 @@ class SharedNetworkFilterSetTestCase(
                 weight=90,
                 dhcp_server=cls.dhcp_servers[0],
                 prefix=cls.ipv4_prefixes[0],
-                **DDNSUpdateFilterSetTests.DATA[0],
-                **BOOTPFilterSetTests.DATA[0],
-                **ValidLifetimeFilterSetTests.DATA[0],
-                **OfferLifetimeFilterSetTests.DATA[0],
-                **LeaseFilterSetTests.DATA[0],
+                **DDNSUpdateFilterSetTestMixin.DATA[0],
+                **BOOTPFilterSetTestMixin.DATA[0],
+                **ValidLifetimeFilterSetTestMixin.DATA[0],
+                **OfferLifetimeFilterSetTestMixin.DATA[0],
+                **LeaseFilterSetTestMixin.DATA[0],
             ),
             SharedNetwork(
                 name="test-shared-network-2",
@@ -72,8 +72,8 @@ class SharedNetworkFilterSetTestCase(
                 weight=100,
                 dhcp_server=cls.dhcp_servers[1],
                 prefix=cls.ipv4_prefixes[1],
-                **BOOTPFilterSetTests.DATA[1],
-                **OfferLifetimeFilterSetTests.DATA[1],
+                **BOOTPFilterSetTestMixin.DATA[1],
+                **OfferLifetimeFilterSetTestMixin.DATA[1],
             ),
             SharedNetwork(
                 name="test-shared-network-3",
@@ -81,11 +81,11 @@ class SharedNetworkFilterSetTestCase(
                 weight=110,
                 dhcp_server=cls.dhcp_servers[2],
                 prefix=cls.ipv4_prefixes[2],
-                **BOOTPFilterSetTests.DATA[2],
-                **DDNSUpdateFilterSetTests.DATA[1],
-                **ValidLifetimeFilterSetTests.DATA[1],
-                **OfferLifetimeFilterSetTests.DATA[2],
-                **LeaseFilterSetTests.DATA[1],
+                **BOOTPFilterSetTestMixin.DATA[2],
+                **DDNSUpdateFilterSetTestMixin.DATA[1],
+                **ValidLifetimeFilterSetTestMixin.DATA[1],
+                **OfferLifetimeFilterSetTestMixin.DATA[2],
+                **LeaseFilterSetTestMixin.DATA[1],
             ),
             SharedNetwork(
                 name="test-shared-network-4",
@@ -93,7 +93,7 @@ class SharedNetworkFilterSetTestCase(
                 weight=90,
                 dhcp_server=cls.dhcp_servers[0],
                 prefix=cls.ipv6_prefixes[0],
-                **PreferredLifetimeFilterSetTests.DATA[0],
+                **PreferredLifetimeFilterSetTestMixin.DATA[0],
             ),
             SharedNetwork(
                 name="test-shared-network-5",
@@ -101,10 +101,10 @@ class SharedNetworkFilterSetTestCase(
                 weight=100,
                 dhcp_server=cls.dhcp_servers[1],
                 prefix=cls.ipv6_prefixes[1],
-                **DDNSUpdateFilterSetTests.DATA[2],
-                **ValidLifetimeFilterSetTests.DATA[2],
-                **PreferredLifetimeFilterSetTests.DATA[1],
-                **LeaseFilterSetTests.DATA[2],
+                **DDNSUpdateFilterSetTestMixin.DATA[2],
+                **ValidLifetimeFilterSetTestMixin.DATA[2],
+                **PreferredLifetimeFilterSetTestMixin.DATA[1],
+                **LeaseFilterSetTestMixin.DATA[2],
             ),
             SharedNetwork(
                 name="test-shared-network-6",
@@ -112,7 +112,7 @@ class SharedNetworkFilterSetTestCase(
                 weight=110,
                 dhcp_server=cls.dhcp_servers[2],
                 prefix=cls.ipv6_prefixes[2],
-                **PreferredLifetimeFilterSetTests.DATA[2],
+                **PreferredLifetimeFilterSetTestMixin.DATA[2],
             ),
         )
         SharedNetwork.objects.bulk_create(shared_networks)

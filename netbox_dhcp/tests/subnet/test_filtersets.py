@@ -4,28 +4,28 @@ from ipam.choices import IPAddressFamilyChoices
 from netbox_dhcp.filtersets import SubnetFilterSet
 from netbox_dhcp.models import HostReservation, SharedNetwork, Subnet
 from netbox_dhcp.tests.custom import (
-    BOOTPFilterSetTests,
-    DDNSUpdateFilterSetTests,
-    LeaseFilterSetTests,
-    OfferLifetimeFilterSetTests,
-    OptionFilterSetTests,
-    PreferredLifetimeFilterSetTests,
+    BOOTPFilterSetTestMixin,
+    DDNSUpdateFilterSetTestMixin,
+    LeaseFilterSetTestMixin,
+    OfferLifetimeFilterSetTestMixin,
+    OptionFilterSetTestMixin,
+    PreferredLifetimeFilterSetTestMixin,
     TestObjects,
-    ValidLifetimeFilterSetTests,
+    ValidLifetimeFilterSetTestMixin,
 )
-from utilities.testing import ChangeLoggedFilterSetTests
+from utilities.testing import ChangeLoggedFilterSetTestMixin
 
 
 class SubnetFilterSetTestCase(
-    BOOTPFilterSetTests,
-    ValidLifetimeFilterSetTests,
-    OfferLifetimeFilterSetTests,
-    PreferredLifetimeFilterSetTests,
-    LeaseFilterSetTests,
-    DDNSUpdateFilterSetTests,
-    OptionFilterSetTests,
     TestCase,
-    ChangeLoggedFilterSetTests,
+    ChangeLoggedFilterSetTestMixin,
+    BOOTPFilterSetTestMixin,
+    ValidLifetimeFilterSetTestMixin,
+    OfferLifetimeFilterSetTestMixin,
+    PreferredLifetimeFilterSetTestMixin,
+    LeaseFilterSetTestMixin,
+    DDNSUpdateFilterSetTestMixin,
+    OptionFilterSetTestMixin,
 ):
     queryset = Subnet.objects.all()
     filterset = SubnetFilterSet
@@ -91,11 +91,11 @@ class SubnetFilterSetTestCase(
                 weight=90,
                 dhcp_server=cls.dhcp_servers[0],
                 prefix=cls.ipv4_prefixes[0],
-                **DDNSUpdateFilterSetTests.DATA[0],
-                **BOOTPFilterSetTests.DATA[0],
-                **ValidLifetimeFilterSetTests.DATA[0],
-                **OfferLifetimeFilterSetTests.DATA[0],
-                **LeaseFilterSetTests.DATA[0],
+                **DDNSUpdateFilterSetTestMixin.DATA[0],
+                **BOOTPFilterSetTestMixin.DATA[0],
+                **ValidLifetimeFilterSetTestMixin.DATA[0],
+                **OfferLifetimeFilterSetTestMixin.DATA[0],
+                **LeaseFilterSetTestMixin.DATA[0],
             ),
             Subnet(
                 name="test-subnet-2",
@@ -103,8 +103,8 @@ class SubnetFilterSetTestCase(
                 weight=100,
                 dhcp_server=cls.dhcp_servers[1],
                 prefix=cls.ipv4_prefixes[1],
-                **BOOTPFilterSetTests.DATA[1],
-                **OfferLifetimeFilterSetTests.DATA[1],
+                **BOOTPFilterSetTestMixin.DATA[1],
+                **OfferLifetimeFilterSetTestMixin.DATA[1],
             ),
             Subnet(
                 name="test-subnet-3",
@@ -112,11 +112,11 @@ class SubnetFilterSetTestCase(
                 weight=110,
                 shared_network=cls.shared_networks[0],
                 prefix=cls.ipv4_prefixes[2],
-                **BOOTPFilterSetTests.DATA[2],
-                **DDNSUpdateFilterSetTests.DATA[1],
-                **ValidLifetimeFilterSetTests.DATA[1],
-                **OfferLifetimeFilterSetTests.DATA[2],
-                **LeaseFilterSetTests.DATA[1],
+                **BOOTPFilterSetTestMixin.DATA[2],
+                **DDNSUpdateFilterSetTestMixin.DATA[1],
+                **ValidLifetimeFilterSetTestMixin.DATA[1],
+                **OfferLifetimeFilterSetTestMixin.DATA[2],
+                **LeaseFilterSetTestMixin.DATA[1],
             ),
         )
         for subnet in cls.ipv4_subnets:
@@ -129,7 +129,7 @@ class SubnetFilterSetTestCase(
                 weight=90,
                 dhcp_server=cls.dhcp_servers[0],
                 prefix=cls.ipv6_prefixes[0],
-                **PreferredLifetimeFilterSetTests.DATA[0],
+                **PreferredLifetimeFilterSetTestMixin.DATA[0],
             ),
             Subnet(
                 name="test-subnet-5",
@@ -137,10 +137,10 @@ class SubnetFilterSetTestCase(
                 weight=100,
                 dhcp_server=cls.dhcp_servers[1],
                 prefix=cls.ipv6_prefixes[1],
-                **DDNSUpdateFilterSetTests.DATA[2],
-                **ValidLifetimeFilterSetTests.DATA[2],
-                **PreferredLifetimeFilterSetTests.DATA[1],
-                **LeaseFilterSetTests.DATA[2],
+                **DDNSUpdateFilterSetTestMixin.DATA[2],
+                **ValidLifetimeFilterSetTestMixin.DATA[2],
+                **PreferredLifetimeFilterSetTestMixin.DATA[1],
+                **LeaseFilterSetTestMixin.DATA[2],
             ),
             Subnet(
                 name="test-subnet-6",
@@ -148,7 +148,7 @@ class SubnetFilterSetTestCase(
                 weight=110,
                 shared_network=cls.shared_networks[2],
                 prefix=cls.ipv6_prefixes[2],
-                **PreferredLifetimeFilterSetTests.DATA[2],
+                **PreferredLifetimeFilterSetTestMixin.DATA[2],
             ),
         )
         for subnet in cls.ipv6_subnets:

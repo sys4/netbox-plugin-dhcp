@@ -28,7 +28,7 @@ This works in much the same way in which NetBox provides configuration data for 
 
 ## Requirements
 
-* NetBox 4.5.0 or higher.
+* NetBox 4.7.0 or higher.
 * Python 3.12 or higher.
 
 ## Installation & Configuration

@@ -4,18 +4,18 @@ from ipam.choices import IPAddressFamilyChoices
 from netbox_dhcp.filtersets import PoolFilterSet
 from netbox_dhcp.models import Pool, Subnet
 from netbox_dhcp.tests.custom import (
-    DDNSUpdateFilterSetTests,
-    OptionFilterSetTests,
+    DDNSUpdateFilterSetTestMixin,
+    OptionFilterSetTestMixin,
     TestObjects,
 )
-from utilities.testing import ChangeLoggedFilterSetTests
+from utilities.testing import ChangeLoggedFilterSetTestMixin
 
 
 class PoolFilterSetTestCase(
-    DDNSUpdateFilterSetTests,
     TestCase,
-    ChangeLoggedFilterSetTests,
-    OptionFilterSetTests,
+    DDNSUpdateFilterSetTestMixin,
+    OptionFilterSetTestMixin,
+    ChangeLoggedFilterSetTestMixin,
 ):
     queryset = Pool.objects.all()
     filterset = PoolFilterSet
@@ -79,7 +79,7 @@ class PoolFilterSetTestCase(
                 subnet=cls.ipv4_subnets[0],
                 ip_range=cls.ipv4_ranges[0],
                 pool_id=23,
-                **DDNSUpdateFilterSetTests.DATA[0],
+                **DDNSUpdateFilterSetTestMixin.DATA[0],
             ),
             Pool(
                 name="test-pool-2",
@@ -88,7 +88,7 @@ class PoolFilterSetTestCase(
                 subnet=cls.ipv4_subnets[1],
                 ip_range=cls.ipv4_ranges[1],
                 pool_id=42,
-                **DDNSUpdateFilterSetTests.DATA[1],
+                **DDNSUpdateFilterSetTestMixin.DATA[1],
             ),
             Pool(
                 name="test-pool-3",
@@ -97,7 +97,7 @@ class PoolFilterSetTestCase(
                 subnet=cls.ipv6_subnets[0],
                 ip_range=cls.ipv6_ranges[0],
                 pool_id=1337,
-                **DDNSUpdateFilterSetTests.DATA[2],
+                **DDNSUpdateFilterSetTestMixin.DATA[2],
             ),
             Pool(
                 name="test-pool-4",

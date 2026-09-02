@@ -3,24 +3,24 @@ from django.test import TestCase
 from netbox_dhcp.filtersets import ClientClassFilterSet
 from netbox_dhcp.models import ClientClass
 from netbox_dhcp.tests.custom import (
-    BOOTPFilterSetTests,
-    OfferLifetimeFilterSetTests,
-    OptionFilterSetTests,
-    PreferredLifetimeFilterSetTests,
+    BOOTPFilterSetTestMixin,
+    OfferLifetimeFilterSetTestMixin,
+    OptionFilterSetTestMixin,
+    PreferredLifetimeFilterSetTestMixin,
     TestObjects,
-    ValidLifetimeFilterSetTests,
+    ValidLifetimeFilterSetTestMixin,
 )
-from utilities.testing import ChangeLoggedFilterSetTests
+from utilities.testing import ChangeLoggedFilterSetTestMixin
 
 
 class ClientClassFilterSetTestCase(
-    BOOTPFilterSetTests,
-    ValidLifetimeFilterSetTests,
-    OfferLifetimeFilterSetTests,
-    PreferredLifetimeFilterSetTests,
-    OptionFilterSetTests,
     TestCase,
-    ChangeLoggedFilterSetTests,
+    ChangeLoggedFilterSetTestMixin,
+    BOOTPFilterSetTestMixin,
+    ValidLifetimeFilterSetTestMixin,
+    OfferLifetimeFilterSetTestMixin,
+    PreferredLifetimeFilterSetTestMixin,
+    OptionFilterSetTestMixin,
 ):
     queryset = ClientClass.objects.all()
     filterset = ClientClassFilterSet
@@ -52,10 +52,10 @@ class ClientClassFilterSetTestCase(
                 test="substring(option[61].hex,0,3) == 'foo'",
                 template_test="substring(option[23].hex,0,3)",
                 only_in_additional_list=False,
-                **BOOTPFilterSetTests.DATA[0],
-                **ValidLifetimeFilterSetTests.DATA[0],
-                **PreferredLifetimeFilterSetTests.DATA[0],
-                **OfferLifetimeFilterSetTests.DATA[0],
+                **BOOTPFilterSetTestMixin.DATA[0],
+                **ValidLifetimeFilterSetTestMixin.DATA[0],
+                **PreferredLifetimeFilterSetTestMixin.DATA[0],
+                **OfferLifetimeFilterSetTestMixin.DATA[0],
             ),
             ClientClass(
                 name="test-client-class-2",
@@ -65,10 +65,10 @@ class ClientClassFilterSetTestCase(
                 test="substring(option[61].hex,0,3) == 'bar'",
                 template_test="substring(option[42].hex,0,3)",
                 only_in_additional_list=True,
-                **BOOTPFilterSetTests.DATA[1],
-                **ValidLifetimeFilterSetTests.DATA[1],
-                **PreferredLifetimeFilterSetTests.DATA[1],
-                **OfferLifetimeFilterSetTests.DATA[1],
+                **BOOTPFilterSetTestMixin.DATA[1],
+                **ValidLifetimeFilterSetTestMixin.DATA[1],
+                **PreferredLifetimeFilterSetTestMixin.DATA[1],
+                **OfferLifetimeFilterSetTestMixin.DATA[1],
             ),
             ClientClass(
                 name="test-client-class-3",
@@ -78,10 +78,10 @@ class ClientClassFilterSetTestCase(
                 test="substring(option[61].hex,0,3) == 'baz'",
                 template_test="substring(option[66].hex,0,3)",
                 only_in_additional_list=True,
-                **BOOTPFilterSetTests.DATA[2],
-                **ValidLifetimeFilterSetTests.DATA[2],
-                **PreferredLifetimeFilterSetTests.DATA[2],
-                **OfferLifetimeFilterSetTests.DATA[2],
+                **BOOTPFilterSetTestMixin.DATA[2],
+                **ValidLifetimeFilterSetTestMixin.DATA[2],
+                **PreferredLifetimeFilterSetTestMixin.DATA[2],
+                **OfferLifetimeFilterSetTestMixin.DATA[2],
             ),
         )
         ClientClass.objects.bulk_create(cls.client_classes)

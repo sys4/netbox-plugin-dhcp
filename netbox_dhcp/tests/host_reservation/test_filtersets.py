@@ -3,18 +3,18 @@ from django.test import TestCase
 from netbox_dhcp.filtersets import HostReservationFilterSet
 from netbox_dhcp.models import HostReservation, Subnet
 from netbox_dhcp.tests.custom import (
-    BOOTPFilterSetTests,
-    OptionFilterSetTests,
+    BOOTPFilterSetTestMixin,
+    OptionFilterSetTestMixin,
     TestObjects,
 )
-from utilities.testing import ChangeLoggedFilterSetTests
+from utilities.testing import ChangeLoggedFilterSetTestMixin
 
 
 class HostReservationFilterSetTestCase(
-    BOOTPFilterSetTests,
     TestCase,
-    ChangeLoggedFilterSetTests,
-    OptionFilterSetTests,
+    ChangeLoggedFilterSetTestMixin,
+    BOOTPFilterSetTestMixin,
+    OptionFilterSetTestMixin,
 ):
     queryset = HostReservation.objects.all()
     filterset = HostReservationFilterSet
@@ -68,7 +68,7 @@ class HostReservationFilterSetTestCase(
                 flex_id="0x42424242",
                 hostname="host1.zone1.example.com",
                 ipv4_address=cls.ipv4_addresses[0],
-                **BOOTPFilterSetTests.DATA[0],
+                **BOOTPFilterSetTestMixin.DATA[0],
             ),
             HostReservation(
                 name="test-host-reservation-2",
@@ -81,7 +81,7 @@ class HostReservationFilterSetTestCase(
                 flex_id="0x2323232323",
                 hostname="host2.zone1.example.com",
                 ipv4_address=cls.ipv4_addresses[1],
-                **BOOTPFilterSetTests.DATA[1],
+                **BOOTPFilterSetTestMixin.DATA[1],
             ),
             HostReservation(
                 name="test-host-reservation-3",
@@ -94,7 +94,7 @@ class HostReservationFilterSetTestCase(
                 flex_id="0x42424242",
                 hostname="host3.zone1.example.com",
                 ipv4_address=cls.ipv4_addresses[2],
-                **BOOTPFilterSetTests.DATA[2],
+                **BOOTPFilterSetTestMixin.DATA[2],
             ),
             HostReservation(
                 name="test-host-reservation-4",
