@@ -32,6 +32,7 @@ class OptionDefinitionSerializer(DHCPServerSerializerMixin, PrimaryModelSerializ
             "encapsulate",
             "array",
             "standard",
+            "owner",
         )
 
         brief_fields = (

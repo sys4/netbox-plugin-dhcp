@@ -40,6 +40,7 @@ class PDPoolSerializer(
             "evaluate_additional_classes",
             "options",
             "tags",
+            "owner",
         )
 
         brief_fields = (

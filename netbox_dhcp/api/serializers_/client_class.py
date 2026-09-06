@@ -37,6 +37,7 @@ class ClientClassSerializer(PrimaryModelSerializer):
             "min_preferred_lifetime",
             "max_preferred_lifetime",
             "options",
+            "owner",
         )
 
         brief_fields = (

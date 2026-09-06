@@ -23,6 +23,7 @@ class DHCPClusterSerializer(PrimaryModelSerializer):
             "comments",
             "status",
             "dhcp_servers",
+            "owner",
         )
 
         brief_fields = (
