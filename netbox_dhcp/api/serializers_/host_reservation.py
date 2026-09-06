@@ -50,6 +50,7 @@ class HostReservationSerializer(
             "excluded_ipv6_prefixes",
             "client_classes",
             "options",
+            "owner",
         )
 
         brief_fields = (

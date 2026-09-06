@@ -107,6 +107,7 @@ class DHCPServerSerializer(
             "child_subnets",
             "child_shared_networks",
             "child_host_reservations",
+            "owner",
         )
 
         brief_fields = (

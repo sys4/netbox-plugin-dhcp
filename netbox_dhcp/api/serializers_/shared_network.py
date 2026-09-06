@@ -83,6 +83,7 @@ class SharedNetworkSerializer(
             "ddns_ttl_min",
             "ddns_ttl_max",
             "tags",
+            "owner",
         )
 
         brief_fields = (

@@ -56,6 +56,7 @@ class OptionSerializer(
             "assigned_object",
             "assigned_object_id",
             "assigned_object_type",
+            "owner",
         )
 
         brief_fields = (
