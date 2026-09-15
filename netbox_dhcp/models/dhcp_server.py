@@ -120,8 +120,10 @@ class DHCPServerInterface(NetBoxModel):
     )
 
     def __str__(self):
-        if hasattr(self, "name"):
-            return self.name
+        if self.device_interface is not None:
+            return self.device_interface.name
+        if self.virtual_machine_interface is not None:
+            return self.virtual_machine_interface.name
 
         return super().__str__()
 

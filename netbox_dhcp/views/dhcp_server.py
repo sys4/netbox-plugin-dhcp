@@ -19,6 +19,7 @@ from netbox_dhcp.forms import (
 from netbox_dhcp.models import (
     ClientClass,
     DHCPServer,
+    DHCPServerInterface,
     HostReservation,
     Option,
     OptionDefinition,
@@ -50,6 +51,11 @@ __all__ = (
     "DHCPServerOptionListView",
     "DHCPServerOptionDefinitionListView",
 )
+
+
+@register_model_view(DHCPServerInterface)
+class DHCPServerInterfaceView(generic.ObjectView):
+    queryset = DHCPServerInterface.objects.all()
 
 
 @register_model_view(DHCPServer, "list", path="", detail=False)
