@@ -68,6 +68,14 @@ urlpatterns = (
         include(get_model_urls("netbox_dhcp", "dhcpserver")),
     ),
     path(
+        "dhcpserverinterfaces/",
+        include(get_model_urls("netbox_dhcp", "dhcpserverinterface", detail=False)),
+    ),
+    path(
+        "dhcpserverinterfaces/<int:pk>/",
+        include(get_model_urls("netbox_dhcp", "dhcpserverinterface")),
+    ),
+    path(
         "pdpools/",
         include(get_model_urls("netbox_dhcp", "pdpool", detail=False)),
     ),
