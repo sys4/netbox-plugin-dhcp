@@ -11,7 +11,14 @@ license-files = [
 readme = "README.md"
 keywords = ["netbox", "netbox-plugin", "dhcp"]
 classifiers = [
-    "Development Status :: 4 - Beta"
+    "Development Status :: 4 - Beta",
+    "Framework :: Django",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 dependencies = []
 requires-python = ">=3.12"
